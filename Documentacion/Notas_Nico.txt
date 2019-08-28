@@ -1,0 +1,77 @@
+SQL Server Management Studio
+SQL Server 2008
+Visual Studio 2013
+
+
+----------------------------------------------------------------------
+	BD Credenciales
+Servidor: 	Maquis
+Autenticacion: 	SQL Server
+Sesion:		avisuales1
+Contraseña:	avisuales1
+
+.\sqlexpress
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+				ADO.Net
+SQLConnection
+	.connectionString [string]	Data Source=MARTIN-PC\\SQLEXPRESS;Initial Catalog=DB_Bugs;Integrated Security=True
+					Data Source=MAQUIS\\SQLEXPRESS;Initial Catalog=DB_Bugs_64429;Integrated Security=True
+	+Open()
+
+--------------------------------
+SQLCommand
+	.connection [SQLConnection]
+	.commandText [string]
+	+ExecuteNonQuery()	(Para ejecutar un No Select)
+	+ExecuteReader()	(Para ejecutar un Select)
+
+--------------------------------
+DataTable
+
+
+
+----------------------------------------------------------------------
+Explorador de servidores > Conexiones de datos > (Click derecho) > Agregar Conexion > Microsoft SQLServer
+Configurar
+
+
+----------------------------------------------------------------------
+[FrmNuevoEditarPerfil] --------------------------------
+private void btn_aceptar_Click(object sender, EventArgs e)
+        {
+            
+            List<OpcionMenu> opcionesSelecionadas = new List<OpcionMenu>();
+            foreach (DataGridViewRow row in dgv_opciones.Rows){
+                int id = Int32.Parse(row.Cells["colId"].Value.ToString());
+                String nombre = row.Cells["colNombreMenu"].Value.ToString();
+                if ((bool)row.Cells["colChk"].Value) //colChk colNombreMenu colId
+                {
+                    opcionesSelecionadas.Add(new OpcionMenu(id, nombre));
+                }
+	        }
+
+            new Perfil(5, textBox1.Text, opcionesSelecionadas);
+            //completar...
+        }
+
+
+[PerfilDaoSqlImp] --------------------------------
+public bool add(Perfil obj)
+        {
+            string sql = "INSERT INTO Perfiles(n_perfil) VALUES('"+ obj.Nombre +"');";
+            DBHelper.getDBHelper().ejecutarSQL(sql);
+            throw new NotImplementedException();
+        }
+
+
+
+
+
+
+
+
+
+
+
