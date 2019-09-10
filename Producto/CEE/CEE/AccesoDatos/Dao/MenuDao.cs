@@ -19,11 +19,11 @@ namespace CEE.AccesoDatos.Dao
         public Menu GetMenuById(int idMenu)
         {
             string strSql = "SELECT menu_id," +
-                "padre_menu_id," +
-                "nombre_menu," +
-                "es_final," +
-                "aplicacion" +
-                "FROM MENU M" +
+                "padre_menu_id, " +
+                "nombre_menu, " +
+                "es_final, " +
+                "aplicacion " +
+                "FROM MENU M " +
                 "WHERE M.menu_id = " + idMenu.ToString();
 
             return MappingMenu(DBHelper.DBHelper.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
@@ -54,7 +54,7 @@ namespace CEE.AccesoDatos.Dao
             oMenu.EsFinal = Boolean.Parse(row["es_final"].ToString());
             oMenu.Aplicacion = row["aplicacion"].ToString();
 
-            if (row["padre_menu_id"] != null)
+            if (!DBNull.Value.Equals(row["padre_menu_id"]))
             {
                 oMenu.MenuPadre = GetMenuById(Int32.Parse(row["padre_menu_id"].ToString()));
             }

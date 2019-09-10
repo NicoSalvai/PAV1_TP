@@ -31,6 +31,9 @@ namespace CEE.Interfaz
 
         private void ButtonBuscar_Click(object sender, EventArgs e)
         {
+            dgvUsuario.Rows.Clear();
+            dgvPerfil.Rows.Clear();
+            dgvMenu.Rows.Clear();
             //Usuario oUsuario = oUsuarioService.GetUsuarioById(1);
             IList<Usuario> usuarios = oUsuarioService.GetUsuarioByFilters(new Dictionary<string, object>());
 
@@ -43,6 +46,8 @@ namespace CEE.Interfaz
 
         private void DgvUsuario_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            dgvPerfil.Rows.Clear();
+            dgvMenu.Rows.Clear();
             if (dgvUsuario.CurrentRow.Index != -1)
             {
                 dgvPerfil.Rows.Clear();
@@ -55,8 +60,9 @@ namespace CEE.Interfaz
             }
         }
 
-        private void DgvMenu_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvPerfil_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            dgvMenu.Rows.Clear();
             if (dgvPerfil.CurrentRow.Index != -1)
             {
                 dgvMenu.Rows.Clear();
@@ -65,7 +71,7 @@ namespace CEE.Interfaz
 
                 IList<CEE.Entidad.Menu> menus = oPerfilService.GetPerfilById(idPerfilSeleccionado).Menus;
                 foreach (CEE.Entidad.Menu oMenu in menus)
-                    dgvMenu.Rows.Add(new string[] { oMenu.IdMenu.ToString(), oMenu.MenuPadre.NombreMenu, oMenu.NombreMenu, oMenu.EsFinal.ToString(), oMenu.Aplicacion});
+                    dgvMenu.Rows.Add(new string[] { oMenu.IdMenu.ToString(), oMenu.MenuPadre.NombreMenu, oMenu.NombreMenu, oMenu.EsFinal.ToString(), oMenu.Aplicacion });
             }
         }
     }

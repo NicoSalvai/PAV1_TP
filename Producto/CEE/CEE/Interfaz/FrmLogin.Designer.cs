@@ -29,33 +29,33 @@
         private void InitializeComponent()
         {
             this.panelUsuario = new System.Windows.Forms.Panel();
+            this.buttonBuscar = new System.Windows.Forms.Button();
             this.dgvUsuario = new System.Windows.Forms.DataGridView();
             this.IdUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelPerfil = new System.Windows.Forms.Panel();
-            this.panelMenu = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.dgvPerfil = new System.Windows.Forms.DataGridView();
-            this.dgvMenu = new System.Windows.Forms.DataGridView();
             this.IdPerfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombrePerfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaAlta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaBaja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panelMenu = new System.Windows.Forms.Panel();
+            this.dgvMenu = new System.Windows.Forms.DataGridView();
             this.IdMenu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PadreMenu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreMenu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EsFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Aplicacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonBuscar = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panelUsuario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).BeginInit();
             this.panelPerfil.SuspendLayout();
-            this.panelMenu.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPerfil)).BeginInit();
+            this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMenu)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelUsuario
@@ -68,6 +68,16 @@
             this.panelUsuario.Name = "panelUsuario";
             this.panelUsuario.Size = new System.Drawing.Size(626, 155);
             this.panelUsuario.TabIndex = 0;
+            // 
+            // buttonBuscar
+            // 
+            this.buttonBuscar.Location = new System.Drawing.Point(539, 121);
+            this.buttonBuscar.Name = "buttonBuscar";
+            this.buttonBuscar.Size = new System.Drawing.Size(75, 23);
+            this.buttonBuscar.TabIndex = 1;
+            this.buttonBuscar.Text = "Buscar";
+            this.buttonBuscar.UseVisualStyleBackColor = true;
+            this.buttonBuscar.Click += new System.EventHandler(this.ButtonBuscar_Click);
             // 
             // dgvUsuario
             // 
@@ -112,27 +122,6 @@
             this.panelPerfil.Size = new System.Drawing.Size(626, 155);
             this.panelPerfil.TabIndex = 1;
             // 
-            // panelMenu
-            // 
-            this.panelMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMenu.Controls.Add(this.dgvMenu);
-            this.panelMenu.Location = new System.Drawing.Point(12, 335);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(626, 164);
-            this.panelMenu.TabIndex = 2;
-            // 
-            // panel2
-            // 
-            this.panel2.AutoScroll = true;
-            this.panel2.Controls.Add(this.panelUsuario);
-            this.panel2.Controls.Add(this.panelMenu);
-            this.panel2.Controls.Add(this.panelPerfil);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(650, 511);
-            this.panel2.TabIndex = 1;
-            // 
             // dgvPerfil
             // 
             this.dgvPerfil.AllowUserToAddRows = false;
@@ -149,24 +138,7 @@
             this.dgvPerfil.ReadOnly = true;
             this.dgvPerfil.Size = new System.Drawing.Size(611, 111);
             this.dgvPerfil.TabIndex = 1;
-            // 
-            // dgvMenu
-            // 
-            this.dgvMenu.AllowUserToAddRows = false;
-            this.dgvMenu.AllowUserToDeleteRows = false;
-            this.dgvMenu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMenu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdMenu,
-            this.PadreMenu,
-            this.NombreMenu,
-            this.EsFinal,
-            this.Aplicacion});
-            this.dgvMenu.Location = new System.Drawing.Point(3, 3);
-            this.dgvMenu.Name = "dgvMenu";
-            this.dgvMenu.ReadOnly = true;
-            this.dgvMenu.Size = new System.Drawing.Size(611, 129);
-            this.dgvMenu.TabIndex = 2;
-            this.dgvMenu.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvMenu_CellClick);
+            this.dgvPerfil.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPerfil_CellClick);
             // 
             // IdPerfil
             // 
@@ -198,6 +170,32 @@
             this.FechaBaja.Name = "FechaBaja";
             this.FechaBaja.ReadOnly = true;
             // 
+            // panelMenu
+            // 
+            this.panelMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMenu.Controls.Add(this.dgvMenu);
+            this.panelMenu.Location = new System.Drawing.Point(12, 335);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(626, 164);
+            this.panelMenu.TabIndex = 2;
+            // 
+            // dgvMenu
+            // 
+            this.dgvMenu.AllowUserToAddRows = false;
+            this.dgvMenu.AllowUserToDeleteRows = false;
+            this.dgvMenu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMenu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdMenu,
+            this.PadreMenu,
+            this.NombreMenu,
+            this.EsFinal,
+            this.Aplicacion});
+            this.dgvMenu.Location = new System.Drawing.Point(3, 3);
+            this.dgvMenu.Name = "dgvMenu";
+            this.dgvMenu.ReadOnly = true;
+            this.dgvMenu.Size = new System.Drawing.Size(611, 129);
+            this.dgvMenu.TabIndex = 2;
+            // 
             // IdMenu
             // 
             this.IdMenu.HeaderText = "IdMenu";
@@ -228,15 +226,17 @@
             this.Aplicacion.Name = "Aplicacion";
             this.Aplicacion.ReadOnly = true;
             // 
-            // buttonBuscar
+            // panel2
             // 
-            this.buttonBuscar.Location = new System.Drawing.Point(539, 121);
-            this.buttonBuscar.Name = "buttonBuscar";
-            this.buttonBuscar.Size = new System.Drawing.Size(75, 23);
-            this.buttonBuscar.TabIndex = 1;
-            this.buttonBuscar.Text = "Buscar";
-            this.buttonBuscar.UseVisualStyleBackColor = true;
-            this.buttonBuscar.Click += new System.EventHandler(this.ButtonBuscar_Click);
+            this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.panelUsuario);
+            this.panel2.Controls.Add(this.panelMenu);
+            this.panel2.Controls.Add(this.panelPerfil);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(650, 511);
+            this.panel2.TabIndex = 1;
             // 
             // FrmLogin
             // 
@@ -251,10 +251,10 @@
             this.panelUsuario.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).EndInit();
             this.panelPerfil.ResumeLayout(false);
-            this.panelMenu.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPerfil)).EndInit();
+            this.panelMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMenu)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

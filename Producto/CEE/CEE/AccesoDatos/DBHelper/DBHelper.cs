@@ -12,7 +12,7 @@ namespace CEE.AccesoDatos.DBHelper
 
         private DBHelper()
         {
-            string_conexion = "Data Source=DESKTOP-IOI9A80\\SQLEXPRESS;Initial Catalog=BugTracker;User ID=admin;Password=admin123";
+            string_conexion = "Data Source=NicoPC\\SQLEXPRESS;Initial Catalog=64429Pav1;Integrated Security=True";
         }
 
         public static DBHelper GetDBHelper()

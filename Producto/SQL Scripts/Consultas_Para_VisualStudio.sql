@@ -4,13 +4,14 @@
 
 -- ################################ Class: MenuDao 
 -- GetMenuById()
+USE [64429Pav1];
 SELECT M.menu_id,
 	M.padre_menu_id,
 	M.nombre_menu,
 	M.es_final,
 	M.aplicacion
 FROM MENU M
-WHERE M.menu_id = 
+WHERE M.menu_id = 1;
 
 
 -- ################################ Class: PerfilDao 

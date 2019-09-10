@@ -53,7 +53,7 @@ INSERT INTO USUARIO_PERFIL (usuario_id, perfil_id)
 INSERT INTO TIPO_EQUIPO(tipo_equipo, descripcion)
 	VALUES('Generico', 'Tipo de equipo generico');
 	
-INSERT INTO TIPO_DOCUMENTO(tipo_documento, descripcion)
+INSERT INTO TIPO_DOCUMENTO(nombre_tipo_documento, descripcion)
 	VALUES('DNI', 'Documento Nacional de Identidad');
 	
 

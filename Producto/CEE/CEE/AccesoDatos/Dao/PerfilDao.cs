@@ -18,12 +18,12 @@ namespace CEE.AccesoDatos.Dao
         /// <returns>El objeto perfil con id = idPerfil</returns>
         public Perfil GetPerfilById(int idPerfil)
         {
-            var strSql = "SELECT 	P.perfil_id," +
-                        "P.nombre_perfil," +
-                        "P.descripcion," +
-                        "P.fecha_alta," +
-                        "P.fecha_baja" +
-                        "FROM PERFIL P" +
+            var strSql = "SELECT 	P.perfil_id, " +
+                        "P.nombre_perfil, " +
+                        "P.descripcion, " +
+                        "P.fecha_alta, " +
+                        "P.fecha_baja " +
+                        "FROM PERFIL P " +
                         "WHERE P.perfil_id = " + idPerfil.ToString();
 
             return MappingPerfil(DBHelper.DBHelper.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
@@ -52,7 +52,8 @@ namespace CEE.AccesoDatos.Dao
             oPerfil.NombrePerfil = row["nombre_perfil"].ToString();
             oPerfil.FechaAlta = DateTime.Parse(row["fecha_alta"].ToString());
 
-            oPerfil.FechaBaja = DateTime.Parse(row["fecha_baja"].ToString());
+            if(!DBNull.Value.Equals(row["fecha_baja"]))
+                oPerfil.FechaBaja = DateTime.Parse(row["fecha_baja"].ToString());
             
             oPerfil.Descripcion = row["descripcion"].ToString();
 
@@ -71,14 +72,14 @@ namespace CEE.AccesoDatos.Dao
             List<Menu> menus = new List<Menu>();        // armo la lista de menus a devolver
             MenuDao menuDao = new MenuDao();            // creo el menuDao para poder buscar los menus del perfil
 
-            string strSql = "SELECT PM.menu_id" +
-                        "FROM PERFIL_MENU PM" +
+            string strSql = "SELECT PM.menu_id " +
+                        "FROM PERFIL_MENU PM " +
                         "WHERE PM.perfil_id = " + idPerfil.ToString();
 
             //List<string> list = DBHelper.DBHelper.GetDBHelper().ConsultaSQL(strSql).Rows.OfType<DataRow>().Select(dr => (string)dr["menu_id"]).ToList();
 
             DataTable dt = DBHelper.DBHelper.GetDBHelper().ConsultaSQL(strSql);             // aca consigo la DataTable con el BDHelper que tenga los menu_id de este perfil 
-            List<string> list = dt.Rows.OfType<DataRow>().Select(dr => (string)dr["menu_id"]).ToList(); // convierto la dt de 1 columna en una lista de strings
+            List<string> list = dt.Rows.OfType<DataRow>().Select(dr => (string)dr["menu_id"].ToString()).ToList(); // convierto la dt de 1 columna en una lista de strings
 
             foreach (string idMenu in list)     // por cada uno de los string de la lista mando al menuDao un pedido de que me traiga el menu q le corresponde y lo meto a mi lista
             {
