@@ -18,7 +18,11 @@ namespace CEE.AccesoDatos.Dao
         /// <returns>El objeto Usuario buscado</returns>
         public Usuario GetUsuarioById (int idUsuario)
         {
-            string strSql = "";
+            string strSql = "SELECT 	U.usuario_id" +
+                            "U.nombre_usuario" +
+                            "U.pass" + 
+                            "FROM USUARIO U" + 
+                            "WHERE U.usuario_id = " + idUsuario.ToString();
 
             return MappingUsuario(DBHelper.DBHelper.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
         }
@@ -30,7 +34,27 @@ namespace CEE.AccesoDatos.Dao
         /// <returns>Operacion no soportada</returns>
         public IList<Usuario> GetUsuarioByFilters(Dictionary<string, object> parametros)
         {
-            throw new Exception("Operacion no soportada");
+            List<Usuario> resultado = new List<Usuario>();
+
+            string strSql = "SELECT 	U.usuario_id" +
+                "U.nombre_usuario" +
+                "U.pass" +
+                "FROM USUARIO U" +
+                "WHERE (1 = 1) ";
+
+            if (parametros.ContainsKey("NombreUsuario"))
+                strSql += " AND (U.nombre_usuario like @NombreUsuario) ";
+            if (parametros.ContainsKey("Pass"))
+                strSql += " AND (U.pass=@Pass) ";
+            
+            DataTable dt = DBHelper.DBHelper.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                resultado.Add(MappingUsuario(row));
+            }
+
+            return resultado;
         }
 
         /// <summary>

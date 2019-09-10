@@ -15,6 +15,8 @@ namespace CEE.Entidad
         public TipoDocumento TipoDocumento { get; set; }
 
         // Desde aca las Propertys son Nullable
+        public int Legajo { get; set; }
+
         public IList<Prestamo> Prestamos { get; set; }
 
         public string Calle { get; set; }
@@ -29,6 +31,7 @@ namespace CEE.Entidad
 
         public int Telefono { get; set; }
 
+        public string Observaciones { get; set; }
 
     }
 }

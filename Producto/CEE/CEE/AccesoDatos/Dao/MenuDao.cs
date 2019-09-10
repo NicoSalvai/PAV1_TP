@@ -51,7 +51,7 @@ namespace CEE.AccesoDatos.Dao
 
             oMenu.IdMenu = Int32.Parse(row["menu_id"].ToString());
             oMenu.NombreMenu = row["nombre_menu"].ToString();
-            oMenu.EsFinal = Boolean.Parse(row["es_final"].ToString();
+            oMenu.EsFinal = Boolean.Parse(row["es_final"].ToString());
             oMenu.Aplicacion = row["aplicacion"].ToString();
 
             if (row["padre_menu_id"] != null)

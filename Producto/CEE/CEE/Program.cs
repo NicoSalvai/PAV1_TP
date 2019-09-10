@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CEE.Interfaz;
 
 namespace CEE
 {
@@ -17,7 +18,7 @@ namespace CEE
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new FrmPrincipal());
+            Application.Run(new FrmLogin());
         }
     }
 }
