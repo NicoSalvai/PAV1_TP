@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using CEE.AccesoDatos.Dao.Sql;
 using CEE.AccesoDatos.Dao;
-using CEE.Entidad;
+using CEE.Negocio.DTO;
 
 namespace CEE.Negocio
 {
@@ -20,12 +20,12 @@ namespace CEE.Negocio
             oPerfilDao = new PerfilDaoSql();
         }
 
-        public Perfil GetPerfilById(int idUsuario)
+        public PerfilDTO GetPerfilById(int idPerfil)
         {
-            return oPerfilDao.GetPerfilById(idUsuario);
+            return oPerfilDao.GetPerfilById(idPerfil);
         }
 
-        public IList<Perfil> GetPerfilByFilters(Dictionary<string, object> parametros)
+        public IList<PerfilDTO> GetPerfilByFilters(Dictionary<string, object> parametros)
         {
             return oPerfilDao.GetPerfilByFilters(parametros);
         }

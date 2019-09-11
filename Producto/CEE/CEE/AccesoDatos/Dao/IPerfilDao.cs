@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using CEE.Entidad;
+using CEE.Negocio.DTO;
 
 namespace CEE.AccesoDatos.Dao
 {
     interface IPerfilDao
     {
-        Perfil GetPerfilById(int idPerfil);
+        PerfilDTO GetPerfilById(int idPerfil);
 
-        IList<Perfil> GetPerfilByFilters(Dictionary<string, object> parametros);
+        IList<PerfilDTO> GetPerfilByFilters(Dictionary<string, object> parametros);
     }
 }

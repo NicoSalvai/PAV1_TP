@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using CEE.AccesoDatos.DBHelper;
-using CEE.Entidad;
+using System.Data;
+using CEE.Negocio.DTO;
 
 namespace CEE.AccesoDatos.Dao.Sql
 {
@@ -16,17 +17,19 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="idMenu">El id del objeto menu a buscar</param>
         /// <returns>un objeto Menu</returns>
-        public Menu GetMenuById(int idMenu)
+        public MenuDTO GetMenuById(int idMenu)
         {
-            string strSql = "SELECT menu_id," +
-                "padre_menu_id, " +
-                "nombre_menu, " +
-                "es_final, " +
-                "aplicacion " +
-                "FROM MENU M " +
-                "WHERE M.menu_id = " + idMenu.ToString();
+            string strSql = "SELECT M.menu_id, " +
+                            "M.nombre_menu, " +
+                            "MP.nombre_menu AS 'padre_menu', " +
+                            "M.padre_menu_id, " +
+                            "M.es_final, " +
+                            "M.aplicacion " +
+                            "FROM MENU M " +
+                            "LEFT JOIN MENU MP ON MP.menu_id = M.padre_menu_id " +
+                            "WHERE M.menu_id = " + idMenu.ToString();
 
-            return MappingMenu(DBHelper.DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
+            return MappingMenu(DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
         }
 
         /// <summary>
@@ -34,9 +37,40 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="parametros">un Dictionary de string-object con los parametros para filtrar la busqueda</param>
         /// <returns>Operacion no soportada</returns>
-        public IList<Menu> GetMenuByFilters(Dictionary<string, object> parametros)
+        public IList<MenuDTO> GetMenuByFilters(Dictionary<string, object> parametros)
         {
-            throw new Exception("Operacion no soportada");
+            List<MenuDTO> resultado = new List<MenuDTO>();
+
+            string strSql = "SELECT M.menu_id, " +
+                            "M.nombre_menu, " +
+                            "MP.nombre_menu AS 'padre_menu', " +
+                            "M.padre_menu_id, " +
+                            "M.es_final, " +
+                            "M.aplicacion " +
+                            "FROM MENU M ";
+
+            if (parametros.ContainsKey("IdPerfil") || parametros.ContainsKey("IdUsuario"))
+                strSql += "LEFT JOIN PERFIL_MENU PM ON PM.menu_id = M.menu_id ";
+            if (parametros.ContainsKey("IdUsuario")){ 
+                strSql += "LEFT JOIN PERFIL P ON P.perfil_id = PM.perfil_id " +
+                          "LEFT JOIN USUARIO_PERFIL UP ON UP.perfil_id = P.perfil_id ";
+            }
+            strSql += "LEFT JOIN MENU MP ON MP.menu_id = M.padre_menu_id " +
+                        "WHERE 1 = 1 ";
+
+            if (parametros.ContainsKey("IdPerfil"))
+                strSql += " AND (PM.perfil_id = @IdPerfil) ";
+            if (parametros.ContainsKey("IdUsuario"))
+                strSql += " AND (UP.usuario_id = @IdUsuario) ";
+
+            DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                resultado.Add(MappingMenu(row));
+            }
+
+            return resultado;
         }
 
         /// <summary>
@@ -45,20 +79,24 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="row">el objeto DataRow que tiene los datos del menu en cuestion</param>
         /// <returns></returns>
-        private Menu MappingMenu(DataRow row)
+        private MenuDTO MappingMenu(DataRow row)
         {
-            Menu oMenu = new Menu();
+            MenuDTO oMenu = new MenuDTO();
 
             oMenu.IdMenu = Int32.Parse(row["menu_id"].ToString());
             oMenu.NombreMenu = row["nombre_menu"].ToString();
             oMenu.EsFinal = Boolean.Parse(row["es_final"].ToString());
-            oMenu.Aplicacion = row["aplicacion"].ToString();
+
+            if (!DBNull.Value.Equals(row["aplicacion"]))
+                oMenu.Aplicacion = row["aplicacion"].ToString();
 
             if (!DBNull.Value.Equals(row["padre_menu_id"]))
             {
-                oMenu.MenuPadre = GetMenuById(Int32.Parse(row["padre_menu_id"].ToString()));
+                oMenu.IdMenuPadre = Int32.Parse(row["padre_menu_id"].ToString());
+                oMenu.MenuPadre = row["padre_menu"].ToString();
             }
-            
+
+
             return oMenu;
         }
     }

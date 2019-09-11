@@ -1,13 +1,14 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CEE.AccesoDatos.DBHelper;
 
+using CEE.AccesoDatos.DBHelper;
+using System.Data;
 using CEE.Negocio.DTO;
+
 namespace CEE.AccesoDatos.Dao.Sql
 {
     class UsuarioDaoSql : IUsuarioDao
@@ -27,7 +28,7 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "FROM USUARIO U " + 
                             "WHERE U.usuario_id = " + idUsuario.ToString();
 
-            return MappingUsuario(DBHelper.DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
+            return MappingUsuario(DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
         }
 
         /// <summary>
@@ -56,7 +57,7 @@ namespace CEE.AccesoDatos.Dao.Sql
             if (parametros.ContainsKey("FechaBajaNull"))
                 strSql += " AND (U.fecha_baja IS NULL) ";
 
-            DataTable dt = DBHelper.DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
+            DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
 
             foreach (DataRow row in dt.Rows)
             {

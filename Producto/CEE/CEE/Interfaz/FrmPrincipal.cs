@@ -16,6 +16,7 @@ namespace CEE.Interfaz
     public partial class FrmPrincipal : Form
     {
         UsuarioService oUsuarioService;
+        MenuService oMenuService;
 
         public FrmPrincipal()
         {
@@ -33,7 +34,9 @@ namespace CEE.Interfaz
             oUsuarioService = new UsuarioService();
             FrmLogin login = new FrmLogin(oUsuarioService);
             login.ShowDialog();
+            oMenuService = new MenuService();
             checkLogin();
+
         }
 
         private void FrmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
@@ -47,6 +50,12 @@ namespace CEE.Interfaz
         private void checkLogin()
         {
             if (oUsuarioService.IdUsuarioLogeado == 0) this.Dispose();
+
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("IdUsuario", oUsuarioService.IdUsuarioLogeado);
+            IList<MenuDTO> lista = oMenuService.GetMenuByFilters(parametros);
+
         }
+
     }
 }

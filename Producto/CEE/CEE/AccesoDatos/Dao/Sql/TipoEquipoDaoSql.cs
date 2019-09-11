@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using CEE.Entidad;
+using CEE.AccesoDatos.DBHelper;
 using System.Data;
+using CEE.Negocio.DTO;
 
 namespace CEE.AccesoDatos.Dao.Sql
 {
@@ -17,15 +18,17 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="idTipoEquipo">El id del objeto TipoEquipo que quiero levantar</param>
         /// <returns>El objeto TipoEquipo buscado</returns>
-        public TipoEquipo GetTipoEquipoById(int idTipoEquipo)
+        public TipoEquipoDTO GetTipoEquipoById(int idTipoEquipo)
         {
             string strSql = "SELECT TE.tipo_equipo_id, " +
                             "TE.tipo_equipo, " +
-                            "TE.descripcion " +
+                            "TE.descripcion, " +
+                            "TE.fecha_alta, " +
+                            "TE.fecha_baja " +
                             "FROM TIPO_EQUIPO TE " +
                             "WHERE TE.tipo_equipo_id = " + idTipoEquipo.ToString();
 
-            return MappingTipoEquipo(DBHelper.DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
+            return MappingTipoEquipo(DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
         }
 
         /// <summary>
@@ -33,9 +36,29 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="parametros">Un Dictionary de parametros y filtros a utilizar</param>
         /// <returns>Una IList de objetos TipoEquipo</returns>
-        public IList<TipoEquipo> GetTipoEquipoByFilters(Dictionary<string, object> parametros)
+        public IList<TipoEquipoDTO> GetTipoEquipoByFilters(Dictionary<string, object> parametros)
         {
-            throw new Exception("Operacion no soportada");
+            List<TipoEquipoDTO> resultado = new List<TipoEquipoDTO>();
+
+            string strSql = "SELECT TE.tipo_equipo_id, " +
+                            "TE.tipo_equipo, " +
+                            "TE.descripcion, " +
+                            "TE.fecha_alta, " +
+                            "TE.fecha_baja " +
+                            "FROM TIPO_EQUIPO TE " +
+                            "WHERE 1 = 1 ";
+
+            if (parametros.ContainsKey("NombreUsuario"))
+                strSql += " AND (U.nombre_usuario = @NombreUsuario) ";
+
+            DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                resultado.Add(MappingTipoEquipo(row));
+            }
+
+            return resultado;
         }
 
         /// <summary>
@@ -44,13 +67,15 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        private TipoEquipo MappingTipoEquipo(DataRow row)
+        private TipoEquipoDTO MappingTipoEquipo(DataRow row)
         {
-            TipoEquipo oTipoEquipo = new TipoEquipo();
+            TipoEquipoDTO oTipoEquipo = new TipoEquipoDTO();
 
             oTipoEquipo.IdTipoEquipo = Int32.Parse(row["tipo_equipo_id"].ToString());
             oTipoEquipo.NombreTipoEquipo = row["tipo_equipo"].ToString();
-            oTipoEquipo.Descripcion = row["descripcion"].ToString();
+
+            if (!DBNull.Value.Equals(row["descripcion"]))
+                oTipoEquipo.Descripcion = row["descripcion"].ToString();
 
             return oTipoEquipo;
         }

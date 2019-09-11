@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using CEE.Entidad;
+using CEE.AccesoDatos.DBHelper;
 using System.Data;
+using CEE.Negocio.DTO;
 
 namespace CEE.AccesoDatos.Dao.Sql
 {
@@ -16,14 +17,16 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="idEquipo">El id del objeto Equipo que busco</param>
         /// <returns>El objeto Equipo con el id pasado por parametro</returns>
-        public Equipo GetEquipoById(int idEquipo)
+        public EquipoDTO GetEquipoById(int idEquipo)
         {
             string strSql = "SELECT E.equipo_id, " +
-                                "E.codigo, " +
-                                "E.nombre, " +
-                                "E.tipo_equipo_id, " +
-                                "E.descripcion " +
+                            "E.codigo, " +
+                            "E.nombre, " +
+                            "TE.tipo_equipo, " +
+                            "E.tipo_equipo_id, " +
+                            "E.descripcion " +
                             "FROM EQUIPO E " +
+                            "JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id " +
                             "WHERE E.equipo_id = " + idEquipo.ToString();
 
             return MappingEquipo(DBHelper.DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
@@ -34,9 +37,31 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="parametros">Parametros para filtrar la busqueda</param>
         /// <returns></returns>
-        public IList<Equipo> GetEquipoByFilters(Dictionary<string, object> parametros)
+        public IList<EquipoDTO> GetEquipoByFilters(Dictionary<string, object> parametros)
         {
-            throw new Exception("Operacion no soportada");
+            List<EquipoDTO> resultado = new List<EquipoDTO>();
+
+            string strSql = "SELECT E.equipo_id, " +
+                            "E.codigo, " +
+                            "E.nombre, " +
+                            "TE.tipo_equipo, " +
+                            "E.tipo_equipo_id, " +
+                            "E.descripcion " +
+                            "FROM EQUIPO E " +
+                            "JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id " +
+                            "WHERE 1 = 1 ";
+
+            if (parametros.ContainsKey("NombreUsuario"))
+                strSql += " AND (U.nombre_usuario = @NombreUsuario) ";
+
+            DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                resultado.Add(MappingEquipo(row));
+            }
+
+            return resultado;
         }
 
         /// <summary>
@@ -45,28 +70,19 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        private Equipo MappingEquipo(DataRow row)
+        private EquipoDTO MappingEquipo(DataRow row)
         {
-            Equipo oEquipo = new Equipo();
+            EquipoDTO oEquipo = new EquipoDTO();
 
             oEquipo.IdEquipo = Int32.Parse(row["equipo_id"].ToString());
             oEquipo.Nombre = row["nombre"].ToString();
             oEquipo.Codigo = row["codigo"].ToString();
-            oEquipo.TipoEquipo = GetEquipoTipoEquipo(Int32.Parse(row["tipo_equipo_id"].ToString()));
-            oEquipo.Descripcion = row["descripcion"].ToString();
+            oEquipo.TipoEquipo = row["tipo_equipo"].ToString();
+            oEquipo.IdTipoEquipo = Int32.Parse(row["tipo_equipo_id"].ToString());
+            if (!DBNull.Value.Equals(row["descripcion"]))
+                oEquipo.Descripcion = row["descripcion"].ToString();
 
             return oEquipo;
-        }
-
-        /// <summary>
-        /// Le paso el id del TipoEquipo de un Equipo y me devuelve el objeto Tipo Equipo correspondiente
-        /// </summary>
-        /// <param name="idTipoEquipo"></param>
-        /// <returns></returns>
-        private TipoEquipo GetEquipoTipoEquipo(int idTipoEquipo)
-        {
-            ITipoEquipoDao tipoEquipoDao = new TipoEquipoDaoSql();
-            return tipoEquipoDao.GetTipoEquipoById(idTipoEquipo);
         }
     }
 }

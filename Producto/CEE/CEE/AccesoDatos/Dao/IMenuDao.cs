@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using CEE.Entidad;
+using CEE.Negocio.DTO;
 
 namespace CEE.AccesoDatos.Dao
 {
     interface IMenuDao
     {
-        Menu GetMenuById(int idMenu);
-        IList<Menu> GetMenuByFilters(Dictionary<string, object> parametros);
+        MenuDTO GetMenuById(int idMenu);
+        IList<MenuDTO> GetMenuByFilters(Dictionary<string, object> parametros);
 
     }
 }

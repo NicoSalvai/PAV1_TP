@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using CEE.Entidad;
+using CEE.Negocio.DTO;
 
 namespace CEE.AccesoDatos.Dao
 {
     interface ITipoEquipoDao
     {
-        TipoEquipo GetTipoEquipoById(int idTipoEquipo);
-        IList<TipoEquipo> GetTipoEquipoByFilters(Dictionary<string, object> parametros);
+        TipoEquipoDTO GetTipoEquipoById(int idTipoEquipo);
+        IList<TipoEquipoDTO> GetTipoEquipoByFilters(Dictionary<string, object> parametros);
     }
 }

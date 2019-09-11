@@ -78,8 +78,15 @@
     <Compile Include="Interfaz\FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Negocio\DTO\EquipoDTO.cs" />
+    <Compile Include="Negocio\DTO\MenuDTO.cs" />
+    <Compile Include="Negocio\DTO\PerfilDTO.cs" />
+    <Compile Include="Negocio\DTO\TipoEquipoDTO.cs" />
     <Compile Include="Negocio\DTO\UsuarioDTO.cs" />
+    <Compile Include="Negocio\EquipoService.cs" />
+    <Compile Include="Negocio\MenuService.cs" />
     <Compile Include="Negocio\PerfilService.cs" />
+    <Compile Include="Negocio\TipoEquipoService.cs" />
     <Compile Include="Negocio\UsuarioService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,13 +6,33 @@
 -- GetMenuById()
 USE [64429Pav1];
 SELECT M.menu_id,
-	M.padre_menu_id,
 	M.nombre_menu,
+	MP.nombre_menu AS 'padre_menu',
+	M.padre_menu_id,
 	M.es_final,
 	M.aplicacion
 FROM MENU M
+LEFT JOIN MENU MP ON MP.menu_id = M.padre_menu_id
 WHERE M.menu_id = 1;
 
+SELECT M.menu_id,
+	M.nombre_menu,
+	MP.nombre_menu AS 'padre_menu',
+	M.padre_menu_id,
+	M.es_final,
+	M.aplicacion
+FROM MENU M
+
+LEFT JOIN PERFIL_MENU PM ON PM.menu_id = M.menu_id
+
+LEFT JOIN PERFIL P ON P.perfil_id = PM.perfil_id
+LEFT JOIN USUARIO_PERFIL UP ON UP.perfil_id = P.perfil_id
+
+LEFT JOIN MENU MP ON MP.menu_id = M.padre_menu_id
+WHERE 1 = 1
+
+AND PM.perfil_id = 1
+AND UP.usuario_id = 1;
 
 -- ################################ Class: PerfilDao 
 -- GetPerfilById()
@@ -63,11 +83,13 @@ WHERE TE.tipo_equipo_id = 1;
 SELECT E.equipo_id,
 	E.codigo,
 	E.nombre,
+	TE.tipo_equipo,
 	E.tipo_equipo_id,
 	E.descripcion,
 	E.fecha_alta,
 	E.fecha_baja
 FROM EQUIPO E
+JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id
 WHERE E.equipo_id = 1;
 
 -- ############################ Class : PrestamoDao

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CEE.AccesoDatos.DBHelper;
-using CEE.Entidad;
 
+using CEE.AccesoDatos.DBHelper;
+using System.Data;
+using CEE.Negocio.DTO;
 namespace CEE.AccesoDatos.Dao.Sql
 {
     class PerfilDaoSql : IPerfilDao
@@ -16,7 +16,7 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="idPerfil"> El id del objeto Perfil buscado</param>
         /// <returns>El objeto perfil con id = idPerfil</returns>
-        public Perfil GetPerfilById(int idPerfil)
+        public PerfilDTO GetPerfilById(int idPerfil)
         {
             var strSql = "SELECT 	P.perfil_id, " +
                         "P.nombre_perfil, " +
@@ -26,7 +26,7 @@ namespace CEE.AccesoDatos.Dao.Sql
                         "FROM PERFIL P " +
                         "WHERE P.perfil_id = " + idPerfil.ToString();
 
-            return MappingPerfil(DBHelper.DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
+            return MappingPerfil(DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
         }
 
         /// <summary>
@@ -34,9 +34,29 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="parametros">Un Dictionary de string-object con los parametros para filtrar la busqueda</param>
         /// <returns>Operacion no soportada</returns>
-        public IList<Perfil> GetPerfilByFilters(Dictionary<string, object> parametros)
+        public IList<PerfilDTO> GetPerfilByFilters(Dictionary<string, object> parametros)
         {
-            throw new Exception("Operacion no soportada");
+            List<PerfilDTO> resultado = new List<PerfilDTO>();
+
+            var strSql = "SELECT 	P.perfil_id, " +
+                        "P.nombre_perfil, " +
+                        "P.descripcion, " +
+                        "P.fecha_alta, " +
+                        "P.fecha_baja " +
+                        "FROM PERFIL P " +
+                        "WHERE 1 = 1 ";
+
+            if (parametros.ContainsKey("NombreUsuario"))
+                strSql += " AND (U.nombre_usuario = @NombreUsuario) ";
+
+            DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                resultado.Add(MappingPerfil(row));
+            }
+
+            return resultado;
         }
 
         /// <summary>
@@ -44,9 +64,9 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="row"> La DataRow con los datos del perfil</param>
         /// <returns>un Objeto Perfil</returns>
-        private Perfil MappingPerfil(DataRow row)
+        private PerfilDTO MappingPerfil(DataRow row)
         {
-            Perfil oPerfil = new Perfil();
+            PerfilDTO oPerfil = new PerfilDTO();
 
             oPerfil.IdPerfil = Int32.Parse(row["perfil_id"].ToString());
             oPerfil.NombrePerfil = row["nombre_perfil"].ToString();
@@ -54,10 +74,9 @@ namespace CEE.AccesoDatos.Dao.Sql
 
             if(!DBNull.Value.Equals(row["fecha_baja"]))
                 oPerfil.FechaBaja = DateTime.Parse(row["fecha_baja"].ToString());
-            
-            oPerfil.Descripcion = row["descripcion"].ToString();
 
-            oPerfil.Menus = GetPerfilMenus(oPerfil.IdPerfil);
+            if (!DBNull.Value.Equals(row["descripcion"]))
+                oPerfil.Descripcion = row["descripcion"].ToString();
 
             return oPerfil;
         }
@@ -67,9 +86,9 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// </summary>
         /// <param name="idPerfil">El id del perfil que quiero conocer sus menus</param>
         /// <returns>Una Lista de objetos Menu</returns>
-        private IList<Menu> GetPerfilMenus(int idPerfil)
+        private IList<MenuDTO> GetPerfilMenus(int idPerfil)
         {
-            List<Menu> menus = new List<Menu>();        // armo la lista de menus a devolver
+            List<MenuDTO> menus = new List<MenuDTO>();        // armo la lista de menus a devolver
             IMenuDao menuDao = new MenuDaoSql();            // creo el menuDao para poder buscar los menus del perfil
 
             string strSql = "SELECT PM.menu_id " +

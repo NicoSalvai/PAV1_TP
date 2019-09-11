@@ -39,6 +39,7 @@ namespace CEE.Interfaz
 
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
                 parametros.Add("NombreUsuario", textBoxUsuario.Text);
+                parametros.Add("FechaBajaNull", "");
 
                 if (oUsuarioService.LoginUsuario(parametros, textBoxPassword.Text))
                 {
