@@ -10,11 +10,11 @@ namespace CEE.Negocio
 {
     class PerfilService
     {
-        private PerfilDao oPerfilDao;
+        private PerfilDaoSql oPerfilDao;
 
         public PerfilService()
         {
-            oPerfilDao = new PerfilDao();
+            oPerfilDao = new PerfilDaoSql();
         }
 
         public Perfil GetPerfilById(int idUsuario)

@@ -10,11 +10,11 @@ namespace CEE.Negocio
 {
     class UsuarioService
     {
-        private UsuarioDao oUsuarioDao;
+        private UsuarioDaoSql oUsuarioDao;
 
         public UsuarioService()
         {
-            oUsuarioDao = new UsuarioDao();
+            oUsuarioDao = new UsuarioDaoSql();
         }
 
         public Usuario GetUsuarioById(int idUsuario)

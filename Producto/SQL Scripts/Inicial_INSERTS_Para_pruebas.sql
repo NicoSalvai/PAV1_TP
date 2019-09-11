@@ -40,9 +40,9 @@ INSERT INTO PERFIL_MENU (perfil_id, menu_id)
 			(3,7),(3,8),(3,9), -- Prestamos
 			(4,11),(4,12),(4,13),(4,14); -- Equipos
 			
-INSERT INTO USUARIO (nombre_usuario, pass)
-	VALUES('administrador', 'administrador'),
-		('NicoSalvai', 'NicoSalvai');
+INSERT INTO USUARIO (nombre_usuario, pass, fecha_alta)
+	VALUES('administrador', 'administrador', GETDATE()),
+		('NicoSalvai', 'NicoSalvai', GETDATE());
 	
 INSERT INTO USUARIO_PERFIL (usuario_id, perfil_id)
 	VALUES(1,1), (2,2), (2,4);
@@ -50,8 +50,8 @@ INSERT INTO USUARIO_PERFIL (usuario_id, perfil_id)
 	
 	
 
-INSERT INTO TIPO_EQUIPO(tipo_equipo, descripcion)
-	VALUES('Generico', 'Tipo de equipo generico');
+INSERT INTO TIPO_EQUIPO(tipo_equipo, descripcion, fecha_alta)
+	VALUES('Generico', 'Tipo de equipo generico', GETDATE());
 	
 INSERT INTO TIPO_DOCUMENTO(nombre_tipo_documento, descripcion)
 	VALUES('DNI', 'Documento Nacional de Identidad');
@@ -60,14 +60,14 @@ INSERT INTO TIPO_DOCUMENTO(nombre_tipo_documento, descripcion)
 
 
 
-INSERT INTO PERSONA(legajo, numero_documento, tipo_documento_id, apellido, nombre, telefono, mail, calle, numero_calle, piso, departamento, observaciones)
-	VALUES(64429,39072672,1,'Salvai','Nicolas',35130941,'example@example.com','Calle Falsa', 123, 1, 'F', 'Observaciones');
+INSERT INTO PERSONA(legajo, numero_documento, tipo_documento_id, apellido, nombre, telefono, mail, calle, numero_calle, piso, departamento, observaciones, fecha_alta)
+	VALUES(64429,39072672,1,'Salvai','Nicolas',35130941,'example@example.com','Calle Falsa', 123, 1, 'F', 'Observaciones', GETDATE());
 
 INSERT INTO PRESTAMO(persona_id, fecha_desde)
 	VALUES(1,GETDATE());
 
-INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, descripcion)
-	VALUES('VM-01', 'voltimetro XXX', 1, '...');
+INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, descripcion, fecha_alta)
+	VALUES('VM-01', 'voltimetro XXX', 1, '...', GETDATE());
 	
 INSERT INTO DETALLE_PRESTAMO(detalle_prestamo_id, prestamo_id, equipo_id)
 	VALUES(1,1,1);

@@ -9,7 +9,7 @@ using CEE.Entidad;
 
 namespace CEE.AccesoDatos.Dao
 {
-    class MenuDao
+    class MenuDaoSql
     {
         /// <summary>
         ///  devuelve un objeto Menu segun el id que le pase

@@ -1,7 +1,9 @@
 -- ####################################################################################
 -- ############			INICIO CREACION DE LA BASE DE DATOS			############
 -- ####################################################################################
+CREATE DATABASE [64429Pav1];
 
+-- DROP DATABASE [64429Pav1];
 
 
 -- ####################################################################################
@@ -14,6 +16,8 @@ CREATE TABLE USUARIO (
 	usuario_id		INT NOT NULL IDENTITY(1,1),
 	nombre_usuario	VARCHAR(30) NOT NULL,
 	pass			VARCHAR(30) NOT NULL,
+	fecha_alta		DATETIME NOT NULL,
+	fecha_baja		DATETIME,
 	
 	CONSTRAINT PK_USUARIO PRIMARY KEY(usuario_id),
 	CONSTRAINT U_nombre_usuario UNIQUE(nombre_usuario)
@@ -23,8 +27,8 @@ CREATE TABLE PERFIL (
 	perfil_id		INT NOT NULL IDENTITY(1,1),
 	nombre_perfil	VARCHAR(30) NOT NULL,
 	descripcion		VARCHAR(50),
-	fecha_alta		DATE NOT NULL,
-	fecha_baja		DATE,
+	fecha_alta		DATETIME NOT NULL,
+	fecha_baja		DATETIME,
 	
 	CONSTRAINT PK_PERFIL PRIMARY KEY(perfil_id),
 	CONSTRAINT U_nombre_perfil UNIQUE(nombre_perfil)
@@ -43,8 +47,8 @@ CREATE TABLE USUARIO_PERFIL (
 
 CREATE TABLE MENU (
 	menu_id			INT NOT NULL,
-	padre_menu_id	INT,
 	nombre_menu		VARCHAR(30) NOT NULL,
+	padre_menu_id	INT,
 	es_final		BIT NOT NULL,
 	aplicacion		VARCHAR(30),
 	
@@ -95,6 +99,8 @@ CREATE TABLE PERSONA (
 	piso				INT,
 	departamento		VARCHAR(30),
 	observaciones		VARCHAR(30),
+	fecha_alta			DATETIME NOT NULL,
+	fecha_baja			DATETIME,
 	
 	CONSTRAINT PK_PERSONA PRIMARY KEY(persona_id),
 	CONSTRAINT U_legajo UNIQUE(legajo),
@@ -106,8 +112,9 @@ CREATE TABLE PERSONA (
 CREATE TABLE PRESTAMO (
 	prestamo_id			INT NOT NULL IDENTITY(1,1),
 	persona_id			INT NOT NULL,
-	fecha_desde			DATE NOT NULL,
-	fecha_hasta			DATE,
+	fecha_desde			DATETIME NOT NULL,
+	fecha_hasta			DATETIME,
+	fecha_cancelacion	DATETIME,
 	
 	CONSTRAINT PK_PRESTAMO PRIMARY KEY(prestamo_id),
 	CONSTRAINT FK_PERSONA_PRESTAMO FOREIGN KEY(persona_id)
@@ -118,6 +125,8 @@ CREATE TABLE TIPO_EQUIPO (
 	tipo_equipo_id		INT NOT NULL IDENTITY(1,1),
 	tipo_equipo			VARCHAR(20) NOT NULL,
 	descripcion			VARCHAR(50),
+	fecha_alta			DATETIME NOT NULL,
+	fecha_baja			DATETIME,
 	
 	CONSTRAINT PK_TIPO_EQUIPO PRIMARY KEY(tipo_equipo_id),
 	CONSTRAINT U_tipo_equipo UNIQUE(tipo_equipo)
@@ -129,6 +138,8 @@ CREATE TABLE EQUIPO (
 	nombre				VARCHAR(30) NOT NULL,
 	tipo_equipo_id		INT NOT NULL,
 	descripcion			VARCHAR(50),
+	fecha_alta			DATETIME NOT NULL,
+	fecha_baja			DATETIME,
 	
 	CONSTRAINT PK_EQUIPO PRIMARY KEY(equipo_id),
 	CONSTRAINT FK_TIPO_EQUIPO_EQUIPO FOREIGN KEY(tipo_equipo_id)

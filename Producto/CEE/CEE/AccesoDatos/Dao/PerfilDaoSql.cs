@@ -70,7 +70,7 @@ namespace CEE.AccesoDatos.Dao
         private IList<Menu> GetPerfilMenus(int idPerfil)
         {
             List<Menu> menus = new List<Menu>();        // armo la lista de menus a devolver
-            MenuDao menuDao = new MenuDao();            // creo el menuDao para poder buscar los menus del perfil
+            MenuDaoSql menuDao = new MenuDaoSql();            // creo el menuDao para poder buscar los menus del perfil
 
             string strSql = "SELECT PM.menu_id " +
                         "FROM PERFIL_MENU PM " +

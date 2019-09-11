@@ -45,9 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoDatos\Dao\EquipoDao.cs" />
     <Compile Include="AccesoDatos\Dao\IDao.cs" />
     <Compile Include="AccesoDatos\Dao\MenuDao.cs" />
     <Compile Include="AccesoDatos\Dao\PerfilDao.cs" />
+    <Compile Include="AccesoDatos\Dao\TipoEquipoDao.cs" />
     <Compile Include="AccesoDatos\Dao\UsuarioDao.cs" />
     <Compile Include="AccesoDatos\DBHelper\DBHelper.cs" />
     <Compile Include="AccesoDatos\DBHelper\DBHelperMio.cs" />
