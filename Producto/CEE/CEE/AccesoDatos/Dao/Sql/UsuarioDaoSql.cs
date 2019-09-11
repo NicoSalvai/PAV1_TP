@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using CEE.AccesoDatos.DBHelper;
 
-namespace CEE.AccesoDatos.Dao
+namespace CEE.AccesoDatos.Dao.Sql
 {
-    class UsuarioDaoSql
+    class UsuarioDaoSql : IUsuarioDao
     {
         /// <summary>
         /// Me devuelve un objeto Usuario segun el id que le pase
@@ -82,7 +82,7 @@ namespace CEE.AccesoDatos.Dao
         private IList<Perfil> GetUsuarioPerfiles(int idUsuario)
         {
             List<Perfil> perfiles = new List<Perfil>();        // armo la lista de menus a devolver
-            PerfilDaoSql perfilDao = new PerfilDaoSql();            // creo el menuDao para poder buscar los menus del perfil
+            IPerfilDao perfilDao = new PerfilDaoSql();            // creo el menuDao para poder buscar los menus del perfil
 
             string strSql = "SELECT UP.perfil_id " +
                         "FROM USUARIO_PERFIL UP " +

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using CEE.AccesoDatos.Dao.Sql;
 using CEE.AccesoDatos.Dao;
 using CEE.Entidad;
 
@@ -10,7 +12,7 @@ namespace CEE.Negocio
 {
     class UsuarioService
     {
-        private UsuarioDaoSql oUsuarioDao;
+        private IUsuarioDao oUsuarioDao;
 
         public UsuarioService()
         {

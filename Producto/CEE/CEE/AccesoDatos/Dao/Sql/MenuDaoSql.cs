@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using CEE.AccesoDatos.DBHelper;
 using CEE.Entidad;
 
-namespace CEE.AccesoDatos.Dao
+namespace CEE.AccesoDatos.Dao.Sql
 {
-    class MenuDaoSql
+    class MenuDaoSql : IMenuDao
     {
         /// <summary>
         ///  devuelve un objeto Menu segun el id que le pase
@@ -26,7 +26,7 @@ namespace CEE.AccesoDatos.Dao
                 "FROM MENU M " +
                 "WHERE M.menu_id = " + idMenu.ToString();
 
-            return MappingMenu(DBHelper.DBHelper.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
+            return MappingMenu(DBHelper.DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
         }
 
         /// <summary>

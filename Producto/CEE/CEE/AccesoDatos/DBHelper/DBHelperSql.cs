@@ -5,20 +5,20 @@ using System.Data.SqlClient;
 
 namespace CEE.AccesoDatos.DBHelper
 {
-    class DBHelper
+    class DBHelperSql
     {
         private string string_conexion;
-        private static DBHelper instance = new DBHelper();
+        private static DBHelperSql instance = new DBHelperSql();
 
-        private DBHelper()
+        private DBHelperSql()
         {
             string_conexion = "Data Source=NicoPC\\SQLEXPRESS;Initial Catalog=64429Pav1;Integrated Security=True";
         }
 
-        public static DBHelper GetDBHelper()
+        public static DBHelperSql GetDBHelper()
         {
             if (instance == null)
-                instance = new DBHelper();
+                instance = new DBHelperSql();
             return instance;
         }
 

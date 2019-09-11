@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using CEE.Entidad;
 using System.Data;
 
-namespace CEE.AccesoDatos.Dao
+namespace CEE.AccesoDatos.Dao.Sql
 {
-    class TipoEquipoDao
+    class TipoEquipoDaoSql : ITipoEquipoDao
     {
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace CEE.AccesoDatos.Dao
                             "FROM TIPO_EQUIPO TE " +
                             "WHERE TE.tipo_equipo_id = " + idTipoEquipo.ToString();
 
-            return MappingTipoEquipo(DBHelper.DBHelper.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
+            return MappingTipoEquipo(DBHelper.DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace CEE.AccesoDatos.Dao
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        public TipoEquipo MappingTipoEquipo(DataRow row)
+        private TipoEquipo MappingTipoEquipo(DataRow row)
         {
             TipoEquipo oTipoEquipo = new TipoEquipo();
 

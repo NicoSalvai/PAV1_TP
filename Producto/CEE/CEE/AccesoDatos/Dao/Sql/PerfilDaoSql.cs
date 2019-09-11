@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using CEE.AccesoDatos.DBHelper;
 using CEE.Entidad;
 
-namespace CEE.AccesoDatos.Dao
+namespace CEE.AccesoDatos.Dao.Sql
 {
-    class PerfilDao
+    class PerfilDaoSql : IPerfilDao
     {
         /// <summary>
         /// Me devuelve un objeto Perfil segun el id que le pase
@@ -26,7 +26,7 @@ namespace CEE.AccesoDatos.Dao
                         "FROM PERFIL P " +
                         "WHERE P.perfil_id = " + idPerfil.ToString();
 
-            return MappingPerfil(DBHelper.DBHelper.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
+            return MappingPerfil(DBHelper.DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace CEE.AccesoDatos.Dao
         private IList<Menu> GetPerfilMenus(int idPerfil)
         {
             List<Menu> menus = new List<Menu>();        // armo la lista de menus a devolver
-            MenuDaoSql menuDao = new MenuDaoSql();            // creo el menuDao para poder buscar los menus del perfil
+            IMenuDao menuDao = new MenuDaoSql();            // creo el menuDao para poder buscar los menus del perfil
 
             string strSql = "SELECT PM.menu_id " +
                         "FROM PERFIL_MENU PM " +
@@ -78,7 +78,7 @@ namespace CEE.AccesoDatos.Dao
 
             //List<string> list = DBHelper.DBHelper.GetDBHelper().ConsultaSQL(strSql).Rows.OfType<DataRow>().Select(dr => (string)dr["menu_id"]).ToList();
 
-            DataTable dt = DBHelper.DBHelper.GetDBHelper().ConsultaSQL(strSql);             // aca consigo la DataTable con el BDHelper que tenga los menu_id de este perfil 
+            DataTable dt = DBHelper.DBHelperSql.GetDBHelper().ConsultaSQL(strSql);             // aca consigo la DataTable con el BDHelper que tenga los menu_id de este perfil 
             List<string> list = dt.Rows.OfType<DataRow>().Select(dr => (string)dr["menu_id"].ToString()).ToList(); // convierto la dt de 1 columna en una lista de strings
 
             foreach (string idMenu in list)     // por cada uno de los string de la lista mando al menuDao un pedido de que me traiga el menu q le corresponde y lo meto a mi lista

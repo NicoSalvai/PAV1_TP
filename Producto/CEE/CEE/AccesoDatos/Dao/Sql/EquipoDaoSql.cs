@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using CEE.Entidad;
 using System.Data;
 
-namespace CEE.AccesoDatos.Dao
+namespace CEE.AccesoDatos.Dao.Sql
 {
-    class EquipoDaoSql
+    class EquipoDaoSql : IEquipoDao
     {
         /// <summary>
         /// Me devuelve un objeto Equipo segun el Id que le pase
@@ -45,7 +45,7 @@ namespace CEE.AccesoDatos.Dao
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        public Equipo MappingEquipo(DataRow row)
+        private Equipo MappingEquipo(DataRow row)
         {
             Equipo oEquipo = new Equipo();
 
@@ -63,9 +63,9 @@ namespace CEE.AccesoDatos.Dao
         /// </summary>
         /// <param name="idTipoEquipo"></param>
         /// <returns></returns>
-        public TipoEquipo GetEquipoTipoEquipo(int idTipoEquipo)
+        private TipoEquipo GetEquipoTipoEquipo(int idTipoEquipo)
         {
-            TipoEquipoDaoSql tipoEquipoDao = new TipoEquipoDaoSql();
+            ITipoEquipoDao tipoEquipoDao = new TipoEquipoDaoSql();
             return tipoEquipoDao.GetTipoEquipoById(idTipoEquipo);
         }
     }

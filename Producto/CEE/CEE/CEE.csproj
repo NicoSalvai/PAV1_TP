@@ -45,13 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccesoDatos\Dao\EquipoDao.cs" />
-    <Compile Include="AccesoDatos\Dao\IDao.cs" />
-    <Compile Include="AccesoDatos\Dao\MenuDao.cs" />
-    <Compile Include="AccesoDatos\Dao\PerfilDao.cs" />
-    <Compile Include="AccesoDatos\Dao\TipoEquipoDao.cs" />
-    <Compile Include="AccesoDatos\Dao\UsuarioDao.cs" />
-    <Compile Include="AccesoDatos\DBHelper\DBHelper.cs" />
+    <Compile Include="AccesoDatos\Dao\IDaoFactory.cs" />
+    <Compile Include="AccesoDatos\Dao\IEquipoDao.cs" />
+    <Compile Include="AccesoDatos\Dao\IMenuDao.cs" />
+    <Compile Include="AccesoDatos\Dao\ITipoEquipoDao.cs" />
+    <Compile Include="AccesoDatos\Dao\IUsuarioDao.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\EquipoDaoSql.cs" />
+    <Compile Include="AccesoDatos\Dao\IPerfilDao.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\MenuDaoSql.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\PerfilDaoSql.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\TipoEquipoDaoSql.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\UsuarioDaoSql.cs" />
+    <Compile Include="AccesoDatos\DBHelper\DBHelperSql.cs" />
     <Compile Include="AccesoDatos\DBHelper\DBHelperMio.cs" />
     <Compile Include="Entidad\DetallePrestamo.cs" />
     <Compile Include="Entidad\Equipo.cs" />

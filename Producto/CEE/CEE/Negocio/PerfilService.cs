@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+
+using CEE.AccesoDatos.Dao.Sql;
 using CEE.AccesoDatos.Dao;
 using CEE.Entidad;
 
@@ -10,7 +13,7 @@ namespace CEE.Negocio
 {
     class PerfilService
     {
-        private PerfilDaoSql oPerfilDao;
+        private IPerfilDao oPerfilDao;
 
         public PerfilService()
         {
