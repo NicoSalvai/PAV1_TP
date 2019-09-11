@@ -28,259 +28,120 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelUsuario = new System.Windows.Forms.Panel();
-            this.buttonBuscar = new System.Windows.Forms.Button();
-            this.dgvUsuario = new System.Windows.Forms.DataGridView();
-            this.IdUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelPerfil = new System.Windows.Forms.Panel();
-            this.dgvPerfil = new System.Windows.Forms.DataGridView();
-            this.IdPerfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombrePerfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaAlta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaBaja = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelMenu = new System.Windows.Forms.Panel();
-            this.dgvMenu = new System.Windows.Forms.DataGridView();
-            this.IdMenu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PadreMenu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreMenu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EsFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Aplicacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panelUsuario.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).BeginInit();
-            this.panelPerfil.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPerfil)).BeginInit();
-            this.panelMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMenu)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.groupBoxLogin = new System.Windows.Forms.GroupBox();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.textBoxUsuario = new System.Windows.Forms.TextBox();
+            this.labelPassword = new System.Windows.Forms.Label();
+            this.labelUsuario = new System.Windows.Forms.Label();
+            this.buttonAceptar = new System.Windows.Forms.Button();
+            this.buttonCancelar = new System.Windows.Forms.Button();
+            this.mainPanel.SuspendLayout();
+            this.groupBoxLogin.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelUsuario
+            // mainPanel
             // 
-            this.panelUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelUsuario.CausesValidation = false;
-            this.panelUsuario.Controls.Add(this.buttonBuscar);
-            this.panelUsuario.Controls.Add(this.dgvUsuario);
-            this.panelUsuario.Location = new System.Drawing.Point(12, 13);
-            this.panelUsuario.Name = "panelUsuario";
-            this.panelUsuario.Size = new System.Drawing.Size(626, 155);
-            this.panelUsuario.TabIndex = 0;
+            this.mainPanel.Controls.Add(this.groupBoxLogin);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(347, 159);
+            this.mainPanel.TabIndex = 0;
             // 
-            // buttonBuscar
+            // groupBoxLogin
             // 
-            this.buttonBuscar.Location = new System.Drawing.Point(539, 121);
-            this.buttonBuscar.Name = "buttonBuscar";
-            this.buttonBuscar.Size = new System.Drawing.Size(75, 23);
-            this.buttonBuscar.TabIndex = 1;
-            this.buttonBuscar.Text = "Buscar";
-            this.buttonBuscar.UseVisualStyleBackColor = true;
-            this.buttonBuscar.Click += new System.EventHandler(this.ButtonBuscar_Click);
+            this.groupBoxLogin.Controls.Add(this.textBoxPassword);
+            this.groupBoxLogin.Controls.Add(this.textBoxUsuario);
+            this.groupBoxLogin.Controls.Add(this.labelPassword);
+            this.groupBoxLogin.Controls.Add(this.labelUsuario);
+            this.groupBoxLogin.Controls.Add(this.buttonAceptar);
+            this.groupBoxLogin.Controls.Add(this.buttonCancelar);
+            this.groupBoxLogin.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxLogin.Name = "groupBoxLogin";
+            this.groupBoxLogin.Size = new System.Drawing.Size(323, 135);
+            this.groupBoxLogin.TabIndex = 0;
+            this.groupBoxLogin.TabStop = false;
+            this.groupBoxLogin.Text = "Login";
             // 
-            // dgvUsuario
+            // textBoxPassword
             // 
-            this.dgvUsuario.AllowUserToAddRows = false;
-            this.dgvUsuario.AllowUserToDeleteRows = false;
-            this.dgvUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUsuario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdUsuario,
-            this.NombreUsuario,
-            this.Pass});
-            this.dgvUsuario.Location = new System.Drawing.Point(3, 4);
-            this.dgvUsuario.Name = "dgvUsuario";
-            this.dgvUsuario.ReadOnly = true;
-            this.dgvUsuario.Size = new System.Drawing.Size(611, 111);
-            this.dgvUsuario.TabIndex = 0;
-            this.dgvUsuario.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvUsuario_CellClick);
+            this.textBoxPassword.Location = new System.Drawing.Point(98, 42);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
+            this.textBoxPassword.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPassword.TabIndex = 5;
+            this.textBoxPassword.UseSystemPasswordChar = true;
             // 
-            // IdUsuario
+            // textBoxUsuario
             // 
-            this.IdUsuario.HeaderText = "IdUsuario";
-            this.IdUsuario.Name = "IdUsuario";
-            this.IdUsuario.ReadOnly = true;
+            this.textBoxUsuario.Location = new System.Drawing.Point(98, 16);
+            this.textBoxUsuario.Name = "textBoxUsuario";
+            this.textBoxUsuario.Size = new System.Drawing.Size(100, 20);
+            this.textBoxUsuario.TabIndex = 4;
             // 
-            // NombreUsuario
+            // labelPassword
             // 
-            this.NombreUsuario.HeaderText = "NombreUsuario";
-            this.NombreUsuario.Name = "NombreUsuario";
-            this.NombreUsuario.ReadOnly = true;
+            this.labelPassword.AutoSize = true;
+            this.labelPassword.Location = new System.Drawing.Point(28, 45);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Size = new System.Drawing.Size(64, 13);
+            this.labelPassword.TabIndex = 3;
+            this.labelPassword.Text = "Contraseña:";
             // 
-            // Pass
+            // labelUsuario
             // 
-            this.Pass.HeaderText = "Pass";
-            this.Pass.Name = "Pass";
-            this.Pass.ReadOnly = true;
+            this.labelUsuario.AutoSize = true;
+            this.labelUsuario.Location = new System.Drawing.Point(46, 16);
+            this.labelUsuario.Name = "labelUsuario";
+            this.labelUsuario.Size = new System.Drawing.Size(46, 13);
+            this.labelUsuario.TabIndex = 2;
+            this.labelUsuario.Text = "Usuario:";
             // 
-            // panelPerfil
+            // buttonAceptar
             // 
-            this.panelPerfil.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelPerfil.Controls.Add(this.dgvPerfil);
-            this.panelPerfil.Location = new System.Drawing.Point(12, 174);
-            this.panelPerfil.Name = "panelPerfil";
-            this.panelPerfil.Size = new System.Drawing.Size(626, 155);
-            this.panelPerfil.TabIndex = 1;
+            this.buttonAceptar.Location = new System.Drawing.Point(242, 106);
+            this.buttonAceptar.Name = "buttonAceptar";
+            this.buttonAceptar.Size = new System.Drawing.Size(75, 23);
+            this.buttonAceptar.TabIndex = 1;
+            this.buttonAceptar.Text = "Aceptar";
+            this.buttonAceptar.UseVisualStyleBackColor = true;
+            this.buttonAceptar.Click += new System.EventHandler(this.ButtonAceptar_Click);
             // 
-            // dgvPerfil
+            // buttonCancelar
             // 
-            this.dgvPerfil.AllowUserToAddRows = false;
-            this.dgvPerfil.AllowUserToDeleteRows = false;
-            this.dgvPerfil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPerfil.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdPerfil,
-            this.NombrePerfil,
-            this.Descripcion,
-            this.FechaAlta,
-            this.FechaBaja});
-            this.dgvPerfil.Location = new System.Drawing.Point(3, 3);
-            this.dgvPerfil.Name = "dgvPerfil";
-            this.dgvPerfil.ReadOnly = true;
-            this.dgvPerfil.Size = new System.Drawing.Size(611, 111);
-            this.dgvPerfil.TabIndex = 1;
-            this.dgvPerfil.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPerfil_CellClick);
-            // 
-            // IdPerfil
-            // 
-            this.IdPerfil.HeaderText = "IdPerfil";
-            this.IdPerfil.Name = "IdPerfil";
-            this.IdPerfil.ReadOnly = true;
-            // 
-            // NombrePerfil
-            // 
-            this.NombrePerfil.HeaderText = "NombrePerfil";
-            this.NombrePerfil.Name = "NombrePerfil";
-            this.NombrePerfil.ReadOnly = true;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
-            // 
-            // FechaAlta
-            // 
-            this.FechaAlta.HeaderText = "FechaAlta";
-            this.FechaAlta.Name = "FechaAlta";
-            this.FechaAlta.ReadOnly = true;
-            // 
-            // FechaBaja
-            // 
-            this.FechaBaja.HeaderText = "FechaBaja";
-            this.FechaBaja.Name = "FechaBaja";
-            this.FechaBaja.ReadOnly = true;
-            // 
-            // panelMenu
-            // 
-            this.panelMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMenu.Controls.Add(this.dgvMenu);
-            this.panelMenu.Location = new System.Drawing.Point(12, 335);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(626, 164);
-            this.panelMenu.TabIndex = 2;
-            // 
-            // dgvMenu
-            // 
-            this.dgvMenu.AllowUserToAddRows = false;
-            this.dgvMenu.AllowUserToDeleteRows = false;
-            this.dgvMenu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMenu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdMenu,
-            this.PadreMenu,
-            this.NombreMenu,
-            this.EsFinal,
-            this.Aplicacion});
-            this.dgvMenu.Location = new System.Drawing.Point(3, 3);
-            this.dgvMenu.Name = "dgvMenu";
-            this.dgvMenu.ReadOnly = true;
-            this.dgvMenu.Size = new System.Drawing.Size(611, 129);
-            this.dgvMenu.TabIndex = 2;
-            // 
-            // IdMenu
-            // 
-            this.IdMenu.HeaderText = "IdMenu";
-            this.IdMenu.Name = "IdMenu";
-            this.IdMenu.ReadOnly = true;
-            // 
-            // PadreMenu
-            // 
-            this.PadreMenu.HeaderText = "PadreMenu";
-            this.PadreMenu.Name = "PadreMenu";
-            this.PadreMenu.ReadOnly = true;
-            // 
-            // NombreMenu
-            // 
-            this.NombreMenu.HeaderText = "NombreMenu";
-            this.NombreMenu.Name = "NombreMenu";
-            this.NombreMenu.ReadOnly = true;
-            // 
-            // EsFinal
-            // 
-            this.EsFinal.HeaderText = "EsFinal";
-            this.EsFinal.Name = "EsFinal";
-            this.EsFinal.ReadOnly = true;
-            // 
-            // Aplicacion
-            // 
-            this.Aplicacion.HeaderText = "Aplicacino";
-            this.Aplicacion.Name = "Aplicacion";
-            this.Aplicacion.ReadOnly = true;
-            // 
-            // panel2
-            // 
-            this.panel2.AutoScroll = true;
-            this.panel2.Controls.Add(this.panelUsuario);
-            this.panel2.Controls.Add(this.panelMenu);
-            this.panel2.Controls.Add(this.panelPerfil);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(650, 511);
-            this.panel2.TabIndex = 1;
+            this.buttonCancelar.Location = new System.Drawing.Point(6, 106);
+            this.buttonCancelar.Name = "buttonCancelar";
+            this.buttonCancelar.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancelar.TabIndex = 0;
+            this.buttonCancelar.Text = "Cancelar";
+            this.buttonCancelar.UseVisualStyleBackColor = true;
+            this.buttonCancelar.Click += new System.EventHandler(this.ButtonCancelar_Click);
             // 
             // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 511);
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(347, 159);
+            this.Controls.Add(this.mainPanel);
             this.Name = "FrmLogin";
-            this.ShowIcon = false;
             this.Text = "FrmLogin";
-            this.Load += new System.EventHandler(this.FrmLogin_Load);
-            this.panelUsuario.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).EndInit();
-            this.panelPerfil.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPerfil)).EndInit();
-            this.panelMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMenu)).EndInit();
-            this.panel2.ResumeLayout(false);
+            this.mainPanel.ResumeLayout(false);
+            this.groupBoxLogin.ResumeLayout(false);
+            this.groupBoxLogin.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panelUsuario;
-        private System.Windows.Forms.DataGridView dgvUsuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdUsuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreUsuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pass;
-        private System.Windows.Forms.Panel panelPerfil;
-        private System.Windows.Forms.Panel panelMenu;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView dgvPerfil;
-        private System.Windows.Forms.DataGridView dgvMenu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdPerfil;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombrePerfil;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaAlta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaBaja;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdMenu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PadreMenu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreMenu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EsFinal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Aplicacion;
-        private System.Windows.Forms.Button buttonBuscar;
+        private System.Windows.Forms.Panel mainPanel;
+        private System.Windows.Forms.GroupBox groupBoxLogin;
+        private System.Windows.Forms.TextBox textBoxPassword;
+        private System.Windows.Forms.TextBox textBoxUsuario;
+        private System.Windows.Forms.Label labelPassword;
+        private System.Windows.Forms.Label labelUsuario;
+        private System.Windows.Forms.Button buttonAceptar;
+        private System.Windows.Forms.Button buttonCancelar;
     }
 }

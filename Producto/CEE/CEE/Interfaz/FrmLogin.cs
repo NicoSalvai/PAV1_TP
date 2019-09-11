@@ -7,72 +7,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using CEE.Negocio;
-using CEE.Entidad;
+using CEE.Negocio.DTO;
 
 namespace CEE.Interfaz
 {
     public partial class FrmLogin : Form
     {
         UsuarioService oUsuarioService;
-        PerfilService oPerfilService;
-        
-        public FrmLogin()
+        public FrmLogin(UsuarioService ioUsuarioService)
         {
-            oUsuarioService = new UsuarioService();
-            oPerfilService = new PerfilService();
+            this.oUsuarioService = ioUsuarioService;
             InitializeComponent();
         }
 
-        private void FrmLogin_Load(object sender, EventArgs e)
+        public FrmLogin()
         {
-
+            this.oUsuarioService = new UsuarioService();
+            InitializeComponent();
         }
 
-        private void ButtonBuscar_Click(object sender, EventArgs e)
+        private void ButtonAceptar_Click(object sender, EventArgs e)
         {
-            dgvUsuario.Rows.Clear();
-            dgvPerfil.Rows.Clear();
-            dgvMenu.Rows.Clear();
-            //Usuario oUsuario = oUsuarioService.GetUsuarioById(1);
-            IList<Usuario> usuarios = oUsuarioService.GetUsuarioByFilters(new Dictionary<string, object>());
-
-            foreach (Usuario oUsuario in usuarios)
+            try
             {
-                dgvUsuario.Rows.Add(new object[] { oUsuario.IdUsuario.ToString(), oUsuario.NombreUsuario.ToString(), oUsuario.Pass.ToString() }); ;
-            }
+                if (textBoxUsuario.Text == "" || textBoxUsuario.Text == null)
+                    throw new Exception("Campo Usuario vacio o null");
+                if (textBoxPassword.Text == "" || textBoxPassword.Text == null)
+                    throw new Exception("Campo Password vacio o null");
 
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("NombreUsuario", textBoxUsuario.Text);
+
+                if (oUsuarioService.LoginUsuario(parametros, textBoxPassword.Text))
+                {
+                    this.Close();
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void DgvUsuario_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void ButtonCancelar_Click(object sender, EventArgs e)
         {
-            dgvPerfil.Rows.Clear();
-            dgvMenu.Rows.Clear();
-            if (dgvUsuario.CurrentRow.Index != -1)
-            {
-                dgvPerfil.Rows.Clear();
-
-                int idUsuarioSeleccionado = Convert.ToInt32(dgvUsuario.CurrentRow.Cells[0].Value);
-
-                IList<Perfil> perfiles = oUsuarioService.GetUsuarioById(idUsuarioSeleccionado).Perfiles;
-                foreach (Perfil oPerfil in perfiles)
-                    dgvPerfil.Rows.Add(new string[] { oPerfil.IdPerfil.ToString(), oPerfil.NombrePerfil, oPerfil.Descripcion, oPerfil.FechaAlta.ToString(), oPerfil.FechaBaja.ToString()});
-            }
-        }
-
-        private void DgvPerfil_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            dgvMenu.Rows.Clear();
-            if (dgvPerfil.CurrentRow.Index != -1)
-            {
-                dgvMenu.Rows.Clear();
-
-                int idPerfilSeleccionado = Convert.ToInt32(dgvPerfil.CurrentRow.Cells[0].Value);
-
-                IList<CEE.Entidad.Menu> menus = oPerfilService.GetPerfilById(idPerfilSeleccionado).Menus;
-                foreach (CEE.Entidad.Menu oMenu in menus)
-                    dgvMenu.Rows.Add(new string[] { oMenu.IdMenu.ToString(), oMenu.MenuPadre.NombreMenu, oMenu.NombreMenu, oMenu.EsFinal.ToString(), oMenu.Aplicacion });
-            }
+            this.Dispose();
         }
     }
 }

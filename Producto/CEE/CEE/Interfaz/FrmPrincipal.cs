@@ -8,10 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using CEE.Negocio;
+using CEE.Negocio.DTO;
+
 namespace CEE.Interfaz
 {
     public partial class FrmPrincipal : Form
     {
+        UsuarioService oUsuarioService;
+
         public FrmPrincipal()
         {
             InitializeComponent();
@@ -25,9 +30,10 @@ namespace CEE.Interfaz
         /// <param name="e">Los argumentos del trigger del evento</param>
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
-            FrmLogin login = new FrmLogin();
+            oUsuarioService = new UsuarioService();
+            FrmLogin login = new FrmLogin(oUsuarioService);
             login.ShowDialog();
+            checkLogin();
         }
 
         private void FrmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
@@ -36,6 +42,11 @@ namespace CEE.Interfaz
             respuesta = MessageBox.Show("Salir de la aplicacion", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (respuesta == DialogResult.No)
                 e.Cancel = true;
+        }
+
+        private void checkLogin()
+        {
+            if (oUsuarioService.IdUsuarioLogeado == 0) this.Dispose();
         }
     }
 }

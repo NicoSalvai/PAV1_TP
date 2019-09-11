@@ -39,11 +39,11 @@ INSERT INTO PERFIL_MENU (perfil_id, menu_id)
 			(2,3),(2,4),(2,5), -- Personas
 			(3,7),(3,8),(3,9), -- Prestamos
 			(4,11),(4,12),(4,13),(4,14); -- Equipos
-			
+
 INSERT INTO USUARIO (nombre_usuario, pass, fecha_alta)
-	VALUES('administrador', 'administrador', GETDATE()),
-		('NicoSalvai', 'NicoSalvai', GETDATE());
-	
+	VALUES('administrador', '91f5167c34c400758115c2a6826ec2e3', GETDATE()), -- administrador
+		('NicoSalvai', '91f5167c34c400758115c2a6826ec2e3', GETDATE()); -- administrador
+
 INSERT INTO USUARIO_PERFIL (usuario_id, perfil_id)
 	VALUES(1,1), (2,2), (2,4);
 	

@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccesoDatos\Dao\IDaoFactory.cs" />
     <Compile Include="AccesoDatos\Dao\IEquipoDao.cs" />
     <Compile Include="AccesoDatos\Dao\IMenuDao.cs" />
     <Compile Include="AccesoDatos\Dao\ITipoEquipoDao.cs" />
@@ -79,6 +78,7 @@
     <Compile Include="Interfaz\FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Negocio\DTO\UsuarioDTO.cs" />
     <Compile Include="Negocio\PerfilService.cs" />
     <Compile Include="Negocio\UsuarioService.cs" />
     <Compile Include="Program.cs" />

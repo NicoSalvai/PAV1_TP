@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using CEE.Entidad;
+using CEE.Negocio.DTO;
 
 namespace CEE.AccesoDatos.Dao
 {
     interface IUsuarioDao
     {
-        Usuario GetUsuarioById(int idUsuario);
-        IList<Usuario> GetUsuarioByFilters(Dictionary<string, object> parametros);
+        UsuarioDTO GetUsuarioById(int idUsuario);
+        IList<UsuarioDTO> GetUsuarioByFilters(Dictionary<string, object> parametros);
     }
 }

@@ -15,7 +15,7 @@ USE [64429Pav1];
 CREATE TABLE USUARIO (
 	usuario_id		INT NOT NULL IDENTITY(1,1),
 	nombre_usuario	VARCHAR(30) NOT NULL,
-	pass			VARCHAR(30) NOT NULL,
+	pass			VARCHAR(50) NOT NULL,
 	fecha_alta		DATETIME NOT NULL,
 	fecha_baja		DATETIME,
 	

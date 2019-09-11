@@ -6,27 +6,67 @@ using System.Threading.Tasks;
 
 using CEE.AccesoDatos.Dao.Sql;
 using CEE.AccesoDatos.Dao;
-using CEE.Entidad;
+
+using CEE.Negocio.DTO;
+
+using System.Security.Cryptography;
 
 namespace CEE.Negocio
 {
-    class UsuarioService
+    public class UsuarioService
     {
         private IUsuarioDao oUsuarioDao;
-
+        public int IdUsuarioLogeado { get; set; }
         public UsuarioService()
         {
             oUsuarioDao = new UsuarioDaoSql();
         }
 
-        public Usuario GetUsuarioById(int idUsuario)
+        public UsuarioDTO GetUsuarioById(int idUsuario)
         {
             return oUsuarioDao.GetUsuarioById(idUsuario);
         }
 
-        public IList<Usuario> GetUsuarioByFilters(Dictionary<string, object> parametros)
+        public IList<UsuarioDTO> GetUsuarioByFilters(Dictionary<string, object> parametros)
         {
             return oUsuarioDao.GetUsuarioByFilters(parametros);
+        }
+
+        public bool LoginUsuario(Dictionary<string, object> parametros, string Pass)
+        {
+            IList<UsuarioDTO> lista = GetUsuarioByFilters(parametros);
+
+            if (lista.Count == 1)
+            {
+                if (lista.First().Pass.Equals(GetMd5Hash(Pass)))
+                {
+                    IdUsuarioLogeado = lista.First().IdUsuario;
+                    return true;
+                }
+                throw new Exception("Password Incorrecta");
+            }
+            throw new Exception("Usuario Inexistente");
+        }
+
+
+
+
+
+
+
+        private string GetMd5Hash(string input)
+        {
+            StringBuilder sbOutput = new StringBuilder(); // StringBuilder Auxiliar para rearmar el hash de la calve
+
+            var md5 = new MD5CryptoServiceProvider();   // Clase que computa el Hash
+            byte[] data = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                sbOutput.Append(data[i].ToString("x2"));    // Armo el hash como un string
+            }
+
+            return sbOutput.ToString();
         }
     }
 }
