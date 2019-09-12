@@ -66,6 +66,12 @@
     <Compile Include="Entidad\TipoDocumento.cs" />
     <Compile Include="Entidad\TipoEquipo.cs" />
     <Compile Include="Entidad\Usuario.cs" />
+    <Compile Include="Interfaz\FrmEquipos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\FrmEquipos.Designer.cs">
+      <DependentUpon>FrmEquipos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaz\FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="Negocio\UsuarioService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Interfaz\FrmEquipos.resx">
+      <DependentUpon>FrmEquipos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>

@@ -51,8 +51,12 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id " +
                             "WHERE 1 = 1 ";
 
-            if (parametros.ContainsKey("NombreUsuario"))
-                strSql += " AND (U.nombre_usuario = @NombreUsuario) ";
+            if (parametros.ContainsKey("Codigo"))
+                strSql += " AND (E.codigo LIKE '%' + @Codigo + '%') ";
+            if (parametros.ContainsKey("Nombre"))
+                strSql += " AND (E.nombre LIKE '%' + @Nombre + '%') ";
+            if (parametros.ContainsKey("TipoEquipo"))
+                strSql += " AND (TE.tipo_equipo = @TipoEquipo) ";
 
             DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
 
