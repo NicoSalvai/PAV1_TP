@@ -26,7 +26,8 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "U.fecha_alta, " +
                             "U.fecha_baja " + 
                             "FROM USUARIO U " + 
-                            "WHERE U.usuario_id = " + idUsuario.ToString();
+                            "WHERE U.usuario_id = " + idUsuario.ToString() + " " +
+                            "AND U.fecha_baja IS NULL";
 
             return MappingUsuario(DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
         }
@@ -34,7 +35,7 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// <summary>
         /// Me devuelve una IList de objetos Usuario segun los parametros que yo le envie
         /// </summary>
-        /// <param name="parametros">Un Dictionary de string-object con los parametros para filtrar la busqueda</param>
+        /// <param name="parametros">NombreUsuario - NombreUsuarioLike - Pass - FechaBajaNotNull</param>
         /// <returns>Operacion no soportada</returns>
         public IList<UsuarioDTO> GetUsuarioByFilters(Dictionary<string, object> parametros)
         {
@@ -54,7 +55,7 @@ namespace CEE.AccesoDatos.Dao.Sql
                 strSql += " AND (U.nombre_usuario = @NombreUsuarioLike) ";
             if (parametros.ContainsKey("Pass"))
                 strSql += " AND (U.pass=@Pass) ";
-            if (parametros.ContainsKey("FechaBajaNull"))
+            if (!parametros.ContainsKey("FechaBajaNotNull"))
                 strSql += " AND (U.fecha_baja IS NULL) ";
 
             DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
@@ -75,9 +76,14 @@ namespace CEE.AccesoDatos.Dao.Sql
         private UsuarioDTO MappingUsuario(DataRow row)
         {
             UsuarioDTO oUsuario = new UsuarioDTO();
+
             oUsuario.IdUsuario = Int32.Parse(row["usuario_id"].ToString());
             oUsuario.NombreUsuario = row["nombre_usuario"].ToString();
             oUsuario.Pass = row["pass"].ToString();
+            oUsuario.FechaAlta = DateTime.Parse(row["fecha_alta"].ToString());
+
+            if(!DBNull.Value.Equals(row["fecha_baja"]))
+                oUsuario.FechaAlta = DateTime.Parse(row["fecha_baja"].ToString());
 
             return oUsuario;
         }

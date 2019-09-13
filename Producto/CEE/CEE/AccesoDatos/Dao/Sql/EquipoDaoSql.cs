@@ -24,18 +24,21 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "E.nombre, " +
                             "TE.tipo_equipo, " +
                             "E.tipo_equipo_id, " +
-                            "E.descripcion " +
+                            "E.descripcion, " +
+	                        "E.fecha_alta, " +
+	                        "E.fecha_baja " +
                             "FROM EQUIPO E " +
                             "JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id " +
-                            "WHERE E.equipo_id = " + idEquipo.ToString();
+                            "WHERE E.equipo_id = " + idEquipo.ToString() + " " +
+                            "AND E.fecha_baja IS NULL ";
 
-            return MappingEquipo(DBHelper.DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
+            return MappingEquipo(DBHelperSql.GetDBHelper().ConsultaSQL(strSql).Rows[0]);
         }
 
         /// <summary>
         /// Me devuelve una IList con objetos Equipos acorde a los filtros pasados por parametro
         /// </summary>
-        /// <param name="parametros">Parametros para filtrar la busqueda</param>
+        /// <param name="parametros">Codigo - Nombre - TipoEquipo - FechaBajaNotNull</param>
         /// <returns></returns>
         public IList<EquipoDTO> GetEquipoByFilters(Dictionary<string, object> parametros)
         {
@@ -46,7 +49,9 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "E.nombre, " +
                             "TE.tipo_equipo, " +
                             "E.tipo_equipo_id, " +
-                            "E.descripcion " +
+                            "E.descripcion, " +
+                            "E.fecha_alta, " +
+                            "E.fecha_baja " +
                             "FROM EQUIPO E " +
                             "JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id " +
                             "WHERE 1 = 1 ";
@@ -57,6 +62,8 @@ namespace CEE.AccesoDatos.Dao.Sql
                 strSql += " AND (E.nombre LIKE '%' + @Nombre + '%') ";
             if (parametros.ContainsKey("TipoEquipo"))
                 strSql += " AND (TE.tipo_equipo = @TipoEquipo) ";
+            if (!parametros.ContainsKey("FechaBajaNotNull"))
+                strSql += " AND (E.fecha_baja IS NULL) ";
 
             DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
 
@@ -83,10 +90,52 @@ namespace CEE.AccesoDatos.Dao.Sql
             oEquipo.Codigo = row["codigo"].ToString();
             oEquipo.TipoEquipo = row["tipo_equipo"].ToString();
             oEquipo.IdTipoEquipo = Int32.Parse(row["tipo_equipo_id"].ToString());
+            oEquipo.FechaAlta = DateTime.Parse(row["fecha_alta"].ToString());
+
+            if(!DBNull.Value.Equals(row["fecha_baja"]))
+                oEquipo.FechaAlta = DateTime.Parse(row["fecha_baja"].ToString());
+
             if (!DBNull.Value.Equals(row["descripcion"]))
                 oEquipo.Descripcion = row["descripcion"].ToString();
 
             return oEquipo;
+        }
+
+        public bool DeleteEquipoById(int idEquipo)
+        {
+            string strSql = "UPDATE EQUIPO " +
+                            "SET fecha_baja = GETDATE() " +
+                            "WHERE equipo_id = " + idEquipo.ToString();
+
+            DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
+            return true;
+        }
+
+        public bool UpdateEquipoById(EquipoDTO oEquipo)
+        {
+            string strSql = "UPDATE EQUIPO " +
+                            "SET codigo = '" + oEquipo.Codigo + "', " +
+                            "nombre = '" + oEquipo.Nombre + "', " +
+                            "tipo_equipo_id = " + oEquipo.IdTipoEquipo + ", " +
+                            "descripcion = '" + oEquipo.Descripcion + "' " +
+                            "WHERE equipo_id = " + oEquipo.IdEquipo.ToString();
+
+            DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
+            return true;
+        }
+
+        public bool InsertEquipo(EquipoDTO oEquipo)
+        {
+            string strSql = "INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, descripcion, fecha_alta) " +
+                            "VALUES('" + 
+                            oEquipo.Codigo + "','" + 
+                            oEquipo.Nombre + "','" + 
+                            oEquipo.IdTipoEquipo.ToString() + "','" + 
+                            oEquipo.Descripcion + "'," +
+                             "GETDATE()" + "); ";
+
+            DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
+            return true;
         }
     }
 }

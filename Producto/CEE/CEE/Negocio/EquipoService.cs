@@ -10,9 +10,10 @@ using CEE.Negocio.DTO;
 
 namespace CEE.Negocio
 {
-    class EquipoService
+    public class EquipoService
     {
         private IEquipoDao oEquipoDao;
+        public int IdEquipoSelected { get; set; }
 
         public EquipoService()
         {
@@ -27,6 +28,21 @@ namespace CEE.Negocio
         public IList<EquipoDTO> GetEquipoByFilters(Dictionary<string, object> parametros)
         {
             return oEquipoDao.GetEquipoByFilters(parametros);
+        }
+
+        public bool DeleteEquipoById(int idEquipo)
+        {
+            return oEquipoDao.DeleteEquipoById(idEquipo);
+        }
+
+        public bool UpdateEquipoById(EquipoDTO oEquipo)
+        {
+            return oEquipoDao.UpdateEquipoById(oEquipo);
+        }
+
+        public bool InsertEquipo(EquipoDTO oEquipo)
+        {
+            return oEquipoDao.InsertEquipo(oEquipo);
         }
     }
 }

@@ -3,7 +3,7 @@
 -- ####################################################################################
 CREATE DATABASE [64429Pav1];
 
- -- DROP DATABASE [64429Pav1];
+-- DROP DATABASE [64429Pav1];
 
 
 -- ####################################################################################
@@ -26,9 +26,7 @@ CREATE TABLE USUARIO (
 CREATE TABLE PERFIL (
 	perfil_id		INT NOT NULL IDENTITY(1,1),
 	nombre_perfil	VARCHAR(30) NOT NULL,
-	descripcion		VARCHAR(50),
-	fecha_alta		DATETIME NOT NULL,
-	fecha_baja		DATETIME,
+	descripcion		VARCHAR(50)
 	
 	CONSTRAINT PK_PERFIL PRIMARY KEY(perfil_id),
 	CONSTRAINT U_nombre_perfil UNIQUE(nombre_perfil)
@@ -87,7 +85,7 @@ CREATE TABLE TIPO_DOCUMENTO (
 
 CREATE TABLE PERSONA (
 	persona_id			INT NOT NULL IDENTITY(1,1),
-	legajo				INT,
+	legajo				INT NOT NULL,
 	numero_documento	INT NOT NULL,
 	tipo_documento_id	INT NOT NULL,
 	apellido			VARCHAR(30) NOT NULL,
@@ -125,8 +123,7 @@ CREATE TABLE TIPO_EQUIPO (
 	tipo_equipo_id		INT NOT NULL IDENTITY(1,1),
 	tipo_equipo			VARCHAR(20) NOT NULL,
 	descripcion			VARCHAR(50),
-	fecha_alta			DATETIME NOT NULL,
-	fecha_baja			DATETIME,
+	codigo_recomendado	VARCHAR(20),
 	
 	CONSTRAINT PK_TIPO_EQUIPO PRIMARY KEY(tipo_equipo_id),
 	CONSTRAINT U_tipo_equipo UNIQUE(tipo_equipo)

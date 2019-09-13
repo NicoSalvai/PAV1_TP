@@ -21,7 +21,7 @@ namespace CEE.AccesoDatos.Dao.Sql
         {
             string strSql = "SELECT M.menu_id, " +
                             "M.nombre_menu, " +
-                            "MP.nombre_menu AS 'padre_menu', " +
+                            "MP.nombre_menu AS 'padre_menu_nombre', " +
                             "M.padre_menu_id, " +
                             "M.es_final, " +
                             "M.aplicacion " +
@@ -35,7 +35,7 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// <summary>
         /// Me devuelve la lista de objetos Menus segun los filtros pasados
         /// </summary>
-        /// <param name="parametros">un Dictionary de string-object con los parametros para filtrar la busqueda</param>
+        /// <param name="parametros">IdPerfil - IdUsuario</param>
         /// <returns>Operacion no soportada</returns>
         public IList<MenuDTO> GetMenuByFilters(Dictionary<string, object> parametros)
         {
@@ -43,7 +43,7 @@ namespace CEE.AccesoDatos.Dao.Sql
 
             string strSql = "SELECT M.menu_id, " +
                             "M.nombre_menu, " +
-                            "MP.nombre_menu AS 'padre_menu', " +
+                            "MP.nombre_menu AS 'padre_menu_nombre', " +
                             "M.padre_menu_id, " +
                             "M.es_final, " +
                             "M.aplicacion " +
@@ -93,9 +93,8 @@ namespace CEE.AccesoDatos.Dao.Sql
             if (!DBNull.Value.Equals(row["padre_menu_id"]))
             {
                 oMenu.IdMenuPadre = Int32.Parse(row["padre_menu_id"].ToString());
-                oMenu.MenuPadre = row["padre_menu"].ToString();
+                oMenu.MenuPadre = row["padre_menu_nombre"].ToString();
             }
-
 
             return oMenu;
         }

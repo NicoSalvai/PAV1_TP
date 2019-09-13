@@ -20,9 +20,7 @@ namespace CEE.AccesoDatos.Dao.Sql
         {
             var strSql = "SELECT 	P.perfil_id, " +
                         "P.nombre_perfil, " +
-                        "P.descripcion, " +
-                        "P.fecha_alta, " +
-                        "P.fecha_baja " +
+                        "P.descripcion " +
                         "FROM PERFIL P " +
                         "WHERE P.perfil_id = " + idPerfil.ToString();
 
@@ -32,22 +30,20 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// <summary>
         /// Me devuelve una IList de objetos Perfil segun los parametros que yo le envie
         /// </summary>
-        /// <param name="parametros">Un Dictionary de string-object con los parametros para filtrar la busqueda</param>
+        /// <param name="parametros">NombrePerfil</param>
         /// <returns>Operacion no soportada</returns>
         public IList<PerfilDTO> GetPerfilByFilters(Dictionary<string, object> parametros)
         {
             List<PerfilDTO> resultado = new List<PerfilDTO>();
 
-            var strSql = "SELECT 	P.perfil_id, " +
+            var strSql = "SELECT P.perfil_id, " +
                         "P.nombre_perfil, " +
-                        "P.descripcion, " +
-                        "P.fecha_alta, " +
-                        "P.fecha_baja " +
+                        "P.descripcion " +
                         "FROM PERFIL P " +
                         "WHERE 1 = 1 ";
 
-            if (parametros.ContainsKey("NombreUsuario"))
-                strSql += " AND (U.nombre_usuario = @NombreUsuario) ";
+            if (parametros.ContainsKey("NombrePerfil"))
+                strSql += " AND (U.nombre_perfil = @NombrePerfil) ";
 
             DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
 
@@ -70,10 +66,6 @@ namespace CEE.AccesoDatos.Dao.Sql
 
             oPerfil.IdPerfil = Int32.Parse(row["perfil_id"].ToString());
             oPerfil.NombrePerfil = row["nombre_perfil"].ToString();
-            oPerfil.FechaAlta = DateTime.Parse(row["fecha_alta"].ToString());
-
-            if(!DBNull.Value.Equals(row["fecha_baja"]))
-                oPerfil.FechaBaja = DateTime.Parse(row["fecha_baja"].ToString());
 
             if (!DBNull.Value.Equals(row["descripcion"]))
                 oPerfil.Descripcion = row["descripcion"].ToString();

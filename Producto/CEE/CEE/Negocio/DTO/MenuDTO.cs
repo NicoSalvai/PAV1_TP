@@ -10,12 +10,18 @@ namespace CEE.Negocio.DTO
     {
         public int IdMenu { get; set; }
         public string NombreMenu { get; set; }
-        public bool EsFinal { get; set; }
-
-        // Desde aca las Propertys son Nullable
-        public string Aplicacion { get; set; }
-
+        /// <summary>
+        /// Nullable
+        /// </summary>
         public string MenuPadre { get; set; }
+        /// <summary>
+        /// Nullable
+        /// </summary>
         public int IdMenuPadre { get; set; }
+        public bool EsFinal { get; set; }
+        /// <summary>
+        /// Nullable
+        /// </summary>
+        public string Aplicacion { get; set; }
     }
 }

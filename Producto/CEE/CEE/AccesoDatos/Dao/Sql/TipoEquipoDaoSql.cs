@@ -23,8 +23,7 @@ namespace CEE.AccesoDatos.Dao.Sql
             string strSql = "SELECT TE.tipo_equipo_id, " +
                             "TE.tipo_equipo, " +
                             "TE.descripcion, " +
-                            "TE.fecha_alta, " +
-                            "TE.fecha_baja " +
+                            "TE.codigo_recomendado " +
                             "FROM TIPO_EQUIPO TE " +
                             "WHERE TE.tipo_equipo_id = " + idTipoEquipo.ToString();
 
@@ -34,7 +33,7 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// <summary>
         /// Me devuelve la lista de objetos TipoEquipo segun los filtros que le pase
         /// </summary>
-        /// <param name="parametros">Un Dictionary de parametros y filtros a utilizar</param>
+        /// <param name="parametros">TipoEquipo</param>
         /// <returns>Una IList de objetos TipoEquipo</returns>
         public IList<TipoEquipoDTO> GetTipoEquipoByFilters(Dictionary<string, object> parametros)
         {
@@ -43,13 +42,12 @@ namespace CEE.AccesoDatos.Dao.Sql
             string strSql = "SELECT TE.tipo_equipo_id, " +
                             "TE.tipo_equipo, " +
                             "TE.descripcion, " +
-                            "TE.fecha_alta, " +
-                            "TE.fecha_baja " +
+                            "TE.codigo_recomendado " +
                             "FROM TIPO_EQUIPO TE " +
                             "WHERE 1 = 1 ";
 
-            if (parametros.ContainsKey("NombreUsuario"))
-                strSql += " AND (U.nombre_usuario = @NombreUsuario) ";
+            if (parametros.ContainsKey("TipoEquipo"))
+                strSql += " AND (TE.tipo_equipo = @TipoEquipo) ";
 
             DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
 
@@ -76,6 +74,9 @@ namespace CEE.AccesoDatos.Dao.Sql
 
             if (!DBNull.Value.Equals(row["descripcion"]))
                 oTipoEquipo.Descripcion = row["descripcion"].ToString();
+
+            if (!DBNull.Value.Equals(row["codigo_recomendado"]))
+                oTipoEquipo.CodigoRecomendado = row["codigo_recomendado"].ToString();
 
             return oTipoEquipo;
         }

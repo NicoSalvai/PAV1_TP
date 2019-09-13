@@ -23,51 +23,45 @@ namespace CEE.Interfaz
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Funcion que se ejecuta ante el evento Load del Formulario
-        /// Lo que hago es crear y mostrar un Formulario de Login para el inicio de sesion
-        /// </summary>
-        /// <param name="sender">Nose</param>
-        /// <param name="e">Los argumentos del trigger del evento</param>
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             oUsuarioService = new UsuarioService();
             oMenuService = new MenuService();
 
-            FrmLogin login = new FrmLogin(oUsuarioService);
-            login.ShowDialog();
             checkLogin();
-
         }
 
         private void FrmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult respuesta;
-            respuesta = MessageBox.Show("Salir de la aplicacion", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (respuesta == DialogResult.No)
+            if (MessageBox.Show("Salir de la aplicacion", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 e.Cancel = true;
         }
+        
         /// <summary>
         /// checkeo si el usuario esta logeado segun el servicio de usuarios
         /// y luego busco sus menus habilitados y procedo a habilitarlos
         /// </summary>
         private void checkLogin()
         {
-            if (oUsuarioService.IdUsuarioLogeado == 0) this.Dispose();
+            FrmLogin login = new FrmLogin(oUsuarioService);
+            login.ShowDialog();
 
-            Dictionary<string, object> parametros = new Dictionary<string, object>();
-            parametros.Add("IdUsuario", oUsuarioService.IdUsuarioLogeado);
-            IList<MenuDTO> usuarioMenus = oMenuService.GetMenuByFilters(parametros);
-
-            HabilitarMenus(usuarioMenus);
+            if (oUsuarioService.IdUsuarioLogeado == 0)
+                this.Dispose();
+            
+            HabilitarMenus();
         }
 
         /// <summary>
         /// Habilitar los menus segun los que tiene habilitados el usuario
         /// </summary>
         /// <param name="usuarioMenus"></param>
-        private void HabilitarMenus(IList<MenuDTO> usuarioMenus)
+        private void HabilitarMenus()
         {
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("IdUsuario", oUsuarioService.IdUsuarioLogeado);
+            IList<MenuDTO> usuarioMenus = oMenuService.GetMenuByFilters(parametros);
+
             foreach (ToolStripMenuItem submenu in menuStrip1.Items)
             {
                 foreach (ToolStripMenuItem opcion in submenu.DropDownItems)
@@ -83,12 +77,24 @@ namespace CEE.Interfaz
             }
         }
 
+        private void Equipos_Click(object sender, EventArgs e)
+        {
+            new FrmEquipos().Show();
+        }
+    }
+}
 
 
 
 
 
 
+
+
+
+
+
+/*
         /// <summary>
         /// Carga automatica del menu strip segun los menus en la BD################################# NO ESTA EN USO
         /// </summary>
@@ -129,10 +135,4 @@ namespace CEE.Interfaz
                 }
             }
         }
-
-        private void Equipos_Click(object sender, EventArgs e)
-        {
-            new FrmEquipos().Show();
-        }
-    }
-}
+     */

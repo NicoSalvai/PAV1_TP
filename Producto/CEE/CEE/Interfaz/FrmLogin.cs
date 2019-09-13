@@ -37,11 +37,7 @@ namespace CEE.Interfaz
                 if (textBoxPassword.Text == "" || textBoxPassword.Text == null)
                     throw new Exception("Campo Password vacio o null");
 
-                Dictionary<string, object> parametros = new Dictionary<string, object>();
-                parametros.Add("NombreUsuario", textBoxUsuario.Text);
-                parametros.Add("FechaBajaNull", "");
-
-                if (oUsuarioService.LoginUsuario(parametros, textBoxPassword.Text))
+                if (oUsuarioService.LoginUsuario(textBoxUsuario.Text, textBoxPassword.Text))
                 {
                     this.Close();
                 }

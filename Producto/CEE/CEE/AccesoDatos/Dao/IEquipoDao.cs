@@ -12,5 +12,8 @@ namespace CEE.AccesoDatos.Dao
     {
         EquipoDTO GetEquipoById(int idEquipo);
         IList<EquipoDTO> GetEquipoByFilters(Dictionary<string, object> parametros);
+        bool DeleteEquipoById(int idEquipo);
+        bool UpdateEquipoById(EquipoDTO oEquipo);
+        bool InsertEquipo(EquipoDTO oEquipo);
     }
 }

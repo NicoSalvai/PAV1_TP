@@ -10,11 +10,9 @@ namespace CEE.Negocio.DTO
     {
         public int IdPerfil { get; set; }
         public string NombrePerfil { get; set; }
-        public DateTime FechaAlta { get; set; }
-
-        // Desde aca las Propertys son Nullable
-        public DateTime FechaBaja { get; set; }
-
+        /// <summary>
+        /// Nullable
+        /// </summary>
         public string Descripcion { get; set; }
     }
 }

@@ -7,7 +7,7 @@
 USE [64429Pav1];
 SELECT M.menu_id,
 	M.nombre_menu,
-	MP.nombre_menu AS 'padre_menu',
+	MP.nombre_menu AS 'padre_menu_nombre',
 	M.padre_menu_id,
 	M.es_final,
 	M.aplicacion
@@ -15,9 +15,10 @@ FROM MENU M
 LEFT JOIN MENU MP ON MP.menu_id = M.padre_menu_id
 WHERE M.menu_id = 1;
 
+-- GetMenuByFilters()
 SELECT M.menu_id,
 	M.nombre_menu,
-	MP.nombre_menu AS 'padre_menu',
+	MP.nombre_menu AS 'padre_menu_nombre',
 	M.padre_menu_id,
 	M.es_final,
 	M.aplicacion
@@ -31,24 +32,16 @@ LEFT JOIN USUARIO_PERFIL UP ON UP.perfil_id = P.perfil_id
 LEFT JOIN MENU MP ON MP.menu_id = M.padre_menu_id
 WHERE 1 = 1
 
-AND PM.perfil_id = 1
-AND UP.usuario_id = 1;
+AND (PM.perfil_id = 1) 
+AND (UP.usuario_id = 1) ;
 
 -- ################################ Class: PerfilDao 
 -- GetPerfilById()
 SELECT 	P.perfil_id,
 		P.nombre_perfil,
-		P.descripcion,	
-		P.fecha_alta,
-		P.fecha_baja		
+		P.descripcion
 FROM PERFIL P
 WHERE P.perfil_id = 1;
-
--- GetPerfilMenus()
-SELECT PM.menu_id
-FROM PERFIL_MENU PM
-WHERE PM.perfil_id = 1;
-
 
 -- ################################ Class: UsuarioDao
 -- GetUsuarioById()
@@ -59,13 +52,8 @@ SELECT 	U.usuario_id,
 		U.fecha_alta,
 		U.fecha_baja
 FROM USUARIO U
-WHERE U.usuario_id = 1;
-
--- GetUsuarioPerfiles()
-SELECT UP.perfil_id
-FROM USUARIO_PERFIL UP
-WHERE UP.usuario_id = 1;
-
+WHERE U.usuario_id = 1
+AND U.fecha_baja IS NULL;
 
 -- ############################ Class : TipoEquipoDao
 -- GetTipoEquipoById()
@@ -73,8 +61,7 @@ USE [64429Pav1]
 SELECT TE.tipo_equipo_id,
 	TE.tipo_equipo,
 	TE.descripcion,
-	TE.fecha_alta,
-	TE.fecha_baja
+	TE.codigo_recomendado
 FROM TIPO_EQUIPO TE
 WHERE TE.tipo_equipo_id = 1;
 
@@ -90,14 +77,27 @@ SELECT E.equipo_id,
 	E.fecha_baja
 FROM EQUIPO E
 JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id
-WHERE E.equipo_id = 1;
+WHERE E.equipo_id = 1
+AND E.fecha_baja IS NULL;
+
+-- DeleteEquipoById()
+UPDATE EQUIPO
+SET fecha_baja = GETDATE()
+WHERE equipo_id = 1;
+
+-- UpdateEquipoById()
+UPDATE EQUIPO
+SET codigo = '',
+	nombre = '',
+	tipo_equipo_id = 1,
+	descripcion = ''
+WHERE equipo_id = 1;
+
+-- InsertEquipo()
+INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, descripcion, fecha_alta)
+VALUES();
 
 -- ############################ Class : PrestamoDao
 -- GetPrestamoById()
-SELECT P.prestamo_id,
-		P.fecha_desde,
-		P.fecha_hasta,
-		P.fecha_cancelacion
-FROM PRESTAMO P
-WHERE P.prestamo_id = 1;
+
 

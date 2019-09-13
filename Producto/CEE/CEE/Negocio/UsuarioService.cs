@@ -17,6 +17,7 @@ namespace CEE.Negocio
     {
         private IUsuarioDao oUsuarioDao;
         public int IdUsuarioLogeado { get; set; }
+
         public UsuarioService()
         {
             oUsuarioDao = new UsuarioDaoSql();
@@ -32,13 +33,16 @@ namespace CEE.Negocio
             return oUsuarioDao.GetUsuarioByFilters(parametros);
         }
 
-        public bool LoginUsuario(Dictionary<string, object> parametros, string Pass)
+        public bool LoginUsuario(string nombreUsuario, string passwordUsuario)
         {
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("NombreUsuario", nombreUsuario);
+
             IList<UsuarioDTO> lista = GetUsuarioByFilters(parametros);
 
             if (lista.Count == 1)
             {
-                if (lista.First().Pass.Equals(GetMd5Hash(Pass)))
+                if (lista.First().Pass.Equals(GetMd5Hash(passwordUsuario)))
                 {
                     IdUsuarioLogeado = lista.First().IdUsuario;
                     return true;
@@ -54,7 +58,7 @@ namespace CEE.Negocio
 
 
 
-        private string GetMd5Hash(string input)
+        public string GetMd5Hash(string input)
         {
             StringBuilder sbOutput = new StringBuilder(); // StringBuilder Auxiliar para rearmar el hash de la calve
 
