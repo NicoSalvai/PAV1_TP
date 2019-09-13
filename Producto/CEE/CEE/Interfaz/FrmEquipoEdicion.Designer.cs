@@ -40,7 +40,6 @@
             this.textBoxDescripcion = new System.Windows.Forms.TextBox();
             this.textBoxCodigo = new System.Windows.Forms.TextBox();
             this.comboBoxTipoEquipo = new System.Windows.Forms.ComboBox();
-            this.labelEquipo = new System.Windows.Forms.Label();
             this.panelPrincipal.SuspendLayout();
             this.panelEquipo.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +50,7 @@
             this.panelPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPrincipal.Location = new System.Drawing.Point(0, 0);
             this.panelPrincipal.Name = "panelPrincipal";
-            this.panelPrincipal.Size = new System.Drawing.Size(430, 333);
+            this.panelPrincipal.Size = new System.Drawing.Size(430, 302);
             this.panelPrincipal.TabIndex = 0;
             // 
             // panelEquipo
@@ -67,16 +66,15 @@
             this.panelEquipo.Controls.Add(this.textBoxDescripcion);
             this.panelEquipo.Controls.Add(this.textBoxCodigo);
             this.panelEquipo.Controls.Add(this.comboBoxTipoEquipo);
-            this.panelEquipo.Controls.Add(this.labelEquipo);
             this.panelEquipo.Location = new System.Drawing.Point(12, 12);
             this.panelEquipo.Name = "panelEquipo";
-            this.panelEquipo.Size = new System.Drawing.Size(406, 309);
+            this.panelEquipo.Size = new System.Drawing.Size(406, 278);
             this.panelEquipo.TabIndex = 0;
             // 
             // labelDescripcion
             // 
             this.labelDescripcion.AutoSize = true;
-            this.labelDescripcion.Location = new System.Drawing.Point(16, 126);
+            this.labelDescripcion.Location = new System.Drawing.Point(16, 100);
             this.labelDescripcion.Name = "labelDescripcion";
             this.labelDescripcion.Size = new System.Drawing.Size(66, 13);
             this.labelDescripcion.TabIndex = 10;
@@ -85,7 +83,7 @@
             // labelNombre
             // 
             this.labelNombre.AutoSize = true;
-            this.labelNombre.Location = new System.Drawing.Point(35, 97);
+            this.labelNombre.Location = new System.Drawing.Point(35, 69);
             this.labelNombre.Name = "labelNombre";
             this.labelNombre.Size = new System.Drawing.Size(47, 13);
             this.labelNombre.TabIndex = 9;
@@ -94,7 +92,7 @@
             // labelCodigo
             // 
             this.labelCodigo.AutoSize = true;
-            this.labelCodigo.Location = new System.Drawing.Point(39, 69);
+            this.labelCodigo.Location = new System.Drawing.Point(39, 44);
             this.labelCodigo.Name = "labelCodigo";
             this.labelCodigo.Size = new System.Drawing.Size(43, 13);
             this.labelCodigo.TabIndex = 8;
@@ -103,7 +101,7 @@
             // labelTipoEquipo
             // 
             this.labelTipoEquipo.AutoSize = true;
-            this.labelTipoEquipo.Location = new System.Drawing.Point(15, 42);
+            this.labelTipoEquipo.Location = new System.Drawing.Point(15, 17);
             this.labelTipoEquipo.Name = "labelTipoEquipo";
             this.labelTipoEquipo.Size = new System.Drawing.Size(67, 13);
             this.labelTipoEquipo.TabIndex = 7;
@@ -111,7 +109,7 @@
             // 
             // buttonGuardar
             // 
-            this.buttonGuardar.Location = new System.Drawing.Point(326, 281);
+            this.buttonGuardar.Location = new System.Drawing.Point(326, 250);
             this.buttonGuardar.Name = "buttonGuardar";
             this.buttonGuardar.Size = new System.Drawing.Size(75, 23);
             this.buttonGuardar.TabIndex = 6;
@@ -121,7 +119,7 @@
             // 
             // buttonCancelar
             // 
-            this.buttonCancelar.Location = new System.Drawing.Point(3, 281);
+            this.buttonCancelar.Location = new System.Drawing.Point(3, 250);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(75, 23);
             this.buttonCancelar.TabIndex = 5;
@@ -131,14 +129,14 @@
             // 
             // textBoxNombre
             // 
-            this.textBoxNombre.Location = new System.Drawing.Point(88, 94);
+            this.textBoxNombre.Location = new System.Drawing.Point(88, 66);
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(152, 20);
             this.textBoxNombre.TabIndex = 4;
             // 
             // textBoxDescripcion
             // 
-            this.textBoxDescripcion.Location = new System.Drawing.Point(88, 123);
+            this.textBoxDescripcion.Location = new System.Drawing.Point(88, 97);
             this.textBoxDescripcion.Multiline = true;
             this.textBoxDescripcion.Name = "textBoxDescripcion";
             this.textBoxDescripcion.Size = new System.Drawing.Size(152, 95);
@@ -146,7 +144,7 @@
             // 
             // textBoxCodigo
             // 
-            this.textBoxCodigo.Location = new System.Drawing.Point(88, 66);
+            this.textBoxCodigo.Location = new System.Drawing.Point(88, 41);
             this.textBoxCodigo.Name = "textBoxCodigo";
             this.textBoxCodigo.Size = new System.Drawing.Size(152, 20);
             this.textBoxCodigo.TabIndex = 2;
@@ -155,28 +153,19 @@
             // 
             this.comboBoxTipoEquipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTipoEquipo.FormattingEnabled = true;
-            this.comboBoxTipoEquipo.Location = new System.Drawing.Point(88, 39);
+            this.comboBoxTipoEquipo.Location = new System.Drawing.Point(88, 14);
             this.comboBoxTipoEquipo.Name = "comboBoxTipoEquipo";
             this.comboBoxTipoEquipo.Size = new System.Drawing.Size(152, 21);
             this.comboBoxTipoEquipo.TabIndex = 1;
-            // 
-            // labelEquipo
-            // 
-            this.labelEquipo.AutoSize = true;
-            this.labelEquipo.Location = new System.Drawing.Point(15, 0);
-            this.labelEquipo.Name = "labelEquipo";
-            this.labelEquipo.Size = new System.Drawing.Size(40, 13);
-            this.labelEquipo.TabIndex = 0;
-            this.labelEquipo.Text = "Equipo";
             // 
             // FrmEquipoEdicion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 333);
+            this.ClientSize = new System.Drawing.Size(430, 302);
             this.Controls.Add(this.panelPrincipal);
             this.Name = "FrmEquipoEdicion";
-            this.Text = "FrmEquipoEdicion";
+            this.Text = "Equipo";
             this.Load += new System.EventHandler(this.FrmEquipoEdicion_Load);
             this.panelPrincipal.ResumeLayout(false);
             this.panelEquipo.ResumeLayout(false);
@@ -189,7 +178,6 @@
 
         private System.Windows.Forms.Panel panelPrincipal;
         private System.Windows.Forms.Panel panelEquipo;
-        private System.Windows.Forms.Label labelEquipo;
         private System.Windows.Forms.Label labelDescripcion;
         private System.Windows.Forms.Label labelNombre;
         private System.Windows.Forms.Label labelCodigo;

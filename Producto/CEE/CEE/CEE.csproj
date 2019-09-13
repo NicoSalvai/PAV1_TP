@@ -84,6 +84,18 @@
     <Compile Include="Interfaz\FrmLogin.Designer.cs">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaz\FrmPersonaEdicion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\FrmPersonaEdicion.Designer.cs">
+      <DependentUpon>FrmPersonaEdicion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz\FrmPersonas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\FrmPersonas.Designer.cs">
+      <DependentUpon>FrmPersonas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaz\FrmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +122,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz\FrmPersonaEdicion.resx">
+      <DependentUpon>FrmPersonaEdicion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz\FrmPersonas.resx">
+      <DependentUpon>FrmPersonas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>

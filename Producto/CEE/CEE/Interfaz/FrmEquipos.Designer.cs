@@ -33,7 +33,6 @@
             this.buttonEliminar = new System.Windows.Forms.Button();
             this.buttonNuevo = new System.Windows.Forms.Button();
             this.buttonSalir = new System.Windows.Forms.Button();
-            this.labelTitle = new System.Windows.Forms.Label();
             this.panelBusqueda = new System.Windows.Forms.Panel();
             this.buttonBuscar = new System.Windows.Forms.Button();
             this.comboBoxTipoEquipo = new System.Windows.Forms.ComboBox();
@@ -61,7 +60,6 @@
             this.panelPrincipal.Controls.Add(this.buttonEliminar);
             this.panelPrincipal.Controls.Add(this.buttonNuevo);
             this.panelPrincipal.Controls.Add(this.buttonSalir);
-            this.panelPrincipal.Controls.Add(this.labelTitle);
             this.panelPrincipal.Controls.Add(this.panelBusqueda);
             this.panelPrincipal.Location = new System.Drawing.Point(12, 12);
             this.panelPrincipal.Name = "panelPrincipal";
@@ -108,15 +106,6 @@
             this.buttonSalir.UseVisualStyleBackColor = true;
             this.buttonSalir.Click += new System.EventHandler(this.ButtonSalir_Click);
             // 
-            // labelTitle
-            // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(3, 10);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(93, 13);
-            this.labelTitle.TabIndex = 0;
-            this.labelTitle.Text = "Gestionar Equipos";
-            // 
             // panelBusqueda
             // 
             this.panelBusqueda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -129,9 +118,9 @@
             this.panelBusqueda.Controls.Add(this.textBoxCodigo);
             this.panelBusqueda.Controls.Add(this.labelCodigo);
             this.panelBusqueda.Controls.Add(this.labelBusqueda);
-            this.panelBusqueda.Location = new System.Drawing.Point(3, 26);
+            this.panelBusqueda.Location = new System.Drawing.Point(3, 3);
             this.panelBusqueda.Name = "panelBusqueda";
-            this.panelBusqueda.Size = new System.Drawing.Size(768, 366);
+            this.panelBusqueda.Size = new System.Drawing.Size(768, 389);
             this.panelBusqueda.TabIndex = 0;
             // 
             // buttonBuscar
@@ -258,9 +247,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panelPrincipal);
             this.Name = "FrmEquipos";
-            this.Text = "FrmEquipos";
+            this.Text = "Gestionar Equipos";
             this.panelPrincipal.ResumeLayout(false);
-            this.panelPrincipal.PerformLayout();
             this.panelBusqueda.ResumeLayout(false);
             this.panelBusqueda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEquipos)).EndInit();
@@ -271,7 +259,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panelPrincipal;
-        private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Panel panelBusqueda;
         private System.Windows.Forms.Label labelBusqueda;
         private System.Windows.Forms.DataGridView dgvEquipos;

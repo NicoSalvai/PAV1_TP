@@ -15,7 +15,6 @@ namespace CEE.Interfaz
 {
     public partial class FrmEquipoEdicion : Form
     {
-
         EquipoService oEquipoService;
         TipoEquipoService oTipoEquipoService;
 
@@ -27,7 +26,6 @@ namespace CEE.Interfaz
             delete
         }
 
-
         public FrmEquipoEdicion(EquipoService oEquipoService)
         {
             InitializeComponent();
@@ -38,6 +36,19 @@ namespace CEE.Interfaz
 
         private void FrmEquipoEdicion_Load(object sender, EventArgs e)
         {
+            switch (formMode) {
+                case ABMFormMode.insert:
+                    this.Text = "Alta Equipo";
+                    break;
+                case ABMFormMode.update:
+                    this.Text = "Modificar Equipo";
+                    break;
+                case ABMFormMode.delete:
+                    this.Text = "Eliminar Equipo";
+                    buttonGuardar.Text = "Eliminar";
+                    break;
+
+            }
             cargarCombos();
             habilitarCampos();
             cargarDatos();

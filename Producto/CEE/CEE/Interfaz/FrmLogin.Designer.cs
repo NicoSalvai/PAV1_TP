@@ -125,7 +125,7 @@
             this.ClientSize = new System.Drawing.Size(347, 159);
             this.Controls.Add(this.mainPanel);
             this.Name = "FrmLogin";
-            this.Text = "FrmLogin";
+            this.Text = "Login";
             this.mainPanel.ResumeLayout(false);
             this.groupBoxLogin.ResumeLayout(false);
             this.groupBoxLogin.PerformLayout();

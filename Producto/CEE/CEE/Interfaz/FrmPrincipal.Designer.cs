@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.panelPrincipal = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.personasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Personas = new System.Windows.Forms.ToolStripMenuItem();
             this.ConsultarPersonas = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,8 +42,6 @@
             this.equiposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Equipos = new System.Windows.Forms.ToolStripMenuItem();
             this.TiposEquipos = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panelPrincipal.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -57,6 +57,15 @@
             this.panelPrincipal.Size = new System.Drawing.Size(800, 450);
             this.panelPrincipal.TabIndex = 0;
             // 
+            // panel2
+            // 
+            this.panel2.AutoSize = true;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Location = new System.Drawing.Point(127, 4);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(670, 442);
+            this.panel2.TabIndex = 2;
+            // 
             // panel1
             // 
             this.panel1.AutoSize = true;
@@ -67,27 +76,41 @@
             this.panel1.Size = new System.Drawing.Size(128, 444);
             this.panel1.TabIndex = 1;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.personasToolStripMenuItem,
+            this.prestamosToolStripMenuItem,
+            this.equiposToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(126, 442);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
             // personasToolStripMenuItem
             // 
             this.personasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Personas,
             this.ConsultarPersonas});
             this.personasToolStripMenuItem.Name = "personasToolStripMenuItem";
-            this.personasToolStripMenuItem.Size = new System.Drawing.Size(67, 19);
+            this.personasToolStripMenuItem.Size = new System.Drawing.Size(113, 19);
             this.personasToolStripMenuItem.Text = "Personas";
             // 
             // Personas
             // 
             this.Personas.Enabled = false;
             this.Personas.Name = "Personas";
-            this.Personas.Size = new System.Drawing.Size(175, 22);
+            this.Personas.Size = new System.Drawing.Size(180, 22);
             this.Personas.Text = "Gestionar Personas";
+            this.Personas.Click += new System.EventHandler(this.Personas_Click);
             // 
             // ConsultarPersonas
             // 
             this.ConsultarPersonas.Enabled = false;
             this.ConsultarPersonas.Name = "ConsultarPersonas";
-            this.ConsultarPersonas.Size = new System.Drawing.Size(175, 22);
+            this.ConsultarPersonas.Size = new System.Drawing.Size(180, 22);
             this.ConsultarPersonas.Text = "Consultar Personas";
             // 
             // prestamosToolStripMenuItem
@@ -97,7 +120,7 @@
             this.FinPrestamos,
             this.ConsultarPrestamos});
             this.prestamosToolStripMenuItem.Name = "prestamosToolStripMenuItem";
-            this.prestamosToolStripMenuItem.Size = new System.Drawing.Size(67, 19);
+            this.prestamosToolStripMenuItem.Size = new System.Drawing.Size(113, 19);
             this.prestamosToolStripMenuItem.Text = "Prestamos";
             // 
             // InicioPrestamos
@@ -145,28 +168,6 @@
             this.TiposEquipos.Size = new System.Drawing.Size(216, 22);
             this.TiposEquipos.Text = "Gestionar Tipos de Equipos";
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.personasToolStripMenuItem,
-            this.prestamosToolStripMenuItem,
-            this.equiposToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(126, 442);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // panel2
-            // 
-            this.panel2.AutoSize = true;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(127, 4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(670, 442);
-            this.panel2.TabIndex = 2;
-            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,7 +175,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panelPrincipal);
             this.Name = "FrmPrincipal";
-            this.Text = "Form1";
+            this.Text = "CEE";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPrincipal_FormClosing);
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.panelPrincipal.ResumeLayout(false);

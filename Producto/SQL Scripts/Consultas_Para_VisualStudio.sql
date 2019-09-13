@@ -97,7 +97,27 @@ WHERE equipo_id = 1;
 INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, descripcion, fecha_alta)
 VALUES();
 
--- ############################ Class : PrestamoDao
--- GetPrestamoById()
-
+-- ############################ Class : PersonaDao
+-- GetPersonaById()
+USE [64429Pav1];
+SELECT P.persona_id,			
+	P.legajo,				
+	P.numero_documento,
+	TD.nombre_tipo_documento,
+	P.tipo_documento_id,
+	P.apellido,
+	P.nombre,
+	P.telefono,
+	P.mail,
+	P.calle,
+	P.numero_calle,
+	P.piso,
+	P.departamento,
+	P.observaciones,
+	P.fecha_alta,
+	P.fecha_baja
+FROM PERSONA P
+	JOIN TIPO_DOCUMENTO TD ON TD.tipo_documento_id = P.tipo_documento_id
+WHERE P.persona_id = 1
+AND P.fecha_baja IS NULL;
 

@@ -81,6 +81,11 @@ namespace CEE.Interfaz
         {
             new FrmEquipos().Show();
         }
+
+        private void Personas_Click(object sender, EventArgs e)
+        {
+            new FrmPersonas().Show();
+        }
     }
 }
 
