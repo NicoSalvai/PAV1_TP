@@ -12,5 +12,8 @@ namespace CEE.AccesoDatos.Dao
     {
         UsuarioDTO GetUsuarioById(int idUsuario);
         IList<UsuarioDTO> GetUsuarioByFilters(Dictionary<string, object> parametros);
+        bool DeleteUsuarioById(int idUsuario);
+        bool UpdateUsuarioById(UsuarioDTO oUsuario);
+        bool InsertUsuario(UsuarioDTO oUsuario);
     }
 }

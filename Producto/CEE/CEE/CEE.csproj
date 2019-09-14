@@ -47,12 +47,18 @@
   <ItemGroup>
     <Compile Include="AccesoDatos\Dao\IEquipoDao.cs" />
     <Compile Include="AccesoDatos\Dao\IMenuDao.cs" />
+    <Compile Include="AccesoDatos\Dao\IPersonaDao.cs" />
+    <Compile Include="AccesoDatos\Dao\IPrestamoDao.cs" />
+    <Compile Include="AccesoDatos\Dao\ITipoDocumentoDao.cs" />
     <Compile Include="AccesoDatos\Dao\ITipoEquipoDao.cs" />
     <Compile Include="AccesoDatos\Dao\IUsuarioDao.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\EquipoDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\IPerfilDao.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\MenuDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\PerfilDaoSql.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\PersonaDaoSql.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\PrestamoDaoSql.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\TipoDocumentoDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\TipoEquipoDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\UsuarioDaoSql.cs" />
     <Compile Include="AccesoDatos\DBHelper\DBHelperSql.cs" />
@@ -105,11 +111,17 @@
     <Compile Include="Negocio\DTO\EquipoDTO.cs" />
     <Compile Include="Negocio\DTO\MenuDTO.cs" />
     <Compile Include="Negocio\DTO\PerfilDTO.cs" />
+    <Compile Include="Negocio\DTO\PersonaDTO.cs" />
+    <Compile Include="Negocio\DTO\PrestamoDTO.cs" />
+    <Compile Include="Negocio\DTO\TipoDocumentoDTO.cs" />
     <Compile Include="Negocio\DTO\TipoEquipoDTO.cs" />
     <Compile Include="Negocio\DTO\UsuarioDTO.cs" />
     <Compile Include="Negocio\EquipoService.cs" />
     <Compile Include="Negocio\MenuService.cs" />
     <Compile Include="Negocio\PerfilService.cs" />
+    <Compile Include="Negocio\PersonaService.cs" />
+    <Compile Include="Negocio\PrestamoService.cs" />
+    <Compile Include="Negocio\TipoDocumentoService.cs" />
     <Compile Include="Negocio\TipoEquipoService.cs" />
     <Compile Include="Negocio\UsuarioService.cs" />
     <Compile Include="Program.cs" />

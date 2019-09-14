@@ -33,6 +33,9 @@ namespace CEE.Negocio
             return oUsuarioDao.GetUsuarioByFilters(parametros);
         }
 
+
+
+
         public bool LoginUsuario(string nombreUsuario, string passwordUsuario)
         {
             Dictionary<string, object> parametros = new Dictionary<string, object>();

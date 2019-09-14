@@ -11,7 +11,6 @@ namespace CEE.AccesoDatos.Dao
     interface IPerfilDao
     {
         PerfilDTO GetPerfilById(int idPerfil);
-
         IList<PerfilDTO> GetPerfilByFilters(Dictionary<string, object> parametros);
     }
 }

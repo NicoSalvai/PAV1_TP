@@ -80,5 +80,15 @@ namespace CEE.AccesoDatos.Dao.Sql
 
             return oTipoEquipo;
         }
+
+        public bool UpdateTipoEquipoById(TipoEquipoDTO oTipoEquipo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool InsertTipoEquipo(TipoEquipoDTO oTipoEquipo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

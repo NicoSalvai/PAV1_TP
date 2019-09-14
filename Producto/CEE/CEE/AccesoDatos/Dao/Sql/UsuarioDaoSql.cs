@@ -87,5 +87,20 @@ namespace CEE.AccesoDatos.Dao.Sql
 
             return oUsuario;
         }
+
+        public bool DeleteUsuarioById(int idUsuario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateUsuarioById(UsuarioDTO oUsuario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool InsertUsuario(UsuarioDTO oUsuario)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

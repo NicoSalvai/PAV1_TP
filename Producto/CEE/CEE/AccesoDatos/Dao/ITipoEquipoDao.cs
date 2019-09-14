@@ -12,5 +12,7 @@ namespace CEE.AccesoDatos.Dao
     {
         TipoEquipoDTO GetTipoEquipoById(int idTipoEquipo);
         IList<TipoEquipoDTO> GetTipoEquipoByFilters(Dictionary<string, object> parametros);
+        bool UpdateTipoEquipoById(TipoEquipoDTO oTipoEquipo);
+        bool InsertTipoEquipo(TipoEquipoDTO oTipoEquipo);
     }
 }
