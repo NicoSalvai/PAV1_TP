@@ -10,7 +10,7 @@ namespace CEE.AccesoDatos.Dao
 {
     interface IPersonaDao
     {
-        PersonaDTO GetPersonaoById(int idPersona);
+        PersonaDTO GetPersonaById(int idPersona);
         IList<PersonaDTO> GetPersonaByFilters(Dictionary<string, object> parametros);
         bool DeletePersonaById(int idPersona);
         bool UpdatePersonaById(PersonaDTO oPersona);

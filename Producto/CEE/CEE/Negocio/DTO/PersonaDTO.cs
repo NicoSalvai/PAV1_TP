@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CEE.Negocio.DTO
 {
-    class PersonaDTO
+    public class PersonaDTO
     {
         public int IdPersona { get; set; }
-        public int Legajo { get; set; }
-        public int NumeroDocumento { get; set; }
+        public string Legajo { get; set; }
+        public string NumeroDocumento { get; set; }
         public int IdTipoDocumento { get; set; }
         public string NombreTipoDocumento{ get; set; }
         public string Apellido { get; set; }
@@ -18,7 +18,7 @@ namespace CEE.Negocio.DTO
         /// <summary>
         /// Nullable
         /// </summary>
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
         /// <summary>
         /// Nullable
         /// </summary>
@@ -30,11 +30,11 @@ namespace CEE.Negocio.DTO
         /// <summary>
         /// Nullable
         /// </summary>
-        public int NumeroCalle { get; set; }
+        public string NumeroCalle { get; set; }
         /// <summary>
         /// Nullable
         /// </summary>
-        public int Piso { get; set; }
+        public string Piso { get; set; }
         /// <summary>
         /// Nullable
         /// </summary>

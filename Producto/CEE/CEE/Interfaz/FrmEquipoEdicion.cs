@@ -96,11 +96,6 @@ namespace CEE.Interfaz
             }
         }
 
-        private void ButtonCancelar_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-        }
-
         private void ButtonGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -150,6 +145,12 @@ namespace CEE.Interfaz
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+
+        private void ButtonCancelar_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
