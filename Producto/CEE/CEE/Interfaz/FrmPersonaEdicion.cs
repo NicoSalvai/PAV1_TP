@@ -130,24 +130,24 @@ namespace CEE.Interfaz
                 if (formMode != ABMFormMode.insert)
                     oPersona.IdPersona = oPersonaService.IdPersonaSeleccionada;
 
-                oPersona.Legajo = textBoxLegajo.Text;
+                oPersona.Legajo = Int32.Parse(textBoxLegajo.Text);
                 oPersona.Apellido = textBoxApellido.Text;
                 oPersona.Nombre = textBoxNombre.Text;
                 oPersona.NombreTipoDocumento = comboBoxTipoDocumento.SelectedItem.ToString();
 
-                oPersona.NumeroDocumento = textBoxNumeroDocumento.Text;
+                oPersona.NumeroDocumento = Int32.Parse(textBoxNumeroDocumento.Text);
 
                 oPersona.Mail = textBoxEmail.Text;
 
                 
                 if (textBoxTelefono.Text != "")
-                    oPersona.Telefono = textBoxTelefono.Text;
+                    oPersona.Telefono = Int32.Parse(textBoxTelefono.Text);
 
                 oPersona.Calle = textBoxCalle.Text;
                 if (textBoxNumero.Text != "")
-                    oPersona.NumeroCalle = textBoxNumero.Text;
+                    oPersona.NumeroCalle = Int32.Parse(textBoxNumero.Text);
                 if (textBoxPiso.Text != "")
-                    oPersona.Piso = textBoxPiso.Text;
+                    oPersona.Piso = Int32.Parse(textBoxPiso.Text);
                 oPersona.Departamento = textBoxDepartamento.Text;
                 oPersona.Observaciones = textBoxObservaciones.Text;
 

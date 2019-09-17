@@ -92,24 +92,24 @@ namespace CEE.AccesoDatos.Dao.Sql
             PersonaDTO oPersona = new PersonaDTO();
 
             oPersona.IdPersona = Int32.Parse(row["persona_id"].ToString());
-            oPersona.Legajo = row["legajo"].ToString();
+            oPersona.Legajo = Int32.Parse(row["legajo"].ToString());
             oPersona.Apellido = row["apellido"].ToString();
             oPersona.Nombre = row["nombre"].ToString();
             oPersona.NombreTipoDocumento = row["nombre_tipo_documento"].ToString();
             oPersona.IdTipoDocumento = Int32.Parse(row["tipo_documento_id"].ToString());
-            oPersona.NumeroDocumento = row["numero_documento"].ToString();
+            oPersona.NumeroDocumento = Int32.Parse(row["numero_documento"].ToString());
 
             if (!DBNull.Value.Equals(row["mail"]))
                 oPersona.Mail = row["mail"].ToString();
             if (!DBNull.Value.Equals(row["telefono"]))
-                oPersona.Telefono = row["telefono"].ToString();
+                oPersona.Telefono = Int32.Parse(row["telefono"].ToString());
 
             if (!DBNull.Value.Equals(row["calle"]))
                 oPersona.Calle = row["calle"].ToString();
             if (!DBNull.Value.Equals(row["numero_calle"]))
-                oPersona.NumeroCalle = row["numero_calle"].ToString();
+                oPersona.NumeroCalle = Int32.Parse(row["numero_calle"].ToString());
             if (!DBNull.Value.Equals(row["piso"]))
-                oPersona.Piso = row["piso"].ToString();
+                oPersona.Piso = Int32.Parse(row["piso"].ToString());
             if (!DBNull.Value.Equals(row["departamento"]))
                 oPersona.Departamento = row["departamento"].ToString();
             if (!DBNull.Value.Equals(row["observaciones"]))
@@ -140,14 +140,14 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "VALUES(" +
                             "'" + oPersona.Legajo.ToString() + "', " +
                             "'" + oPersona.NumeroDocumento.ToString() + "', " +
-                            oPersona.IdTipoDocumento.ToString() + ", " +
+                            "'" + oPersona.IdTipoDocumento.ToString() + "', " +
                             "'" + oPersona.Apellido.ToString() + "', " +
                             "'" + oPersona.Nombre.ToString() + "', " +
                             "'" + oPersona.Telefono.ToString() + "', " +
                             "'" + oPersona.Mail.ToString() + "', " +
                             "'" + oPersona.Calle.ToString() + "', " +
                             "'" + oPersona.NumeroCalle.ToString() + "', " +
-                           "'" + oPersona.Piso.ToString() + "', " +
+                            "'" + oPersona.Piso.ToString() + "', " +
                             "'" + oPersona.Departamento.ToString() + "', " +
                             "'" + oPersona.Observaciones.ToString() + "', " +
                             "GETDATE() )";
@@ -160,7 +160,7 @@ namespace CEE.AccesoDatos.Dao.Sql
             string strSql = "UPDATE PERSONA " +
                             "SET legajo = '" + oPersona.Legajo.ToString() + "', " +
                             "    numero_documento = '" + oPersona.NumeroDocumento.ToString() + "', " +
-                            "    tipo_documento_id = " + oPersona.IdTipoDocumento.ToString() + ", " +
+                            "    tipo_documento_id = '" + oPersona.IdTipoDocumento.ToString() + "', " +
                             "    apellido = '" + oPersona.Apellido.ToString() + "', " +
                             "    nombre = '" + oPersona.Nombre.ToString() + "', " +
                             "    telefono = '" + oPersona.Telefono.ToString() + "', " +

@@ -9,8 +9,8 @@ namespace CEE.Negocio.DTO
     public class PersonaDTO
     {
         public int IdPersona { get; set; }
-        public string Legajo { get; set; }
-        public string NumeroDocumento { get; set; }
+        public int Legajo { get; set; }
+        public int NumeroDocumento { get; set; }
         public int IdTipoDocumento { get; set; }
         public string NombreTipoDocumento{ get; set; }
         public string Apellido { get; set; }
@@ -18,7 +18,7 @@ namespace CEE.Negocio.DTO
         /// <summary>
         /// Nullable
         /// </summary>
-        public string Telefono { get; set; }
+        public int Telefono { get; set; }
         /// <summary>
         /// Nullable
         /// </summary>
@@ -30,11 +30,11 @@ namespace CEE.Negocio.DTO
         /// <summary>
         /// Nullable
         /// </summary>
-        public string NumeroCalle { get; set; }
+        public int NumeroCalle { get; set; }
         /// <summary>
         /// Nullable
         /// </summary>
-        public string Piso { get; set; }
+        public int Piso { get; set; }
         /// <summary>
         /// Nullable
         /// </summary>
