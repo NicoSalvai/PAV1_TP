@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using CEE.Negocio;
 using CEE.Negocio.DTO;
+using CEE.Negocio.Auxiliares;
 
 namespace CEE.Interfaz
 {
@@ -17,6 +18,7 @@ namespace CEE.Interfaz
     {
         EquipoService oEquipoService;
         TipoEquipoService oTipoEquipoService;
+        private ErrorProviderExtension oErrorProviderExtension;
 
         public ABMFormMode formMode = ABMFormMode.insert;
         public enum ABMFormMode
@@ -36,6 +38,8 @@ namespace CEE.Interfaz
 
         private void FrmEquipoEdicion_Load(object sender, EventArgs e)
         {
+            oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
+            errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             setLabels();
             cargarCombos();
             habilitarCampos();
@@ -108,54 +112,64 @@ namespace CEE.Interfaz
             }
         }
 
+        // #########################################################
+        // Eventos de los botonoes
+        // #########################################################
+
         private void ButtonGuardar_Click(object sender, EventArgs e)
         {
-            try
+            validarObligatorios(this.textBoxNombre);
+            validarObligatorios(this.textBoxCodigo);
+            validarObligatorios(this.comboBoxTipoEquipo);
+            if (!oErrorProviderExtension.HasErrors())
             {
-                if (string.IsNullOrEmpty(textBoxCodigo.Text) || string.IsNullOrWhiteSpace(textBoxCodigo.Text))
-                    throw new Exception("Codigo no puede ser vacio");
-                if (string.IsNullOrEmpty(textBoxNombre.Text) || string.IsNullOrWhiteSpace(textBoxNombre.Text))
-                    throw new Exception("Nombre no puede ser vacio");
-                if (comboBoxTipoEquipo.SelectedIndex == 0)
-                    throw new Exception("Debe seleccionar un Tipo de Equipo");
-
-                EquipoDTO oEquipo = new EquipoDTO();
-
-                oEquipo.IdEquipo = 0;
-                if (formMode != ABMFormMode.insert)
-                    oEquipo.IdEquipo = oEquipoService.IdEquipoSelected;
-
-                oEquipo.Codigo = textBoxCodigo.Text;
-                oEquipo.Nombre = textBoxNombre.Text;
-                oEquipo.Descripcion = textBoxDescripcion.Text;
-                oEquipo.TipoEquipo = comboBoxTipoEquipo.SelectedItem.ToString();
-
-                //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
-                Dictionary<string, object> parametros = new Dictionary<string, object>();
-                parametros.Add("TipoEquipo", comboBoxTipoEquipo.SelectedItem.ToString());
-                oEquipo.IdTipoEquipo = oTipoEquipoService.GetTipoEquipoByFilters(parametros).First().IdTipoEquipo; // CORREGIR
-                //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
-
-                if (formMode == ABMFormMode.update)
+                try
                 {
-                    oEquipoService.UpdateEquipoById(oEquipo);
-                    this.Dispose();
+                    if (string.IsNullOrEmpty(textBoxCodigo.Text) || string.IsNullOrWhiteSpace(textBoxCodigo.Text))
+                        throw new Exception("Codigo no puede ser vacio");
+                    if (string.IsNullOrEmpty(textBoxNombre.Text) || string.IsNullOrWhiteSpace(textBoxNombre.Text))
+                        throw new Exception("Nombre no puede ser vacio");
+                    if (comboBoxTipoEquipo.SelectedIndex == 0)
+                        throw new Exception("Debe seleccionar un Tipo de Equipo");
+
+                    EquipoDTO oEquipo = new EquipoDTO();
+
+                    oEquipo.IdEquipo = 0;
+                    if (formMode != ABMFormMode.insert)
+                        oEquipo.IdEquipo = oEquipoService.IdEquipoSelected;
+
+                    oEquipo.Codigo = textBoxCodigo.Text;
+                    oEquipo.Nombre = textBoxNombre.Text;
+                    oEquipo.Descripcion = textBoxDescripcion.Text;
+                    oEquipo.TipoEquipo = comboBoxTipoEquipo.SelectedItem.ToString();
+
+                    //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
+                    Dictionary<string, object> parametros = new Dictionary<string, object>();
+                    parametros.Add("TipoEquipo", comboBoxTipoEquipo.SelectedItem.ToString());
+                    oEquipo.IdTipoEquipo = oTipoEquipoService.GetTipoEquipoByFilters(parametros).First().IdTipoEquipo; // CORREGIR
+                    //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
+
+                    if (formMode == ABMFormMode.update)
+                    {
+                        oEquipoService.UpdateEquipoById(oEquipo);
+                        this.Dispose();
+                    }
+                    else if (formMode == ABMFormMode.insert)
+                    {
+                        oEquipoService.InsertEquipo(oEquipo);
+                        this.Dispose();
+                    }
+                    else if (formMode == ABMFormMode.delete)
+                    {
+                        if (MessageBox.Show("¿Seguro que quiere eliminar" + oEquipo.Codigo + "?", "Confirmar Eliminacion", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                            oEquipoService.DeleteEquipoById(oEquipo.IdEquipo);
+                        this.Dispose();
+                    }
                 }
-                else if (formMode == ABMFormMode.insert)
+                catch (Exception ex)
                 {
-                    oEquipoService.InsertEquipo(oEquipo);
-                    this.Dispose();
+                    MessageBox.Show(ex.Message);
                 }
-                else if (formMode == ABMFormMode.delete)
-                {
-                    if (MessageBox.Show("¿Seguro que quiere eliminar" + oEquipo.Codigo + "?", "Confirmar Eliminacion", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                        oEquipoService.DeleteEquipoById(oEquipo.IdEquipo);
-                    this.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
@@ -164,5 +178,43 @@ namespace CEE.Interfaz
         {
             this.Dispose();
         }
+
+        // ##################################################################
+        // Eventos Validating y KeyPress(No hay aca)
+        // ##################################################################
+
+        private void TextBoxObligatorios_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox oEventSender = (TextBox)sender;
+            validarObligatorios(oEventSender);
+        }
+
+        private void validarObligatorios(TextBox oEventSender)
+        {
+            string errorString = "";
+
+            if (string.IsNullOrEmpty(oEventSender.Text))
+                errorString += "El " + oEventSender.Name + " es un campo obligatorio";
+
+            oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
+        }
+
+        private void ComboBoxObligatorios_Validating(object sender, CancelEventArgs e)
+        {
+            ComboBox oEventSender = (ComboBox)sender;
+            validarObligatorios(oEventSender);
+        }
+
+        private void validarObligatorios(ComboBox oEventSender)
+        {
+            string errorString = "";
+
+            if (oEventSender.SelectedIndex == 0)
+                errorString += "El " + oEventSender.Name + " es un campo obligatorio";
+
+            oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
+        }
+
+
     }
 }

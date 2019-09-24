@@ -46,6 +46,9 @@ namespace CEE.Interfaz
             cargarDatos();
         }
 
+        /// <summary>
+        /// Seteo los labels para que concuerden con el modo de operacion del formulario
+        /// </summary>
         private void setLabels()
         {
             switch (formMode)
@@ -220,7 +223,6 @@ namespace CEE.Interfaz
                 errorString += "El " + oEventSender.Name + " es un campo obligatorio";
 
             oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
-            //errorProvider.SetError(oEventSender, errorString);
         }
 
         private void ComboBoxTipoDocumento_Validating(object sender, CancelEventArgs e)
@@ -235,7 +237,6 @@ namespace CEE.Interfaz
             if (oEventSender.SelectedIndex == 0)
                 errorString += "El " + oEventSender.Name + " es un campo obligatorio";
 
-            //errorProvider.SetError(oEventSender, errorString);
             oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
         }
 
@@ -260,7 +261,6 @@ namespace CEE.Interfaz
                 }
             }
 
-            //errorProvider.SetError(oEventSender, errorString);
             oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
         }
 
@@ -283,7 +283,6 @@ namespace CEE.Interfaz
                 }
             }
 
-            //errorProvider.SetError(oEventSender, errorString);
             oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
         }
     }

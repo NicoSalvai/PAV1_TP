@@ -75,3 +75,9 @@ INSERT INTO PRESTAMO(persona_id, fecha_desde)
 
 INSERT INTO DETALLE_PRESTAMO(detalle_prestamo_id, prestamo_id, equipo_id)
 	VALUES(1, 1, 1);
+
+INSERT INTO USUARIO (nombre_usuario, pass, fecha_alta)
+	VALUES('u01','91f5167c34c400758115c2a6826ec2e3', GETDATE());
+	
+INSERT INTO USUARIO_PERFIL (usuario_id, perfil_id)
+	VALUES(2,2),(2,3);

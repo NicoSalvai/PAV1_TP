@@ -248,6 +248,7 @@
             this.Controls.Add(this.panelPrincipal);
             this.Name = "FrmEquipos";
             this.Text = "Gestionar Equipos";
+            this.Load += new System.EventHandler(this.FrmEquipos_Load);
             this.panelPrincipal.ResumeLayout(false);
             this.panelBusqueda.ResumeLayout(false);
             this.panelBusqueda.PerformLayout();

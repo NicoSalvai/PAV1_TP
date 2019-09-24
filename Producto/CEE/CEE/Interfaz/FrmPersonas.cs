@@ -18,11 +18,17 @@ namespace CEE.Interfaz
     {
         PersonaService oPersonaService;
         private ErrorProviderExtension oErrorProviderExtension;
+
         public FrmPersonas()
         {
             InitializeComponent();
+
             oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
             oPersonaService = new PersonaService();
+        }
+
+        private void FrmPersonas_Load(object sender, EventArgs e)
+        {
             cargarCombos();
         }
 
@@ -146,7 +152,6 @@ namespace CEE.Interfaz
             }
 
             oErrorProviderExtension.SetErrorWithCount(this.textBoxLegajo, errorString);
-            // errorProvider.SetError(this.textBoxLegajo, errorString);
         }
 
         private void TextBoxNumeroDocumento_Validating(object sender, CancelEventArgs e)
@@ -162,7 +167,6 @@ namespace CEE.Interfaz
             }
 
             oErrorProviderExtension.SetErrorWithCount(this.textBoxNumeroDocumento, errorString);
-            //errorProvider.SetError(this.textBoxNumeroDocumento, errorString);
         }
     }
 }

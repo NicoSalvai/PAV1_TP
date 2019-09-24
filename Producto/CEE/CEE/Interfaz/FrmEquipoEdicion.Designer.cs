@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.panelEquipo = new System.Windows.Forms.Panel();
             this.labelDescripcion = new System.Windows.Forms.Label();
@@ -40,8 +41,10 @@
             this.textBoxDescripcion = new System.Windows.Forms.TextBox();
             this.textBoxCodigo = new System.Windows.Forms.TextBox();
             this.comboBoxTipoEquipo = new System.Windows.Forms.ComboBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelPrincipal.SuspendLayout();
             this.panelEquipo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panelPrincipal
@@ -133,6 +136,7 @@
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(152, 20);
             this.textBoxNombre.TabIndex = 4;
+            this.textBoxNombre.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxObligatorios_Validating);
             // 
             // textBoxDescripcion
             // 
@@ -148,6 +152,7 @@
             this.textBoxCodigo.Name = "textBoxCodigo";
             this.textBoxCodigo.Size = new System.Drawing.Size(152, 20);
             this.textBoxCodigo.TabIndex = 2;
+            this.textBoxCodigo.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxObligatorios_Validating);
             // 
             // comboBoxTipoEquipo
             // 
@@ -157,6 +162,11 @@
             this.comboBoxTipoEquipo.Name = "comboBoxTipoEquipo";
             this.comboBoxTipoEquipo.Size = new System.Drawing.Size(152, 21);
             this.comboBoxTipoEquipo.TabIndex = 1;
+            this.comboBoxTipoEquipo.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxObligatorios_Validating);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // FrmEquipoEdicion
             // 
@@ -170,6 +180,7 @@
             this.panelPrincipal.ResumeLayout(false);
             this.panelEquipo.ResumeLayout(false);
             this.panelEquipo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -188,5 +199,6 @@
         private System.Windows.Forms.TextBox textBoxDescripcion;
         private System.Windows.Forms.TextBox textBoxCodigo;
         private System.Windows.Forms.ComboBox comboBoxTipoEquipo;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

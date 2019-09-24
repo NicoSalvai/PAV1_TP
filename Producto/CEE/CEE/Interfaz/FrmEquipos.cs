@@ -19,7 +19,12 @@ namespace CEE.Interfaz
         public FrmEquipos()
         {
             InitializeComponent();
+
             oEquipoService = new EquipoService();
+        }
+
+        private void FrmEquipos_Load(object sender, EventArgs e)
+        {
             cargarCombos();
         }
 

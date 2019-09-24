@@ -316,6 +316,7 @@
             this.Controls.Add(this.panelPrincipal);
             this.Name = "FrmPersonas";
             this.Text = "Gestionar Personas";
+            this.Load += new System.EventHandler(this.FrmPersonas_Load);
             this.panelPrincipal.ResumeLayout(false);
             this.panelBusqueda.ResumeLayout(false);
             this.panelBusqueda.PerformLayout();
