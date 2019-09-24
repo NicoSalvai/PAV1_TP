@@ -108,6 +108,7 @@
     <Compile Include="Interfaz\FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Negocio\Auxiliares\ErrorProviderExtension.cs" />
     <Compile Include="Negocio\DTO\EquipoDTO.cs" />
     <Compile Include="Negocio\DTO\MenuDTO.cs" />
     <Compile Include="Negocio\DTO\PerfilDTO.cs" />

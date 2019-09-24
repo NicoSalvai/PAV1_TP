@@ -36,7 +36,19 @@ namespace CEE.Interfaz
 
         private void FrmEquipoEdicion_Load(object sender, EventArgs e)
         {
-            switch (formMode) {
+            setLabels();
+            cargarCombos();
+            habilitarCampos();
+            cargarDatos();
+        }
+
+        /// <summary>
+        /// Ajusta los labels de la pantalla para que coincidan con el modo de formulario
+        /// </summary>
+        private void setLabels()
+        {
+            switch (formMode)
+            {
                 case ABMFormMode.insert:
                     this.Text = "Alta Equipo";
                     break;
@@ -49,9 +61,6 @@ namespace CEE.Interfaz
                     break;
 
             }
-            cargarCombos();
-            habilitarCampos();
-            cargarDatos();
         }
 
         /// <summary>
@@ -85,6 +94,9 @@ namespace CEE.Interfaz
             }
         }
         
+        /// <summary>
+        /// habilita o deshabilita los campos segun el modo de formulario
+        /// </summary>
         private void habilitarCampos()
         {
             if (formMode == ABMFormMode.delete)

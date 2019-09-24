@@ -28,12 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.buttonNuevo = new System.Windows.Forms.Button();
             this.buttonEliminar = new System.Windows.Forms.Button();
             this.buttonModificar = new System.Windows.Forms.Button();
             this.buttonSalir = new System.Windows.Forms.Button();
             this.panelBusqueda = new System.Windows.Forms.Panel();
+            this.textBoxNombre = new System.Windows.Forms.TextBox();
+            this.textBoxApellido = new System.Windows.Forms.TextBox();
+            this.labelNombre = new System.Windows.Forms.Label();
+            this.labelApellido = new System.Windows.Forms.Label();
             this.dgvPersonas = new System.Windows.Forms.DataGridView();
             this.IdPersona = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,13 +55,11 @@
             this.labelNumeroDocumento = new System.Windows.Forms.Label();
             this.labelLegajo = new System.Windows.Forms.Label();
             this.labelBusqueda = new System.Windows.Forms.Label();
-            this.labelApellido = new System.Windows.Forms.Label();
-            this.labelNombre = new System.Windows.Forms.Label();
-            this.textBoxApellido = new System.Windows.Forms.TextBox();
-            this.textBoxNombre = new System.Windows.Forms.TextBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelPrincipal.SuspendLayout();
             this.panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panelPrincipal
@@ -133,6 +136,38 @@
             this.panelBusqueda.Size = new System.Drawing.Size(768, 460);
             this.panelBusqueda.TabIndex = 0;
             // 
+            // textBoxNombre
+            // 
+            this.textBoxNombre.Location = new System.Drawing.Point(84, 76);
+            this.textBoxNombre.Name = "textBoxNombre";
+            this.textBoxNombre.Size = new System.Drawing.Size(189, 20);
+            this.textBoxNombre.TabIndex = 12;
+            // 
+            // textBoxApellido
+            // 
+            this.textBoxApellido.Location = new System.Drawing.Point(84, 50);
+            this.textBoxApellido.Name = "textBoxApellido";
+            this.textBoxApellido.Size = new System.Drawing.Size(189, 20);
+            this.textBoxApellido.TabIndex = 11;
+            // 
+            // labelNombre
+            // 
+            this.labelNombre.AutoSize = true;
+            this.labelNombre.Location = new System.Drawing.Point(31, 79);
+            this.labelNombre.Name = "labelNombre";
+            this.labelNombre.Size = new System.Drawing.Size(47, 13);
+            this.labelNombre.TabIndex = 10;
+            this.labelNombre.Text = "Nombre:";
+            // 
+            // labelApellido
+            // 
+            this.labelApellido.AutoSize = true;
+            this.labelApellido.Location = new System.Drawing.Point(31, 53);
+            this.labelApellido.Name = "labelApellido";
+            this.labelApellido.Size = new System.Drawing.Size(47, 13);
+            this.labelApellido.TabIndex = 9;
+            this.labelApellido.Text = "Apellido:";
+            // 
             // dgvPersonas
             // 
             this.dgvPersonas.AllowUserToAddRows = false;
@@ -208,16 +243,18 @@
             // 
             // textBoxNumeroDocumento
             // 
-            this.textBoxNumeroDocumento.Location = new System.Drawing.Point(390, 50);
+            this.textBoxNumeroDocumento.Location = new System.Drawing.Point(448, 50);
             this.textBoxNumeroDocumento.Name = "textBoxNumeroDocumento";
             this.textBoxNumeroDocumento.Size = new System.Drawing.Size(183, 20);
             this.textBoxNumeroDocumento.TabIndex = 6;
+            this.textBoxNumeroDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxNumeroDocumento_KeyPress);
+            this.textBoxNumeroDocumento.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxNumeroDocumento_Validating);
             // 
             // comboBoxTipoDocumento
             // 
             this.comboBoxTipoDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTipoDocumento.FormattingEnabled = true;
-            this.comboBoxTipoDocumento.Location = new System.Drawing.Point(390, 23);
+            this.comboBoxTipoDocumento.Location = new System.Drawing.Point(448, 23);
             this.comboBoxTipoDocumento.Name = "comboBoxTipoDocumento";
             this.comboBoxTipoDocumento.Size = new System.Drawing.Size(183, 21);
             this.comboBoxTipoDocumento.TabIndex = 5;
@@ -228,11 +265,13 @@
             this.textBoxLegajo.Name = "textBoxLegajo";
             this.textBoxLegajo.Size = new System.Drawing.Size(189, 20);
             this.textBoxLegajo.TabIndex = 4;
+            this.textBoxLegajo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxLegajo_KeyPress);
+            this.textBoxLegajo.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxLegajo_Validating);
             // 
             // labelTipoDocumento
             // 
             this.labelTipoDocumento.AutoSize = true;
-            this.labelTipoDocumento.Location = new System.Drawing.Point(295, 26);
+            this.labelTipoDocumento.Location = new System.Drawing.Point(353, 26);
             this.labelTipoDocumento.Name = "labelTipoDocumento";
             this.labelTipoDocumento.Size = new System.Drawing.Size(89, 13);
             this.labelTipoDocumento.TabIndex = 3;
@@ -241,7 +280,7 @@
             // labelNumeroDocumento
             // 
             this.labelNumeroDocumento.AutoSize = true;
-            this.labelNumeroDocumento.Location = new System.Drawing.Point(279, 53);
+            this.labelNumeroDocumento.Location = new System.Drawing.Point(337, 53);
             this.labelNumeroDocumento.Name = "labelNumeroDocumento";
             this.labelNumeroDocumento.Size = new System.Drawing.Size(105, 13);
             this.labelNumeroDocumento.TabIndex = 2;
@@ -265,37 +304,9 @@
             this.labelBusqueda.TabIndex = 0;
             this.labelBusqueda.Text = "Busqueda";
             // 
-            // labelApellido
+            // errorProvider
             // 
-            this.labelApellido.AutoSize = true;
-            this.labelApellido.Location = new System.Drawing.Point(31, 53);
-            this.labelApellido.Name = "labelApellido";
-            this.labelApellido.Size = new System.Drawing.Size(47, 13);
-            this.labelApellido.TabIndex = 9;
-            this.labelApellido.Text = "Apellido:";
-            // 
-            // labelNombre
-            // 
-            this.labelNombre.AutoSize = true;
-            this.labelNombre.Location = new System.Drawing.Point(31, 79);
-            this.labelNombre.Name = "labelNombre";
-            this.labelNombre.Size = new System.Drawing.Size(47, 13);
-            this.labelNombre.TabIndex = 10;
-            this.labelNombre.Text = "Nombre:";
-            // 
-            // textBoxApellido
-            // 
-            this.textBoxApellido.Location = new System.Drawing.Point(84, 50);
-            this.textBoxApellido.Name = "textBoxApellido";
-            this.textBoxApellido.Size = new System.Drawing.Size(189, 20);
-            this.textBoxApellido.TabIndex = 11;
-            // 
-            // textBoxNombre
-            // 
-            this.textBoxNombre.Location = new System.Drawing.Point(84, 76);
-            this.textBoxNombre.Name = "textBoxNombre";
-            this.textBoxNombre.Size = new System.Drawing.Size(189, 20);
-            this.textBoxNombre.TabIndex = 12;
+            this.errorProvider.ContainerControl = this;
             // 
             // FrmPersonas
             // 
@@ -309,6 +320,7 @@
             this.panelBusqueda.ResumeLayout(false);
             this.panelBusqueda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -341,5 +353,6 @@
         private System.Windows.Forms.TextBox textBoxApellido;
         private System.Windows.Forms.Label labelNombre;
         private System.Windows.Forms.Label labelApellido;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

@@ -102,7 +102,7 @@ namespace CEE.AccesoDatos.Dao.Sql
             if (!DBNull.Value.Equals(row["mail"]))
                 oPersona.Mail = row["mail"].ToString();
             if (!DBNull.Value.Equals(row["telefono"]))
-                oPersona.Telefono = Int32.Parse(row["telefono"].ToString());
+                oPersona.Telefono = row["telefono"].ToString();
 
             if (!DBNull.Value.Equals(row["calle"]))
                 oPersona.Calle = row["calle"].ToString();
@@ -138,18 +138,18 @@ namespace CEE.AccesoDatos.Dao.Sql
             string strSql = "INSERT INTO PERSONA(legajo, numero_documento, tipo_documento_id, apellido, nombre, telefono, " +
                             "mail, calle, numero_calle, piso, departamento, observaciones, fecha_alta) " +
                             "VALUES(" +
-                            "'" + oPersona.Legajo.ToString() + "', " +
-                            "'" + oPersona.NumeroDocumento.ToString() + "', " +
-                            "'" + oPersona.IdTipoDocumento.ToString() + "', " +
-                            "'" + oPersona.Apellido.ToString() + "', " +
-                            "'" + oPersona.Nombre.ToString() + "', " +
-                            "'" + oPersona.Telefono.ToString() + "', " +
-                            "'" + oPersona.Mail.ToString() + "', " +
-                            "'" + oPersona.Calle.ToString() + "', " +
-                            "'" + oPersona.NumeroCalle.ToString() + "', " +
-                            "'" + oPersona.Piso.ToString() + "', " +
-                            "'" + oPersona.Departamento.ToString() + "', " +
-                            "'" + oPersona.Observaciones.ToString() + "', " +
+                            "'" + oPersona.Legajo.ToString()            + "', " +
+                            "'" + oPersona.NumeroDocumento.ToString()   + "', " +
+                            "'" + oPersona.IdTipoDocumento.ToString()   + "', " +
+                            "'" + oPersona.Apellido.ToString()          + "', " +
+                            "'" + oPersona.Nombre.ToString()            + "', " +
+                            "'" + oPersona.Telefono.ToString()          + "', " +
+                            "'" + oPersona.Mail.ToString()              + "', " +
+                            "'" + oPersona.Calle.ToString()             + "', " +
+                            "'" + oPersona.NumeroCalle.ToString()       + "', " +
+                            "'" + oPersona.Piso.ToString()              + "', " +
+                            "'" + oPersona.Departamento.ToString()      + "', " +
+                            "'" + oPersona.Observaciones.ToString()     + "', " +
                             "GETDATE() )";
             DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
             return true; 
@@ -158,18 +158,18 @@ namespace CEE.AccesoDatos.Dao.Sql
         public bool UpdatePersonaById(PersonaDTO oPersona)
         {
             string strSql = "UPDATE PERSONA " +
-                            "SET legajo = '" + oPersona.Legajo.ToString() + "', " +
-                            "    numero_documento = '" + oPersona.NumeroDocumento.ToString() + "', " +
-                            "    tipo_documento_id = '" + oPersona.IdTipoDocumento.ToString() + "', " +
-                            "    apellido = '" + oPersona.Apellido.ToString() + "', " +
-                            "    nombre = '" + oPersona.Nombre.ToString() + "', " +
-                            "    telefono = '" + oPersona.Telefono.ToString() + "', " +
-                            "    mail = '" + oPersona.Mail.ToString() + "', " +
-                            "    calle = '" + oPersona.Calle.ToString() + "', " +
-                            "    numero_calle = '" + oPersona.NumeroCalle.ToString() + "', " +
-                            "    piso = '" + oPersona.Piso.ToString() + "', " +
-                            "    departamento = '" + oPersona.Departamento.ToString() + "', " +
-                            "    observaciones = '" + oPersona.Observaciones.ToString() + "' " +
+                            "SET legajo = '" + oPersona.Legajo.ToString()                       + "', " +
+                            "    numero_documento = '" + oPersona.NumeroDocumento.ToString()    + "', " +
+                            "    tipo_documento_id = '" + oPersona.IdTipoDocumento.ToString()   + "', " +
+                            "    apellido = '" + oPersona.Apellido.ToString()                   + "', " +
+                            "    nombre = '" + oPersona.Nombre.ToString()                       + "', " +
+                            "    telefono = '" + oPersona.Telefono.ToString()                   + "', " +
+                            "    mail = '" + oPersona.Mail.ToString()                           + "', " +
+                            "    calle = '" + oPersona.Calle.ToString()                         + "', " +
+                            "    numero_calle = '" + oPersona.NumeroCalle.ToString()            + "', " +
+                            "    piso = '" + oPersona.Piso.ToString()                           + "', " +
+                            "    departamento = '" + oPersona.Departamento.ToString()           + "', " +
+                            "    observaciones = '" + oPersona.Observaciones.ToString()         + "' " +
                             "WHERE persona_id = " + oPersona.IdPersona.ToString();
 
             DBHelperSql.GetDBHelper().EjecutarSQL(strSql);

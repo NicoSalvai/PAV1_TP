@@ -76,7 +76,7 @@ USE [64429Pav1];
 
 CREATE TABLE TIPO_DOCUMENTO (
 	tipo_documento_id		INT NOT NULL IDENTITY(1,1),
-	nombre_tipo_documento			VARCHAR(30) NOT NULL,
+	nombre_tipo_documento	VARCHAR(30) NOT NULL,
 	descripcion				VARCHAR(50) NOT NULL,
 	
 	CONSTRAINT PK_TIPO_DOCUMENTO PRIMARY KEY(tipo_documento_id),
@@ -85,12 +85,12 @@ CREATE TABLE TIPO_DOCUMENTO (
 
 CREATE TABLE PERSONA (
 	persona_id			INT NOT NULL IDENTITY(1,1),
-	legajo				INT NOT NULL,
-	numero_documento	INT NOT NULL,
+	legajo				LONG NOT NULL,
+	numero_documento	LONG NOT NULL,
 	tipo_documento_id	INT NOT NULL,
 	apellido			VARCHAR(30) NOT NULL,
 	nombre				VARCHAR(30) NOT NULL,
-	telefono			INT,
+	telefono			VARCHAR(30),
 	mail				VARCHAR(30),
 	calle				VARCHAR(30),
 	numero_calle		INT,

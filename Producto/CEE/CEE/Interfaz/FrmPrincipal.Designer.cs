@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.panelPrincipal = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.personasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +48,6 @@
             // 
             // panelPrincipal
             // 
-            this.panelPrincipal.Controls.Add(this.panel2);
             this.panelPrincipal.Controls.Add(this.panel1);
             this.panelPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPrincipal.Location = new System.Drawing.Point(0, 0);
@@ -57,35 +55,28 @@
             this.panelPrincipal.Size = new System.Drawing.Size(800, 450);
             this.panelPrincipal.TabIndex = 0;
             // 
-            // panel2
-            // 
-            this.panel2.AutoSize = true;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(127, 4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(670, 442);
-            this.panel2.TabIndex = 2;
-            // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoSize = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.menuStrip1);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(128, 444);
+            this.panel1.Size = new System.Drawing.Size(776, 426);
             this.panel1.TabIndex = 1;
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.personasToolStripMenuItem,
-            this.prestamosToolStripMenuItem,
-            this.equiposToolStripMenuItem});
+            this.equiposToolStripMenuItem,
+            this.prestamosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(126, 442);
+            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -95,14 +86,14 @@
             this.Personas,
             this.ConsultarPersonas});
             this.personasToolStripMenuItem.Name = "personasToolStripMenuItem";
-            this.personasToolStripMenuItem.Size = new System.Drawing.Size(113, 19);
+            this.personasToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.personasToolStripMenuItem.Text = "Personas";
             // 
             // Personas
             // 
             this.Personas.Enabled = false;
             this.Personas.Name = "Personas";
-            this.Personas.Size = new System.Drawing.Size(180, 22);
+            this.Personas.Size = new System.Drawing.Size(175, 22);
             this.Personas.Text = "Gestionar Personas";
             this.Personas.Click += new System.EventHandler(this.Personas_Click);
             // 
@@ -110,7 +101,7 @@
             // 
             this.ConsultarPersonas.Enabled = false;
             this.ConsultarPersonas.Name = "ConsultarPersonas";
-            this.ConsultarPersonas.Size = new System.Drawing.Size(180, 22);
+            this.ConsultarPersonas.Size = new System.Drawing.Size(175, 22);
             this.ConsultarPersonas.Text = "Consultar Personas";
             // 
             // prestamosToolStripMenuItem
@@ -120,7 +111,7 @@
             this.FinPrestamos,
             this.ConsultarPrestamos});
             this.prestamosToolStripMenuItem.Name = "prestamosToolStripMenuItem";
-            this.prestamosToolStripMenuItem.Size = new System.Drawing.Size(113, 19);
+            this.prestamosToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.prestamosToolStripMenuItem.Text = "Prestamos";
             // 
             // InicioPrestamos
@@ -150,7 +141,7 @@
             this.Equipos,
             this.TiposEquipos});
             this.equiposToolStripMenuItem.Name = "equiposToolStripMenuItem";
-            this.equiposToolStripMenuItem.Size = new System.Drawing.Size(113, 19);
+            this.equiposToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.equiposToolStripMenuItem.Text = "Equipos";
             // 
             // Equipos
@@ -203,7 +194,6 @@
         private System.Windows.Forms.ToolStripMenuItem equiposToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Equipos;
         private System.Windows.Forms.ToolStripMenuItem TiposEquipos;
-        private System.Windows.Forms.Panel panel2;
     }
 }
 

@@ -29,7 +29,7 @@ namespace CEE.Entidad
 
         public string Mail { get; set; }
 
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
 
         public string Observaciones { get; set; }
 

@@ -114,10 +114,10 @@ namespace CEE.AccesoDatos.Dao.Sql
         public bool UpdateEquipoById(EquipoDTO oEquipo)
         {
             string strSql = "UPDATE EQUIPO " +
-                            "SET codigo = '" + oEquipo.Codigo + "', " +
-                            "nombre = '" + oEquipo.Nombre + "', " +
-                            "tipo_equipo_id = " + oEquipo.IdTipoEquipo + ", " +
-                            "descripcion = '" + oEquipo.Descripcion + "' " +
+                            "SET codigo = '" + oEquipo.Codigo               + "', " +
+                            "nombre = '" + oEquipo.Nombre                   + "', " +
+                            "tipo_equipo_id = '" + oEquipo.IdTipoEquipo     + "', " +
+                            "descripcion = '" + oEquipo.Descripcion         + "' " +
                             "WHERE equipo_id = " + oEquipo.IdEquipo.ToString();
 
             DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
@@ -127,11 +127,11 @@ namespace CEE.AccesoDatos.Dao.Sql
         public bool InsertEquipo(EquipoDTO oEquipo)
         {
             string strSql = "INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, descripcion, fecha_alta) " +
-                            "VALUES('" + 
-                            oEquipo.Codigo + "','" + 
-                            oEquipo.Nombre + "','" + 
-                            oEquipo.IdTipoEquipo.ToString() + "','" + 
-                            oEquipo.Descripcion + "'," +
+                            "VALUES(" + 
+                            "'" + oEquipo.Codigo                            + "'," +
+                            "'" + oEquipo.Nombre                            + "'," +
+                            "'" + oEquipo.IdTipoEquipo.ToString()           + "'," +
+                            "'" + oEquipo.Descripcion                       + "'," +
                              "GETDATE()" + "); ";
 
             DBHelperSql.GetDBHelper().EjecutarSQL(strSql);

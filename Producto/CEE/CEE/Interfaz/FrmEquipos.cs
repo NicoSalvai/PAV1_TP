@@ -38,7 +38,9 @@ namespace CEE.Interfaz
             comboBoxTipoEquipo.DataSource = content;
         }
 
-
+        // ########################################################################
+        // Eventos de los botones
+        // ########################################################################
         private void ButtonBuscar_Click(object sender, EventArgs e)
         {
             dgvEquipos.Rows.Clear();

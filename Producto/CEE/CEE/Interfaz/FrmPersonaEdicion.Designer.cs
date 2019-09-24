@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.buttonCancelar = new System.Windows.Forms.Button();
             this.buttonGuardar = new System.Windows.Forms.Button();
@@ -58,10 +59,12 @@
             this.labelNombre = new System.Windows.Forms.Label();
             this.labelApellido = new System.Windows.Forms.Label();
             this.labelLegajo = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelPrincipal.SuspendLayout();
             this.groupBoxDomicilio.SuspendLayout();
             this.groupBoxDatosContacto.SuspendLayout();
             this.groupBoxDatosPersonales.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panelPrincipal
@@ -146,6 +149,8 @@
             this.textBoxNumero.Name = "textBoxNumero";
             this.textBoxNumero.Size = new System.Drawing.Size(174, 20);
             this.textBoxNumero.TabIndex = 18;
+            this.textBoxNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxNumericos_KeyPress);
+            this.textBoxNumero.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxPisoYNumero_Validating);
             // 
             // textBoxPiso
             // 
@@ -153,6 +158,8 @@
             this.textBoxPiso.Name = "textBoxPiso";
             this.textBoxPiso.Size = new System.Drawing.Size(174, 20);
             this.textBoxPiso.TabIndex = 17;
+            this.textBoxPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxNumericos_KeyPress);
+            this.textBoxPiso.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxPisoYNumero_Validating);
             // 
             // textBoxCalle
             // 
@@ -267,6 +274,8 @@
             this.textBoxNumeroDocumento.Name = "textBoxNumeroDocumento";
             this.textBoxNumeroDocumento.Size = new System.Drawing.Size(174, 20);
             this.textBoxNumeroDocumento.TabIndex = 9;
+            this.textBoxNumeroDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxNumericos_KeyPress);
+            this.textBoxNumeroDocumento.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxLegajoyNumeroDocumento_Validating);
             // 
             // comboBoxTipoDocumento
             // 
@@ -276,6 +285,7 @@
             this.comboBoxTipoDocumento.Name = "comboBoxTipoDocumento";
             this.comboBoxTipoDocumento.Size = new System.Drawing.Size(174, 21);
             this.comboBoxTipoDocumento.TabIndex = 8;
+            this.comboBoxTipoDocumento.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxTipoDocumento_Validating);
             // 
             // textBoxNombre
             // 
@@ -283,6 +293,7 @@
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(174, 20);
             this.textBoxNombre.TabIndex = 7;
+            this.textBoxNombre.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxApellidoyNombre_Validating);
             // 
             // textBoxApellido
             // 
@@ -290,6 +301,7 @@
             this.textBoxApellido.Name = "textBoxApellido";
             this.textBoxApellido.Size = new System.Drawing.Size(174, 20);
             this.textBoxApellido.TabIndex = 6;
+            this.textBoxApellido.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxApellidoyNombre_Validating);
             // 
             // textBoxLegajo
             // 
@@ -297,51 +309,57 @@
             this.textBoxLegajo.Name = "textBoxLegajo";
             this.textBoxLegajo.Size = new System.Drawing.Size(174, 20);
             this.textBoxLegajo.TabIndex = 5;
+            this.textBoxLegajo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxNumericos_KeyPress);
+            this.textBoxLegajo.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxLegajoyNumeroDocumento_Validating);
             // 
             // labelNumeroDocumento
             // 
             this.labelNumeroDocumento.AutoSize = true;
-            this.labelNumeroDocumento.Location = new System.Drawing.Point(24, 127);
+            this.labelNumeroDocumento.Location = new System.Drawing.Point(20, 127);
             this.labelNumeroDocumento.Name = "labelNumeroDocumento";
-            this.labelNumeroDocumento.Size = new System.Drawing.Size(105, 13);
+            this.labelNumeroDocumento.Size = new System.Drawing.Size(109, 13);
             this.labelNumeroDocumento.TabIndex = 4;
-            this.labelNumeroDocumento.Text = "Numero Documento:";
+            this.labelNumeroDocumento.Text = "Numero Documento:*";
             // 
             // labelTipoDocumento
             // 
             this.labelTipoDocumento.AutoSize = true;
-            this.labelTipoDocumento.Location = new System.Drawing.Point(40, 100);
+            this.labelTipoDocumento.Location = new System.Drawing.Point(36, 100);
             this.labelTipoDocumento.Name = "labelTipoDocumento";
-            this.labelTipoDocumento.Size = new System.Drawing.Size(89, 13);
+            this.labelTipoDocumento.Size = new System.Drawing.Size(93, 13);
             this.labelTipoDocumento.TabIndex = 3;
-            this.labelTipoDocumento.Text = "Tipo Documento:";
+            this.labelTipoDocumento.Text = "Tipo Documento:*";
             // 
             // labelNombre
             // 
             this.labelNombre.AutoSize = true;
-            this.labelNombre.Location = new System.Drawing.Point(82, 74);
+            this.labelNombre.Location = new System.Drawing.Point(78, 74);
             this.labelNombre.Name = "labelNombre";
-            this.labelNombre.Size = new System.Drawing.Size(47, 13);
+            this.labelNombre.Size = new System.Drawing.Size(51, 13);
             this.labelNombre.TabIndex = 2;
-            this.labelNombre.Text = "Nombre:";
+            this.labelNombre.Text = "Nombre:*";
             // 
             // labelApellido
             // 
             this.labelApellido.AutoSize = true;
-            this.labelApellido.Location = new System.Drawing.Point(82, 48);
+            this.labelApellido.Location = new System.Drawing.Point(78, 48);
             this.labelApellido.Name = "labelApellido";
-            this.labelApellido.Size = new System.Drawing.Size(47, 13);
+            this.labelApellido.Size = new System.Drawing.Size(51, 13);
             this.labelApellido.TabIndex = 1;
-            this.labelApellido.Text = "Apellido:";
+            this.labelApellido.Text = "Apellido:*";
             // 
             // labelLegajo
             // 
             this.labelLegajo.AutoSize = true;
-            this.labelLegajo.Location = new System.Drawing.Point(87, 22);
+            this.labelLegajo.Location = new System.Drawing.Point(83, 22);
             this.labelLegajo.Name = "labelLegajo";
-            this.labelLegajo.Size = new System.Drawing.Size(42, 13);
+            this.labelLegajo.Size = new System.Drawing.Size(46, 13);
             this.labelLegajo.TabIndex = 0;
-            this.labelLegajo.Text = "Legajo:";
+            this.labelLegajo.Text = "Legajo:*";
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // FrmPersonaEdicion
             // 
@@ -360,6 +378,7 @@
             this.groupBoxDatosContacto.PerformLayout();
             this.groupBoxDatosPersonales.ResumeLayout(false);
             this.groupBoxDatosPersonales.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -396,5 +415,6 @@
         private System.Windows.Forms.Label labelCalle;
         private System.Windows.Forms.Button buttonCancelar;
         private System.Windows.Forms.Button buttonGuardar;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

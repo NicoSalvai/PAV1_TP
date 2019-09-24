@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using CEE.Negocio;
 using CEE.Negocio.DTO;
+using CEE.Negocio.Auxiliares;
 
 namespace CEE.Interfaz
 {
@@ -17,6 +18,7 @@ namespace CEE.Interfaz
     {
         private PersonaService oPersonaService;
         private TipoDocumentoService oTipoDocumentoService;
+        private ErrorProviderExtension oErrorProviderExtension;
 
         public ABMFormMode formMode = ABMFormMode.insert;
         public enum ABMFormMode
@@ -36,6 +38,16 @@ namespace CEE.Interfaz
 
         private void FrmPersonaEdicion_Load(object sender, EventArgs e)
         {
+            oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
+            errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            setLabels();
+            cargarCombos();
+            habilitarCampos();
+            cargarDatos();
+        }
+
+        private void setLabels()
+        {
             switch (formMode)
             {
                 case ABMFormMode.insert:
@@ -50,11 +62,10 @@ namespace CEE.Interfaz
                     break;
 
             }
-            cargarCombos();
-            habilitarCampos();
-            cargarDatos();
         }
-
+        /// <summary>
+        /// Cargos el combo de Tipo Documento para la seleccion
+        /// </summary>
         private void cargarCombos()
         {
             IList<TipoDocumentoDTO> tiposDocumentos = oTipoDocumentoService.GetTipoDocumentoByFilters(new Dictionary<string, object>());
@@ -67,6 +78,9 @@ namespace CEE.Interfaz
             comboBoxTipoDocumento.DataSource = content;
         }
 
+        /// <summary>
+        /// si estamos en modo update o delete cargo los datos de la Persona Seleccionada en la otra pantalla
+        /// </summary>
         private void cargarDatos()
         {
             if (formMode == ABMFormMode.update || formMode == ABMFormMode.delete)
@@ -90,6 +104,9 @@ namespace CEE.Interfaz
             }
         }
 
+        /// <summary>
+        /// Se habilitan o deshabilitan los campos que haga falta segun el modo en que estemos
+        /// </summary>
         private void habilitarCampos()
         {
             if(formMode == ABMFormMode.delete)
@@ -109,74 +126,71 @@ namespace CEE.Interfaz
             }
         }
 
+        // ########################################################################
+        // Eventos de botones
+        // ########################################################################
+
         private void ButtonGuardar_Click(object sender, EventArgs e)
         {
-            try
+            validarApellidoYNombre(textBoxApellido);
+            validarApellidoYNombre(textBoxNombre);
+            validarLegajoYNumeroDocumento(textBoxLegajo);
+            validarLegajoYNumeroDocumento(textBoxNumeroDocumento);
+            ValidarTipoDocumento(comboBoxTipoDocumento);
+            if (!oErrorProviderExtension.HasErrors())
             {
-                if (string.IsNullOrEmpty(textBoxLegajo.Text) || string.IsNullOrWhiteSpace(textBoxLegajo.Text))
-                    throw new Exception("Legajo no puede ser vacio ni negativo");
-                if (string.IsNullOrEmpty(textBoxApellido.Text) || string.IsNullOrWhiteSpace(textBoxApellido.Text))
-                    throw new Exception("Apellido no puede ser vacio");
-                if (string.IsNullOrEmpty(textBoxNombre.Text) || string.IsNullOrWhiteSpace(textBoxNombre.Text))
-                    throw new Exception("Nombre no puede ser vacio");
-                if (comboBoxTipoDocumento.SelectedIndex == 0)
-                    throw new Exception("Debe seleccionar un Tipo de Documento");
-                if (string.IsNullOrEmpty(textBoxNumeroDocumento.Text) || string.IsNullOrWhiteSpace(textBoxNumeroDocumento.Text))
-                    throw new Exception("Numero de Documento no puede ser vacio");
-
-                PersonaDTO oPersona = new PersonaDTO();
-
-                oPersona.IdPersona = 0;
-                if (formMode != ABMFormMode.insert)
-                    oPersona.IdPersona = oPersonaService.IdPersonaSeleccionada;
-
-                oPersona.Legajo = Int32.Parse(textBoxLegajo.Text);
-                oPersona.Apellido = textBoxApellido.Text;
-                oPersona.Nombre = textBoxNombre.Text;
-                oPersona.NombreTipoDocumento = comboBoxTipoDocumento.SelectedItem.ToString();
-
-                oPersona.NumeroDocumento = Int32.Parse(textBoxNumeroDocumento.Text);
-
-                oPersona.Mail = textBoxEmail.Text;
-
-                
-                if (textBoxTelefono.Text != "")
-                    oPersona.Telefono = Int32.Parse(textBoxTelefono.Text);
-
-                oPersona.Calle = textBoxCalle.Text;
-                if (textBoxNumero.Text != "")
-                    oPersona.NumeroCalle = Int32.Parse(textBoxNumero.Text);
-                if (textBoxPiso.Text != "")
-                    oPersona.Piso = Int32.Parse(textBoxPiso.Text);
-                oPersona.Departamento = textBoxDepartamento.Text;
-                oPersona.Observaciones = textBoxObservaciones.Text;
-
-                //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
-                Dictionary<string, object> parametros = new Dictionary<string, object>();
-                parametros.Add("TipoDocumento", comboBoxTipoDocumento.SelectedItem.ToString());
-                oPersona.IdTipoDocumento = oTipoDocumentoService.GetTipoDocumentoByFilters(parametros).First().IdTipoDocumento; // CORREGIR
-                //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
-
-                if (formMode == ABMFormMode.update)
+                try
                 {
-                    oPersonaService.UpdatePersonaById(oPersona);
-                    this.Dispose();
+                    PersonaDTO oPersona = new PersonaDTO();
+
+                    oPersona.IdPersona = 0;
+                    if (formMode != ABMFormMode.insert)
+                        oPersona.IdPersona = oPersonaService.IdPersonaSeleccionada;
+
+                    oPersona.Legajo = Int32.Parse(textBoxLegajo.Text);
+                    oPersona.Apellido = textBoxApellido.Text;
+                    oPersona.Nombre = textBoxNombre.Text;
+                    oPersona.NombreTipoDocumento = comboBoxTipoDocumento.SelectedItem.ToString();
+                    oPersona.NumeroDocumento = Int32.Parse(textBoxNumeroDocumento.Text);
+
+                    oPersona.Mail = textBoxEmail.Text;
+                    oPersona.Telefono = (textBoxTelefono.Text);
+
+                    oPersona.Calle = textBoxCalle.Text;
+                    if (textBoxNumero.Text != "")
+                        oPersona.NumeroCalle = Int32.Parse(textBoxNumero.Text);
+                    if (textBoxPiso.Text != "")
+                        oPersona.Piso = Int32.Parse(textBoxPiso.Text);
+                    oPersona.Departamento = textBoxDepartamento.Text;
+                    oPersona.Observaciones = textBoxObservaciones.Text;
+
+                    //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoDopcumento
+                    Dictionary<string, object> parametros = new Dictionary<string, object>();
+                    parametros.Add("TipoDocumento", comboBoxTipoDocumento.SelectedItem.ToString());
+                    oPersona.IdTipoDocumento = oTipoDocumentoService.GetTipoDocumentoByFilters(parametros).First().IdTipoDocumento; // CORREGIR
+                    //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoDopcumento
+
+                    if (formMode == ABMFormMode.update)
+                    {
+                        oPersonaService.UpdatePersonaById(oPersona);
+                        this.Dispose();
+                    }
+                    else if (formMode == ABMFormMode.insert)
+                    {
+                        oPersonaService.InsertPersona(oPersona);
+                        this.Dispose();
+                    }
+                    else if (formMode == ABMFormMode.delete)
+                    {
+                        if (MessageBox.Show("¿Seguro que quiere eliminar" + oPersona.Nombre + ", " + oPersona.Apellido + "?", "Confirmar Eliminacion", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                            oPersonaService.DeletePersonaById(oPersona.IdPersona);
+                        this.Dispose();
+                    }
                 }
-                else if (formMode == ABMFormMode.insert)
+                catch (Exception ex)
                 {
-                    oPersonaService.InsertPersona(oPersona);
-                    this.Dispose();
+                    MessageBox.Show(ex.Message);
                 }
-                else if (formMode == ABMFormMode.delete)
-                {
-                    if (MessageBox.Show("¿Seguro que quiere eliminar" + oPersona.Nombre + ", " + oPersona.Apellido + "?", "Confirmar Eliminacion", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                        oPersonaService.DeletePersonaById(oPersona.IdPersona);
-                    this.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
@@ -185,6 +199,92 @@ namespace CEE.Interfaz
             this.Dispose();
         }
 
+        // ########################################################################
+        // Eventos Validating y KeyPress
+        // ########################################################################
+        private void TextBoxNumericos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar));
+        }
 
+        private void TextBoxApellidoyNombre_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox oEventSender = (TextBox)sender;
+            validarApellidoYNombre(oEventSender);
+        }
+        private void validarApellidoYNombre(TextBox oEventSender)
+        {
+            string errorString = "";
+
+            if (string.IsNullOrEmpty(oEventSender.Text))
+                errorString += "El " + oEventSender.Name + " es un campo obligatorio";
+
+            oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
+            //errorProvider.SetError(oEventSender, errorString);
+        }
+
+        private void ComboBoxTipoDocumento_Validating(object sender, CancelEventArgs e)
+        {
+            ComboBox oEventSender = (ComboBox)sender;
+            ValidarTipoDocumento(oEventSender);
+        }
+        private void ValidarTipoDocumento(ComboBox oEventSender)
+        {
+            string errorString = "";
+
+            if (oEventSender.SelectedIndex == 0)
+                errorString += "El " + oEventSender.Name + " es un campo obligatorio";
+
+            //errorProvider.SetError(oEventSender, errorString);
+            oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
+        }
+
+        private void TextBoxLegajoyNumeroDocumento_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox oEventSender = (TextBox)sender;
+            validarLegajoYNumeroDocumento(oEventSender);
+        }
+        private void validarLegajoYNumeroDocumento(TextBox oEventSender)
+        {
+            string errorString = "";
+
+            if (string.IsNullOrEmpty(oEventSender.Text))
+                errorString += "El " + oEventSender.Name + " es un campo obligatorio";
+
+            foreach (char oChar in oEventSender.Text)
+            {
+                if (!(char.IsDigit(oChar)))
+                {
+                    errorString += "El " + oEventSender.Name + " debe ser un numero entero mayor que 0";
+                    break;
+                }
+            }
+
+            //errorProvider.SetError(oEventSender, errorString);
+            oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
+        }
+
+        private void TextBoxPisoYNumero_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox oEventSender = (TextBox)sender;
+            validarPisoYNumero(oEventSender);
+        }
+
+        private void validarPisoYNumero(TextBox oEventSender)
+        {
+            string errorString = "";
+
+            foreach (char oChar in oEventSender.Text)
+            {
+                if (!(char.IsDigit(oChar)))
+                {
+                    errorString += "El " + oEventSender.Name + " debe ser un numero entero mayor que 0";
+                    break;
+                }
+            }
+
+            //errorProvider.SetError(oEventSender, errorString);
+            oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
+        }
     }
 }

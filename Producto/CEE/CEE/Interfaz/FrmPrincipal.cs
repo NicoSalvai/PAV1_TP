@@ -28,6 +28,10 @@ namespace CEE.Interfaz
             oUsuarioService = new UsuarioService();
             oMenuService = new MenuService();
 
+            this.WindowState = FormWindowState.Maximized;
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+
             checkLogin();
         }
 
@@ -43,11 +47,11 @@ namespace CEE.Interfaz
         /// </summary>
         private void checkLogin()
         {
-            FrmLogin login = new FrmLogin(oUsuarioService);
-            login.ShowDialog();
-
+            //FrmLogin login = new FrmLogin(oUsuarioService);
+            //login.ShowDialog();
+            oUsuarioService.IdUsuarioLogeado = 1;
             if (oUsuarioService.IdUsuarioLogeado == 0)
-                this.Dispose();
+               Application.Exit(); 
             
             HabilitarMenus();
         }
@@ -79,12 +83,12 @@ namespace CEE.Interfaz
 
         private void Equipos_Click(object sender, EventArgs e)
         {
-            new FrmEquipos().Show();
+            new FrmEquipos().ShowDialog();
         }
 
         private void Personas_Click(object sender, EventArgs e)
         {
-            new FrmPersonas().Show();
+            new FrmPersonas().ShowDialog();
         }
     }
 }

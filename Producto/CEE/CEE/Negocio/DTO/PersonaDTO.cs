@@ -18,7 +18,7 @@ namespace CEE.Negocio.DTO
         /// <summary>
         /// Nullable
         /// </summary>
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
         /// <summary>
         /// Nullable
         /// </summary>

@@ -10,15 +10,18 @@ using System.Windows.Forms;
 
 using CEE.Negocio;
 using CEE.Negocio.DTO;
+using CEE.Negocio.Auxiliares;
 
 namespace CEE.Interfaz
 {
     public partial class FrmPersonas : Form
     {
         PersonaService oPersonaService;
+        private ErrorProviderExtension oErrorProviderExtension;
         public FrmPersonas()
         {
             InitializeComponent();
+            oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
             oPersonaService = new PersonaService();
             cargarCombos();
         }
@@ -39,27 +42,33 @@ namespace CEE.Interfaz
             comboBoxTipoDocumento.DataSource = content;
         }
 
+        // ##############################################################################################################################
+        // ACA van los eventos de los botones
+        // ##############################################################################################################################
+
         private void ButtonBuscar_Click(object sender, EventArgs e)
         {
             dgvPersonas.Rows.Clear();
-
-            Dictionary<string, object> parametros = new Dictionary<string, object>();
-            if (!string.IsNullOrEmpty(textBoxLegajo.Text))
-                parametros.Add("Legajo", textBoxLegajo.Text);
-            if (!string.IsNullOrEmpty(textBoxApellido.Text))
-                parametros.Add("Apellido", textBoxApellido.Text);
-            if (!string.IsNullOrEmpty(textBoxNombre.Text))
-                parametros.Add("Nombre", textBoxNombre.Text);
-            if (!string.IsNullOrEmpty(textBoxNumeroDocumento.Text))
-                parametros.Add("NumeroDocumento", textBoxNumeroDocumento.Text);
-            if (comboBoxTipoDocumento.SelectedIndex != 0)
-                parametros.Add("TipoDocumento", comboBoxTipoDocumento.SelectedValue.ToString());
+            if (!oErrorProviderExtension.HasErrors())
+            {   
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                if (!string.IsNullOrEmpty(textBoxLegajo.Text))
+                    parametros.Add("Legajo", textBoxLegajo.Text);
+                if (!string.IsNullOrEmpty(textBoxApellido.Text))
+                    parametros.Add("Apellido", textBoxApellido.Text);
+                if (!string.IsNullOrEmpty(textBoxNombre.Text))
+                    parametros.Add("Nombre", textBoxNombre.Text);
+                if (!string.IsNullOrEmpty(textBoxNumeroDocumento.Text))
+                    parametros.Add("NumeroDocumento", textBoxNumeroDocumento.Text);
+                if (comboBoxTipoDocumento.SelectedIndex != 0)
+                    parametros.Add("TipoDocumento", comboBoxTipoDocumento.SelectedValue.ToString());
             
-
-            IList<PersonaDTO> busqueda = oPersonaService.GetPersonaByFilters(parametros);
-            foreach (PersonaDTO oPersona in busqueda)
-            {
-                dgvPersonas.Rows.Add(new object[] { oPersona.IdPersona.ToString(), oPersona.Legajo.ToString(), oPersona.NumeroDocumento.ToString(), oPersona.NombreTipoDocumento, oPersona.IdTipoDocumento.ToString(), oPersona.Apellido, oPersona.Nombre });
+            
+                IList<PersonaDTO> busqueda = oPersonaService.GetPersonaByFilters(parametros);
+                foreach (PersonaDTO oPersona in busqueda)
+                {
+                    dgvPersonas.Rows.Add(new object[] { oPersona.IdPersona.ToString(), oPersona.Legajo.ToString(), oPersona.NumeroDocumento.ToString(), oPersona.NombreTipoDocumento, oPersona.IdTipoDocumento.ToString(), oPersona.Apellido, oPersona.Nombre });
+                }
             }
         }
 
@@ -107,6 +116,53 @@ namespace CEE.Interfaz
         private void ButtonSalir_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        /// ########################################################################################################################
+        /// Entramos a la seccion de KeyPress y Validating para validar textboxs         ######################################################
+        /// ########################################################################################################################
+       
+        private void TextBoxLegajo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar));
+        }
+
+        private void TextBoxNumeroDocumento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar));
+        }
+
+        private void TextBoxLegajo_Validating(object sender, CancelEventArgs e)
+        {
+            string errorString = "";
+
+            foreach (char oChar in textBoxLegajo.Text)
+            {
+                if (!(char.IsDigit(oChar)))
+                {
+                    errorString += "El legajo debe ser un numero entero mayor que 0";
+                    break;
+                }
+            }
+
+            oErrorProviderExtension.SetErrorWithCount(this.textBoxLegajo, errorString);
+            // errorProvider.SetError(this.textBoxLegajo, errorString);
+        }
+
+        private void TextBoxNumeroDocumento_Validating(object sender, CancelEventArgs e)
+        {
+            string errorString = "";
+            foreach (char oChar in textBoxNumeroDocumento.Text)
+            {
+                if (!(char.IsDigit(oChar)))
+                {
+                    errorString += "El numero de documento debe se run numero entero mayor que 0";
+                    break;
+                }
+            }
+
+            oErrorProviderExtension.SetErrorWithCount(this.textBoxNumeroDocumento, errorString);
+            //errorProvider.SetError(this.textBoxNumeroDocumento, errorString);
         }
     }
 }
