@@ -141,11 +141,13 @@ SELECT E.equipo_id,
 	E.nombre,
 	TE.tipo_equipo,
 	E.tipo_equipo_id,
+	EST.nombre_estado,
 	E.descripcion,
 	E.fecha_alta,
 	E.fecha_baja
 FROM EQUIPO E
 JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id
+JOIN ESTADO EST ON EST.estado_id = E.estado_id
 WHERE E.equipo_id = 1
 AND E.fecha_baja IS NULL;
 

@@ -31,6 +31,11 @@ namespace CEE.Interfaz
             oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             cargarCombos();
+
+            textBoxLegajo.MaxLength = 10;
+            textBoxNumeroDocumento.MaxLength = 12;
+            textBoxApellido.MaxLength = 30;
+            textBoxNombre.MaxLength = 30;
         }
 
         /// <summary>

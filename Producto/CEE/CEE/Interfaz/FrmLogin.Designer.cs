@@ -69,7 +69,7 @@
             this.textBoxPassword.Location = new System.Drawing.Point(98, 42);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '*';
-            this.textBoxPassword.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPassword.Size = new System.Drawing.Size(151, 20);
             this.textBoxPassword.TabIndex = 1;
             this.textBoxPassword.UseSystemPasswordChar = true;
             // 
@@ -77,7 +77,7 @@
             // 
             this.textBoxUsuario.Location = new System.Drawing.Point(98, 16);
             this.textBoxUsuario.Name = "textBoxUsuario";
-            this.textBoxUsuario.Size = new System.Drawing.Size(100, 20);
+            this.textBoxUsuario.Size = new System.Drawing.Size(151, 20);
             this.textBoxUsuario.TabIndex = 0;
             // 
             // labelPassword
@@ -126,6 +126,7 @@
             this.Controls.Add(this.mainPanel);
             this.Name = "FrmLogin";
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.FrmLogin_Load);
             this.mainPanel.ResumeLayout(false);
             this.groupBoxLogin.ResumeLayout(false);
             this.groupBoxLogin.PerformLayout();

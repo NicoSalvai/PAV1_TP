@@ -129,11 +129,22 @@ CREATE TABLE TIPO_EQUIPO (
 	CONSTRAINT U_tipo_equipo UNIQUE(tipo_equipo)
 );
 
+CREATE TABLE ESTADO (									--	AGREGADO ##################################################################### HASTA
+	estado_id		INT NOT NULL IDENTITY(1,1),
+	nombre_estado	VARCHAR(30) NOT NULL,
+	ambito			VARCHAR(30) NOT NULL,
+	deshabilita		BIT NOT NULL,
+	
+	CONSTRAINT PK_ESTADO PRIMARY KEY(estado_id),
+	CONSTRAINT U_nombre_estado UNIQUE(nombre_estado)	
+);														-- AGREGADO ##################################################################### FIN
+
 CREATE TABLE EQUIPO (
 	equipo_id			INT NOT NULL IDENTITY(1,1),
 	codigo				VARCHAR(20) NOT NULL,
 	nombre				VARCHAR(30) NOT NULL,
 	tipo_equipo_id		INT NOT NULL,
+	estado_id			INT NOT NULL,					--	AGREGADO #####################################################################
 	descripcion			VARCHAR(50),
 	fecha_alta			DATETIME NOT NULL,
 	fecha_baja			DATETIME,
@@ -141,6 +152,8 @@ CREATE TABLE EQUIPO (
 	CONSTRAINT PK_EQUIPO PRIMARY KEY(equipo_id),
 	CONSTRAINT FK_TIPO_EQUIPO_EQUIPO FOREIGN KEY(tipo_equipo_id)
 		REFERENCES TIPO_EQUIPO(tipo_equipo_id),
+	CONSTRAINT FK_ESTADO_EQUIPO FOREIGN KEY(estado_id)		--	AGREGADO #####################################################################
+		REFERENCES ESTADO(estado_id),						--	AGREGADO #####################################################################
 	CONSTRAINT U_codigo UNIQUE(codigo) -- nose esto ?
 );
 
@@ -156,6 +169,8 @@ CREATE TABLE DETALLE_PRESTAMO (
 	CONSTRAINT FK_EQUIPO_DETALLE_PRESTAMO FOREIGN KEY(equipo_id)
 		REFERENCES EQUIPO(equipo_id)
 );
+
+
 
 
 -- ####################################################################################

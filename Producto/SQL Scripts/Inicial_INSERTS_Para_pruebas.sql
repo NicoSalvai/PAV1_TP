@@ -38,6 +38,11 @@ VALUES(4, NULL, 'Equipos', 0, ''),
 			
 INSERT INTO PERFIL (nombre_perfil, descripcion)
 	VALUES('Encargado Equipos', '');
+
+INSERT INTO ESTADO(nombre_estado, ambito, deshabilita)
+	VALUES('DISPONIBLE','EQUIPO',0),
+		('PRESTADO','EQUIPO',1),
+		('FUERA DE SERVICIO','EQUIPO',0);
 	
 INSERT INTO PERFIL_MENU (perfil_id, menu_id)
 VALUES(3,5),(3,6),		-- Equipos
@@ -67,8 +72,8 @@ USE [64429Pav1];
 INSERT INTO PERSONA(legajo, numero_documento, tipo_documento_id, apellido, nombre, telefono, mail, calle, numero_calle, piso, departamento, observaciones, fecha_alta)
 	VALUES(64429,39072672,1,'Salvai','Nicolas',35130941,'example@example.com','Calle Falsa', 123, 1, 'F', 'Observaciones', GETDATE());
 
-INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, descripcion, fecha_alta)
-	VALUES('Ej-01', 'Ejemplo XXX', 1, '...', GETDATE());
+INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, estado_id, descripcion, fecha_alta)
+	VALUES('Ej-01', 'Ejemplo XXX', 1, 1, '...', GETDATE());
 
 INSERT INTO PRESTAMO(persona_id, fecha_desde)
 	VALUES(1, GETDATE());

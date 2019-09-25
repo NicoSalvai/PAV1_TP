@@ -26,6 +26,9 @@ namespace CEE.Interfaz
         private void FrmEquipos_Load(object sender, EventArgs e)
         {
             cargarCombos();
+
+            textBoxNombre.MaxLength = 30;
+            textBoxCodigo.MaxLength = 30;
         }
 
         /// <summary>

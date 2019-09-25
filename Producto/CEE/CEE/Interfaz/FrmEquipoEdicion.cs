@@ -44,6 +44,10 @@ namespace CEE.Interfaz
             cargarCombos();
             habilitarCampos();
             cargarDatos();
+
+            textBoxNombre.MaxLength = 30;
+            textBoxCodigo.MaxLength = 30;
+            textBoxDescripcion.MaxLength = 50;
         }
 
         /// <summary>

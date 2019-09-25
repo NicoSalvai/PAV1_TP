@@ -26,6 +26,7 @@ namespace CEE.Interfaz
         {
             this.oUsuarioService = new UsuarioService();
             InitializeComponent();
+
         }
 
         private void ButtonAceptar_Click(object sender, EventArgs e)
@@ -48,6 +49,12 @@ namespace CEE.Interfaz
         private void ButtonCancelar_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+            textBoxUsuario.MaxLength = 20;
+            textBoxPassword.MaxLength = 20;
         }
     }
 }
