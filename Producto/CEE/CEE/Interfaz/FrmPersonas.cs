@@ -33,7 +33,7 @@ namespace CEE.Interfaz
             cargarCombos();
 
             textBoxLegajo.MaxLength = 10;
-            textBoxNumeroDocumento.MaxLength = 12;
+            textBoxNumeroDocumento.MaxLength = 10;
             textBoxApellido.MaxLength = 30;
             textBoxNombre.MaxLength = 30;
         }
@@ -89,6 +89,7 @@ namespace CEE.Interfaz
             FrmPersonaEdicion alta = new FrmPersonaEdicion(oPersonaService);
             alta.formMode = FrmPersonaEdicion.ABMFormMode.insert;
             alta.ShowDialog();
+            dgvPersonas.Rows.Clear();
         }
 
         private void ButtonEliminar_Click(object sender, EventArgs e)
@@ -105,6 +106,7 @@ namespace CEE.Interfaz
                 FrmPersonaEdicion alta = new FrmPersonaEdicion(oPersonaService);
                 alta.formMode = FrmPersonaEdicion.ABMFormMode.delete;
                 alta.ShowDialog();
+                dgvPersonas.Rows.Clear();
             }
         }
 
@@ -122,6 +124,7 @@ namespace CEE.Interfaz
                 FrmPersonaEdicion alta = new FrmPersonaEdicion(oPersonaService);
                 alta.formMode = FrmPersonaEdicion.ABMFormMode.update;
                 alta.ShowDialog();
+                dgvPersonas.Rows.Clear();
             }
         }
 

@@ -46,7 +46,7 @@ namespace CEE.Interfaz
             cargarDatos();
 
             textBoxLegajo.MaxLength = 10;
-            textBoxNumeroDocumento.MaxLength = 12;
+            textBoxNumeroDocumento.MaxLength = 10;
             textBoxApellido.MaxLength = 30;
             textBoxNombre.MaxLength = 30;
             textBoxTelefono.MaxLength = 30;

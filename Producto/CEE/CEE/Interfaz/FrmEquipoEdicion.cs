@@ -46,7 +46,7 @@ namespace CEE.Interfaz
             cargarDatos();
 
             textBoxNombre.MaxLength = 30;
-            textBoxCodigo.MaxLength = 30;
+            textBoxCodigo.MaxLength = 20;
             textBoxDescripcion.MaxLength = 50;
         }
 

@@ -74,6 +74,7 @@ namespace CEE.Interfaz
             FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService);
             alta.formMode = FrmEquipoEdicion.ABMFormMode.insert;
             alta.ShowDialog();
+            dgvEquipos.Rows.Clear();
         }
 
 
@@ -91,6 +92,7 @@ namespace CEE.Interfaz
                 FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService);
                 alta.formMode = FrmEquipoEdicion.ABMFormMode.delete;
                 alta.ShowDialog();
+                dgvEquipos.Rows.Clear();
             }
         }
 
@@ -109,6 +111,7 @@ namespace CEE.Interfaz
                 FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService);
                 alta.formMode = FrmEquipoEdicion.ABMFormMode.update;
                 alta.ShowDialog();
+                dgvEquipos.Rows.Clear();
             }
         }
 

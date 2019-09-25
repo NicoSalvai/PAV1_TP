@@ -115,7 +115,7 @@
             this.buttonGuardar.Location = new System.Drawing.Point(326, 250);
             this.buttonGuardar.Name = "buttonGuardar";
             this.buttonGuardar.Size = new System.Drawing.Size(75, 23);
-            this.buttonGuardar.TabIndex = 6;
+            this.buttonGuardar.TabIndex = 5;
             this.buttonGuardar.Text = "Guardar";
             this.buttonGuardar.UseVisualStyleBackColor = true;
             this.buttonGuardar.Click += new System.EventHandler(this.ButtonGuardar_Click);
@@ -125,7 +125,7 @@
             this.buttonCancelar.Location = new System.Drawing.Point(3, 250);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancelar.TabIndex = 5;
+            this.buttonCancelar.TabIndex = 4;
             this.buttonCancelar.Text = "Cancelar";
             this.buttonCancelar.UseVisualStyleBackColor = true;
             this.buttonCancelar.Click += new System.EventHandler(this.ButtonCancelar_Click);
@@ -135,7 +135,7 @@
             this.textBoxNombre.Location = new System.Drawing.Point(88, 66);
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(152, 20);
-            this.textBoxNombre.TabIndex = 4;
+            this.textBoxNombre.TabIndex = 2;
             this.textBoxNombre.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxObligatorios_Validating);
             // 
             // textBoxDescripcion
@@ -151,7 +151,7 @@
             this.textBoxCodigo.Location = new System.Drawing.Point(88, 41);
             this.textBoxCodigo.Name = "textBoxCodigo";
             this.textBoxCodigo.Size = new System.Drawing.Size(152, 20);
-            this.textBoxCodigo.TabIndex = 2;
+            this.textBoxCodigo.TabIndex = 1;
             this.textBoxCodigo.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxObligatorios_Validating);
             // 
             // comboBoxTipoEquipo
@@ -161,7 +161,7 @@
             this.comboBoxTipoEquipo.Location = new System.Drawing.Point(88, 14);
             this.comboBoxTipoEquipo.Name = "comboBoxTipoEquipo";
             this.comboBoxTipoEquipo.Size = new System.Drawing.Size(152, 21);
-            this.comboBoxTipoEquipo.TabIndex = 1;
+            this.comboBoxTipoEquipo.TabIndex = 0;
             this.comboBoxTipoEquipo.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxObligatorios_Validating);
             // 
             // errorProvider
