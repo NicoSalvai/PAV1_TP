@@ -47,9 +47,9 @@ namespace CEE.Interfaz
         /// </summary>
         private void checkLogin()
         {
-            FrmLogin login = new FrmLogin(oUsuarioService);
-            login.ShowDialog();
-            //oUsuarioService.IdUsuarioLogeado = 1;
+            //FrmLogin login = new FrmLogin(oUsuarioService);
+            //login.ShowDialog();
+            oUsuarioService.IdUsuarioLogeado = 1;
             if (oUsuarioService.IdUsuarioLogeado == 0)
                Application.Exit(); 
             
@@ -68,6 +68,7 @@ namespace CEE.Interfaz
 
             foreach (ToolStripMenuItem submenu in menuStrip1.Items)
             {
+                bool flag = false;
                 foreach (ToolStripMenuItem opcion in submenu.DropDownItems)
                 {
                     foreach (MenuDTO menu in usuarioMenus)
@@ -75,9 +76,13 @@ namespace CEE.Interfaz
                         if (menu.NombreMenu == opcion.Text)
                         {
                             opcion.Enabled = true;
+                            opcion.Visible = true;
+                            flag = true;
                         }
                     }
                 }
+                submenu.Enabled = flag;
+                submenu.Visible = flag;
             }
         }
 

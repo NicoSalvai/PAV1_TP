@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.personasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Personas = new System.Windows.Forms.ToolStripMenuItem();
             this.ConsultarPersonas = new System.Windows.Forms.ToolStripMenuItem();
+            this.equiposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Equipos = new System.Windows.Forms.ToolStripMenuItem();
+            this.TiposEquipos = new System.Windows.Forms.ToolStripMenuItem();
             this.prestamosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InicioPrestamos = new System.Windows.Forms.ToolStripMenuItem();
             this.FinPrestamos = new System.Windows.Forms.ToolStripMenuItem();
             this.ConsultarPrestamos = new System.Windows.Forms.ToolStripMenuItem();
-            this.equiposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Equipos = new System.Windows.Forms.ToolStripMenuItem();
-            this.TiposEquipos = new System.Windows.Forms.ToolStripMenuItem();
             this.panelPrincipal.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -85,9 +86,11 @@
             this.personasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Personas,
             this.ConsultarPersonas});
+            this.personasToolStripMenuItem.Enabled = false;
             this.personasToolStripMenuItem.Name = "personasToolStripMenuItem";
             this.personasToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.personasToolStripMenuItem.Text = "Personas";
+            this.personasToolStripMenuItem.Visible = false;
             // 
             // Personas
             // 
@@ -95,6 +98,7 @@
             this.Personas.Name = "Personas";
             this.Personas.Size = new System.Drawing.Size(175, 22);
             this.Personas.Text = "Gestionar Personas";
+            this.Personas.Visible = false;
             this.Personas.Click += new System.EventHandler(this.Personas_Click);
             // 
             // ConsultarPersonas
@@ -103,46 +107,18 @@
             this.ConsultarPersonas.Name = "ConsultarPersonas";
             this.ConsultarPersonas.Size = new System.Drawing.Size(175, 22);
             this.ConsultarPersonas.Text = "Consultar Personas";
-            // 
-            // prestamosToolStripMenuItem
-            // 
-            this.prestamosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.InicioPrestamos,
-            this.FinPrestamos,
-            this.ConsultarPrestamos});
-            this.prestamosToolStripMenuItem.Name = "prestamosToolStripMenuItem";
-            this.prestamosToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.prestamosToolStripMenuItem.Text = "Prestamos";
-            // 
-            // InicioPrestamos
-            // 
-            this.InicioPrestamos.Enabled = false;
-            this.InicioPrestamos.Name = "InicioPrestamos";
-            this.InicioPrestamos.Size = new System.Drawing.Size(183, 22);
-            this.InicioPrestamos.Text = "Iniciar Prestamos";
-            // 
-            // FinPrestamos
-            // 
-            this.FinPrestamos.Enabled = false;
-            this.FinPrestamos.Name = "FinPrestamos";
-            this.FinPrestamos.Size = new System.Drawing.Size(183, 22);
-            this.FinPrestamos.Text = "Finalizar Prestamos";
-            // 
-            // ConsultarPrestamos
-            // 
-            this.ConsultarPrestamos.Enabled = false;
-            this.ConsultarPrestamos.Name = "ConsultarPrestamos";
-            this.ConsultarPrestamos.Size = new System.Drawing.Size(183, 22);
-            this.ConsultarPrestamos.Text = "Consultar Prestamos";
+            this.ConsultarPersonas.Visible = false;
             // 
             // equiposToolStripMenuItem
             // 
             this.equiposToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Equipos,
             this.TiposEquipos});
+            this.equiposToolStripMenuItem.Enabled = false;
             this.equiposToolStripMenuItem.Name = "equiposToolStripMenuItem";
             this.equiposToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.equiposToolStripMenuItem.Text = "Equipos";
+            this.equiposToolStripMenuItem.Visible = false;
             // 
             // Equipos
             // 
@@ -150,6 +126,7 @@
             this.Equipos.Name = "Equipos";
             this.Equipos.Size = new System.Drawing.Size(216, 22);
             this.Equipos.Text = "Gestionar Equipos";
+            this.Equipos.Visible = false;
             this.Equipos.Click += new System.EventHandler(this.Equipos_Click);
             // 
             // TiposEquipos
@@ -158,6 +135,43 @@
             this.TiposEquipos.Name = "TiposEquipos";
             this.TiposEquipos.Size = new System.Drawing.Size(216, 22);
             this.TiposEquipos.Text = "Gestionar Tipos de Equipos";
+            this.TiposEquipos.Visible = false;
+            // 
+            // prestamosToolStripMenuItem
+            // 
+            this.prestamosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.InicioPrestamos,
+            this.FinPrestamos,
+            this.ConsultarPrestamos});
+            this.prestamosToolStripMenuItem.Enabled = false;
+            this.prestamosToolStripMenuItem.Name = "prestamosToolStripMenuItem";
+            this.prestamosToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.prestamosToolStripMenuItem.Text = "Prestamos";
+            this.prestamosToolStripMenuItem.Visible = false;
+            // 
+            // InicioPrestamos
+            // 
+            this.InicioPrestamos.Enabled = false;
+            this.InicioPrestamos.Name = "InicioPrestamos";
+            this.InicioPrestamos.Size = new System.Drawing.Size(183, 22);
+            this.InicioPrestamos.Text = "Iniciar Prestamos";
+            this.InicioPrestamos.Visible = false;
+            // 
+            // FinPrestamos
+            // 
+            this.FinPrestamos.Enabled = false;
+            this.FinPrestamos.Name = "FinPrestamos";
+            this.FinPrestamos.Size = new System.Drawing.Size(183, 22);
+            this.FinPrestamos.Text = "Finalizar Prestamos";
+            this.FinPrestamos.Visible = false;
+            // 
+            // ConsultarPrestamos
+            // 
+            this.ConsultarPrestamos.Enabled = false;
+            this.ConsultarPrestamos.Name = "ConsultarPrestamos";
+            this.ConsultarPrestamos.Size = new System.Drawing.Size(183, 22);
+            this.ConsultarPrestamos.Text = "Consultar Prestamos";
+            this.ConsultarPrestamos.Visible = false;
             // 
             // FrmPrincipal
             // 
@@ -165,6 +179,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panelPrincipal);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FrmPrincipal";
             this.Text = "CEE";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPrincipal_FormClosing);

@@ -27,6 +27,12 @@ namespace CEE.Interfaz
             this.oUsuarioService = new UsuarioService();
             InitializeComponent();
 
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            this.CenterToScreen();
+            this.ShowInTaskbar = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
         private void ButtonAceptar_Click(object sender, EventArgs e)

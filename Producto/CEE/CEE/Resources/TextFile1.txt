@@ -1,0 +1,22 @@
+﻿Load para formularios
+
+			errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+			oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
+			oPersonaService = new PersonaService();
+            
+            cargarCombos();
+            setTextBoxLimits();
+            setLabels();
+            habilitarCampos();
+            cargarDatos();
+
+
+
+CTOR para formularios
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            this.CenterToScreen();
+            this.ShowInTaskbar = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+

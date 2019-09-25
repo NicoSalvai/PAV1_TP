@@ -22,24 +22,28 @@ namespace CEE.Interfaz
         public FrmPersonas()
         {
             InitializeComponent();
-
-            oPersonaService = new PersonaService();
+            
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            this.CenterToScreen();
+            this.ShowInTaskbar = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
         private void FrmPersonas_Load(object sender, EventArgs e)
         {
-            oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
+            oPersonaService = new PersonaService();
+            
             cargarCombos();
-
-            textBoxLegajo.MaxLength = 10;
-            textBoxNumeroDocumento.MaxLength = 10;
-            textBoxApellido.MaxLength = 30;
-            textBoxNombre.MaxLength = 30;
+            setTextBoxLimits();
         }
 
         /// <summary>
         /// Levanta los datos necesarios atraves de servicios para cargar los combos
+        /// Levanta Tipos de Documento a partir de TipoDocumentoService en forma de TipoDocumentoDTO
         /// </summary>
         private void cargarCombos()
         {
@@ -54,6 +58,16 @@ namespace CEE.Interfaz
             comboBoxTipoDocumento.DataSource = content;
         }
 
+        /// <summary>
+        /// Setea el largo maximo para los campos textBox iguales a los seteados en la BD
+        /// </summary>
+        private void setTextBoxLimits()
+        {
+            textBoxLegajo.MaxLength = 9;
+            textBoxNumeroDocumento.MaxLength = 9;
+            textBoxApellido.MaxLength = 30;
+            textBoxNombre.MaxLength = 30;
+        }
         // ##############################################################################################################################
         // ACA van los eventos de los botones
         // ##############################################################################################################################
@@ -86,8 +100,7 @@ namespace CEE.Interfaz
 
         private void ButtonNuevo_Click(object sender, EventArgs e)
         {
-            FrmPersonaEdicion alta = new FrmPersonaEdicion(oPersonaService);
-            alta.formMode = FrmPersonaEdicion.ABMFormMode.insert;
+            FrmPersonaEdicion alta = new FrmPersonaEdicion(oPersonaService, FrmPersonaEdicion.ABMFormMode.insert);
             alta.ShowDialog();
             dgvPersonas.Rows.Clear();
         }
@@ -100,11 +113,8 @@ namespace CEE.Interfaz
             }
             else
             {
-                int idPersonaSeleccionada = Int32.Parse(dgvPersonas.CurrentRow.Cells["IdPersona"].Value.ToString());
-                oPersonaService.IdPersonaSeleccionada = idPersonaSeleccionada;
-
-                FrmPersonaEdicion alta = new FrmPersonaEdicion(oPersonaService);
-                alta.formMode = FrmPersonaEdicion.ABMFormMode.delete;
+                oPersonaService.IdPersonaSeleccionada = Int32.Parse(dgvPersonas.CurrentRow.Cells["IdPersona"].Value.ToString());
+                FrmPersonaEdicion alta = new FrmPersonaEdicion(oPersonaService, FrmPersonaEdicion.ABMFormMode.delete);
                 alta.ShowDialog();
                 dgvPersonas.Rows.Clear();
             }
@@ -118,11 +128,8 @@ namespace CEE.Interfaz
             }
             else
             {
-                int idPersonaSeleccionada = Int32.Parse(dgvPersonas.CurrentRow.Cells["IdPersona"].Value.ToString());
-                oPersonaService.IdPersonaSeleccionada = idPersonaSeleccionada;
-
-                FrmPersonaEdicion alta = new FrmPersonaEdicion(oPersonaService);
-                alta.formMode = FrmPersonaEdicion.ABMFormMode.update;
+                oPersonaService.IdPersonaSeleccionada = Int32.Parse(dgvPersonas.CurrentRow.Cells["IdPersona"].Value.ToString());
+                FrmPersonaEdicion alta = new FrmPersonaEdicion(oPersonaService, FrmPersonaEdicion.ABMFormMode.update);
                 alta.ShowDialog();
                 dgvPersonas.Rows.Clear();
             }
@@ -134,7 +141,7 @@ namespace CEE.Interfaz
         }
 
         /// ########################################################################################################################
-        /// Entramos a la seccion de KeyPress y Validating para validar textboxs         ######################################################
+        /// ##################          KeyPress y Validating Events           ######################################################
         /// ########################################################################################################################
        
         private void TextBoxLegajo_KeyPress(object sender, KeyPressEventArgs e)
@@ -149,33 +156,28 @@ namespace CEE.Interfaz
 
         private void TextBoxLegajo_Validating(object sender, CancelEventArgs e)
         {
-            string errorString = "";
-
-            foreach (char oChar in textBoxLegajo.Text)
-            {
-                if (!(char.IsDigit(oChar)))
-                {
-                    errorString += "El legajo debe ser un numero entero mayor que 0";
-                    break;
-                }
-            }
-
-            oErrorProviderExtension.SetErrorWithCount(this.textBoxLegajo, errorString);
+            TextBox oEventSender = (TextBox)sender;
+            validarCampoNumerico(oEventSender);
         }
 
         private void TextBoxNumeroDocumento_Validating(object sender, CancelEventArgs e)
         {
+            TextBox oEventSender = (TextBox)sender;
+            validarCampoNumerico(oEventSender);
+        }
+
+        private void validarCampoNumerico(TextBox oEventSender)
+        {
             string errorString = "";
-            foreach (char oChar in textBoxNumeroDocumento.Text)
+            foreach (char oChar in oEventSender.Text)
             {
                 if (!(char.IsDigit(oChar)))
                 {
-                    errorString += "El numero de documento debe se run numero entero mayor que 0";
+                    errorString += "El " + oEventSender.Text + " debe ser un numero entero mayor que 0";
                     break;
                 }
             }
-
-            oErrorProviderExtension.SetErrorWithCount(this.textBoxNumeroDocumento, errorString);
+            oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
         }
     }
 }

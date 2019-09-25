@@ -10,25 +10,32 @@ using System.Windows.Forms;
 
 using CEE.Negocio;
 using CEE.Negocio.DTO;
+using CEE.Negocio.Auxiliares;
 
 namespace CEE.Interfaz
 {
     public partial class FrmEquipos : Form
     {
         EquipoService oEquipoService;
+
         public FrmEquipos()
         {
             InitializeComponent();
 
-            oEquipoService = new EquipoService();
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            this.CenterToScreen();
+            this.ShowInTaskbar = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
         private void FrmEquipos_Load(object sender, EventArgs e)
         {
-            cargarCombos();
+            oEquipoService = new EquipoService();
 
-            textBoxNombre.MaxLength = 30;
-            textBoxCodigo.MaxLength = 30;
+            cargarCombos();
+            setTextBoxLimits();
         }
 
         /// <summary>
@@ -44,6 +51,15 @@ namespace CEE.Interfaz
                 content.Add(tipoEquipo.NombreTipoEquipo);
 
             comboBoxTipoEquipo.DataSource = content;
+        }
+
+        /// <summary>
+        /// Setea el largo maximo para los campos textBox iguales a los seteados en la BD
+        /// </summary>
+        private void setTextBoxLimits()
+        {
+            textBoxNombre.MaxLength = 20;
+            textBoxCodigo.MaxLength = 20;
         }
 
         // ########################################################################
@@ -71,8 +87,7 @@ namespace CEE.Interfaz
 
         private void ButtonNuevo_Click(object sender, EventArgs e)
         {
-            FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService);
-            alta.formMode = FrmEquipoEdicion.ABMFormMode.insert;
+            FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService, FrmEquipoEdicion.ABMFormMode.insert);
             alta.ShowDialog();
             dgvEquipos.Rows.Clear();
         }
@@ -86,11 +101,8 @@ namespace CEE.Interfaz
             }
             else
             {
-                int idEquipoSeleccionado = Int32.Parse(dgvEquipos.CurrentRow.Cells["IdEquipo"].Value.ToString());
-                oEquipoService.IdEquipoSelected = idEquipoSeleccionado;
-
-                FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService);
-                alta.formMode = FrmEquipoEdicion.ABMFormMode.delete;
+                oEquipoService.IdEquipoSelected = Int32.Parse(dgvEquipos.CurrentRow.Cells["IdEquipo"].Value.ToString());
+                FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService, FrmEquipoEdicion.ABMFormMode.delete);
                 alta.ShowDialog();
                 dgvEquipos.Rows.Clear();
             }
@@ -105,11 +117,8 @@ namespace CEE.Interfaz
             }
             else
             {
-                int idEquipoSeleccionado = Int32.Parse(dgvEquipos.CurrentRow.Cells["IdEquipo"].Value.ToString());
-                oEquipoService.IdEquipoSelected = idEquipoSeleccionado;
-
-                FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService);
-                alta.formMode = FrmEquipoEdicion.ABMFormMode.update;
+                oEquipoService.IdEquipoSelected = Int32.Parse(dgvEquipos.CurrentRow.Cells["IdEquipo"].Value.ToString());
+                FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService, FrmEquipoEdicion.ABMFormMode.update);
                 alta.ShowDialog();
                 dgvEquipos.Rows.Clear();
             }

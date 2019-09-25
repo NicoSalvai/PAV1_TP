@@ -29,24 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPersonas));
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.buttonNuevo = new System.Windows.Forms.Button();
             this.buttonEliminar = new System.Windows.Forms.Button();
             this.buttonModificar = new System.Windows.Forms.Button();
-            this.buttonSalir = new System.Windows.Forms.Button();
             this.panelBusqueda = new System.Windows.Forms.Panel();
             this.textBoxNombre = new System.Windows.Forms.TextBox();
             this.textBoxApellido = new System.Windows.Forms.TextBox();
             this.labelNombre = new System.Windows.Forms.Label();
             this.labelApellido = new System.Windows.Forms.Label();
             this.dgvPersonas = new System.Windows.Forms.DataGridView();
-            this.IdPersona = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumeroDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonBuscar = new System.Windows.Forms.Button();
             this.textBoxNumeroDocumento = new System.Windows.Forms.TextBox();
             this.comboBoxTipoDocumento = new System.Windows.Forms.ComboBox();
@@ -56,6 +49,13 @@
             this.labelLegajo = new System.Windows.Forms.Label();
             this.labelBusqueda = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.IdPersona = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumeroDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelPrincipal.SuspendLayout();
             this.panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonas)).BeginInit();
@@ -68,7 +68,6 @@
             this.panelPrincipal.Controls.Add(this.buttonNuevo);
             this.panelPrincipal.Controls.Add(this.buttonEliminar);
             this.panelPrincipal.Controls.Add(this.buttonModificar);
-            this.panelPrincipal.Controls.Add(this.buttonSalir);
             this.panelPrincipal.Controls.Add(this.panelBusqueda);
             this.panelPrincipal.Location = new System.Drawing.Point(12, 12);
             this.panelPrincipal.Name = "panelPrincipal";
@@ -104,16 +103,6 @@
             this.buttonModificar.Text = "Modificar Seleccionado";
             this.buttonModificar.UseVisualStyleBackColor = true;
             this.buttonModificar.Click += new System.EventHandler(this.ButtonModificar_Click);
-            // 
-            // buttonSalir
-            // 
-            this.buttonSalir.Location = new System.Drawing.Point(7, 469);
-            this.buttonSalir.Name = "buttonSalir";
-            this.buttonSalir.Size = new System.Drawing.Size(75, 23);
-            this.buttonSalir.TabIndex = 1;
-            this.buttonSalir.Text = "Salir";
-            this.buttonSalir.UseVisualStyleBackColor = true;
-            this.buttonSalir.Click += new System.EventHandler(this.ButtonSalir_Click);
             // 
             // panelBusqueda
             // 
@@ -181,55 +170,11 @@
             this.IdTipoDocumento,
             this.Apellido,
             this.Nombre});
-            this.dgvPersonas.Location = new System.Drawing.Point(3, 159);
+            this.dgvPersonas.Location = new System.Drawing.Point(3, 102);
             this.dgvPersonas.Name = "dgvPersonas";
             this.dgvPersonas.ReadOnly = true;
-            this.dgvPersonas.Size = new System.Drawing.Size(760, 296);
+            this.dgvPersonas.Size = new System.Drawing.Size(760, 353);
             this.dgvPersonas.TabIndex = 6;
-            // 
-            // IdPersona
-            // 
-            this.IdPersona.HeaderText = "IdPersona";
-            this.IdPersona.Name = "IdPersona";
-            this.IdPersona.ReadOnly = true;
-            this.IdPersona.Visible = false;
-            // 
-            // Legajo
-            // 
-            this.Legajo.HeaderText = "Legajo";
-            this.Legajo.Name = "Legajo";
-            this.Legajo.ReadOnly = true;
-            // 
-            // NumeroDocumento
-            // 
-            this.NumeroDocumento.HeaderText = "Numero Documento";
-            this.NumeroDocumento.Name = "NumeroDocumento";
-            this.NumeroDocumento.ReadOnly = true;
-            // 
-            // NombreTipoDocumento
-            // 
-            this.NombreTipoDocumento.HeaderText = "Tipo Documento";
-            this.NombreTipoDocumento.Name = "NombreTipoDocumento";
-            this.NombreTipoDocumento.ReadOnly = true;
-            // 
-            // IdTipoDocumento
-            // 
-            this.IdTipoDocumento.HeaderText = "IdTipoDocumento";
-            this.IdTipoDocumento.Name = "IdTipoDocumento";
-            this.IdTipoDocumento.ReadOnly = true;
-            this.IdTipoDocumento.Visible = false;
-            // 
-            // Apellido
-            // 
-            this.Apellido.HeaderText = "Apellido";
-            this.Apellido.Name = "Apellido";
-            this.Apellido.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
             // 
             // buttonBuscar
             // 
@@ -308,14 +253,62 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // IdPersona
+            // 
+            this.IdPersona.HeaderText = "IdPersona";
+            this.IdPersona.Name = "IdPersona";
+            this.IdPersona.ReadOnly = true;
+            this.IdPersona.Visible = false;
+            // 
+            // Legajo
+            // 
+            this.Legajo.HeaderText = "Legajo";
+            this.Legajo.Name = "Legajo";
+            this.Legajo.ReadOnly = true;
+            // 
+            // NumeroDocumento
+            // 
+            this.NumeroDocumento.HeaderText = "Numero Documento";
+            this.NumeroDocumento.Name = "NumeroDocumento";
+            this.NumeroDocumento.ReadOnly = true;
+            this.NumeroDocumento.Width = 115;
+            // 
+            // NombreTipoDocumento
+            // 
+            this.NombreTipoDocumento.HeaderText = "Tipo Documento";
+            this.NombreTipoDocumento.Name = "NombreTipoDocumento";
+            this.NombreTipoDocumento.ReadOnly = true;
+            // 
+            // IdTipoDocumento
+            // 
+            this.IdTipoDocumento.HeaderText = "IdTipoDocumento";
+            this.IdTipoDocumento.Name = "IdTipoDocumento";
+            this.IdTipoDocumento.ReadOnly = true;
+            this.IdTipoDocumento.Visible = false;
+            // 
+            // Apellido
+            // 
+            this.Apellido.HeaderText = "Apellido";
+            this.Apellido.Name = "Apellido";
+            this.Apellido.ReadOnly = true;
+            this.Apellido.Width = 200;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 200;
+            // 
             // FrmPersonas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 521);
             this.Controls.Add(this.panelPrincipal);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmPersonas";
-            this.Text = "s";
+            this.Text = "Gestionar Personas";
             this.Load += new System.EventHandler(this.FrmPersonas_Load);
             this.panelPrincipal.ResumeLayout(false);
             this.panelBusqueda.ResumeLayout(false);
@@ -341,8 +334,12 @@
         private System.Windows.Forms.Button buttonNuevo;
         private System.Windows.Forms.Button buttonEliminar;
         private System.Windows.Forms.Button buttonModificar;
-        private System.Windows.Forms.Button buttonSalir;
         private System.Windows.Forms.DataGridView dgvPersonas;
+        private System.Windows.Forms.TextBox textBoxNombre;
+        private System.Windows.Forms.TextBox textBoxApellido;
+        private System.Windows.Forms.Label labelNombre;
+        private System.Windows.Forms.Label labelApellido;
+        private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdPersona;
         private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumeroDocumento;
@@ -350,10 +347,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IdTipoDocumento;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.TextBox textBoxNombre;
-        private System.Windows.Forms.TextBox textBoxApellido;
-        private System.Windows.Forms.Label labelNombre;
-        private System.Windows.Forms.Label labelApellido;
-        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

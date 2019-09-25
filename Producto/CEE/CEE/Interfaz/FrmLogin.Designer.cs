@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogin));
             this.mainPanel = new System.Windows.Forms.Panel();
             this.groupBoxLogin = new System.Windows.Forms.GroupBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
@@ -35,7 +36,6 @@
             this.labelPassword = new System.Windows.Forms.Label();
             this.labelUsuario = new System.Windows.Forms.Label();
             this.buttonAceptar = new System.Windows.Forms.Button();
-            this.buttonCancelar = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
             this.SuspendLayout();
@@ -46,7 +46,7 @@
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(347, 159);
+            this.mainPanel.Size = new System.Drawing.Size(347, 122);
             this.mainPanel.TabIndex = 0;
             // 
             // groupBoxLogin
@@ -56,10 +56,9 @@
             this.groupBoxLogin.Controls.Add(this.labelPassword);
             this.groupBoxLogin.Controls.Add(this.labelUsuario);
             this.groupBoxLogin.Controls.Add(this.buttonAceptar);
-            this.groupBoxLogin.Controls.Add(this.buttonCancelar);
             this.groupBoxLogin.Location = new System.Drawing.Point(12, 12);
             this.groupBoxLogin.Name = "groupBoxLogin";
-            this.groupBoxLogin.Size = new System.Drawing.Size(323, 135);
+            this.groupBoxLogin.Size = new System.Drawing.Size(323, 98);
             this.groupBoxLogin.TabIndex = 0;
             this.groupBoxLogin.TabStop = false;
             this.groupBoxLogin.Text = "Login";
@@ -100,30 +99,21 @@
             // 
             // buttonAceptar
             // 
-            this.buttonAceptar.Location = new System.Drawing.Point(242, 106);
+            this.buttonAceptar.Location = new System.Drawing.Point(242, 68);
             this.buttonAceptar.Name = "buttonAceptar";
             this.buttonAceptar.Size = new System.Drawing.Size(75, 23);
             this.buttonAceptar.TabIndex = 3;
-            this.buttonAceptar.Text = "Aceptar";
+            this.buttonAceptar.Text = "Login";
             this.buttonAceptar.UseVisualStyleBackColor = true;
             this.buttonAceptar.Click += new System.EventHandler(this.ButtonAceptar_Click);
-            // 
-            // buttonCancelar
-            // 
-            this.buttonCancelar.Location = new System.Drawing.Point(6, 106);
-            this.buttonCancelar.Name = "buttonCancelar";
-            this.buttonCancelar.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancelar.TabIndex = 2;
-            this.buttonCancelar.Text = "Cancelar";
-            this.buttonCancelar.UseVisualStyleBackColor = true;
-            this.buttonCancelar.Click += new System.EventHandler(this.ButtonCancelar_Click);
             // 
             // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(347, 159);
+            this.ClientSize = new System.Drawing.Size(347, 122);
             this.Controls.Add(this.mainPanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmLogin";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.FrmLogin_Load);
@@ -143,6 +133,5 @@
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.Label labelUsuario;
         private System.Windows.Forms.Button buttonAceptar;
-        private System.Windows.Forms.Button buttonCancelar;
     }
 }

@@ -85,8 +85,8 @@ CREATE TABLE TIPO_DOCUMENTO (
 
 CREATE TABLE PERSONA (
 	persona_id			INT NOT NULL IDENTITY(1,1),
-	legajo				LONG NOT NULL,
-	numero_documento	LONG NOT NULL,
+	legajo				INT NOT NULL,
+	numero_documento	INT NOT NULL,
 	tipo_documento_id	INT NOT NULL,
 	apellido			VARCHAR(30) NOT NULL,
 	nombre				VARCHAR(30) NOT NULL,

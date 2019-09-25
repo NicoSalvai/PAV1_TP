@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEquipos));
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.buttonModificar = new System.Windows.Forms.Button();
             this.buttonEliminar = new System.Windows.Forms.Button();
             this.buttonNuevo = new System.Windows.Forms.Button();
-            this.buttonSalir = new System.Windows.Forms.Button();
             this.panelBusqueda = new System.Windows.Forms.Panel();
             this.buttonBuscar = new System.Windows.Forms.Button();
             this.comboBoxTipoEquipo = new System.Windows.Forms.ComboBox();
@@ -40,14 +40,14 @@
             this.labelTipoEquipo = new System.Windows.Forms.Label();
             this.labelNombre = new System.Windows.Forms.Label();
             this.dgvEquipos = new System.Windows.Forms.DataGridView();
+            this.textBoxCodigo = new System.Windows.Forms.TextBox();
+            this.labelCodigo = new System.Windows.Forms.Label();
+            this.labelBusqueda = new System.Windows.Forms.Label();
             this.IdEquipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoEquipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBoxCodigo = new System.Windows.Forms.TextBox();
-            this.labelCodigo = new System.Windows.Forms.Label();
-            this.labelBusqueda = new System.Windows.Forms.Label();
             this.panelPrincipal.SuspendLayout();
             this.panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEquipos)).BeginInit();
@@ -59,7 +59,6 @@
             this.panelPrincipal.Controls.Add(this.buttonModificar);
             this.panelPrincipal.Controls.Add(this.buttonEliminar);
             this.panelPrincipal.Controls.Add(this.buttonNuevo);
-            this.panelPrincipal.Controls.Add(this.buttonSalir);
             this.panelPrincipal.Controls.Add(this.panelBusqueda);
             this.panelPrincipal.Location = new System.Drawing.Point(12, 12);
             this.panelPrincipal.Name = "panelPrincipal";
@@ -95,16 +94,6 @@
             this.buttonNuevo.Text = "Nuevo Equipo";
             this.buttonNuevo.UseVisualStyleBackColor = true;
             this.buttonNuevo.Click += new System.EventHandler(this.ButtonNuevo_Click);
-            // 
-            // buttonSalir
-            // 
-            this.buttonSalir.Location = new System.Drawing.Point(7, 398);
-            this.buttonSalir.Name = "buttonSalir";
-            this.buttonSalir.Size = new System.Drawing.Size(75, 23);
-            this.buttonSalir.TabIndex = 10;
-            this.buttonSalir.Text = "Salir";
-            this.buttonSalir.UseVisualStyleBackColor = true;
-            this.buttonSalir.Click += new System.EventHandler(this.ButtonSalir_Click);
             // 
             // panelBusqueda
             // 
@@ -181,39 +170,8 @@
             this.dgvEquipos.Location = new System.Drawing.Point(3, 109);
             this.dgvEquipos.Name = "dgvEquipos";
             this.dgvEquipos.ReadOnly = true;
-            this.dgvEquipos.Size = new System.Drawing.Size(760, 252);
+            this.dgvEquipos.Size = new System.Drawing.Size(760, 275);
             this.dgvEquipos.TabIndex = 4;
-            // 
-            // IdEquipo
-            // 
-            this.IdEquipo.HeaderText = "IdEquipo";
-            this.IdEquipo.Name = "IdEquipo";
-            this.IdEquipo.ReadOnly = true;
-            this.IdEquipo.Visible = false;
-            // 
-            // Codigo
-            // 
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.Name = "Codigo";
-            this.Codigo.ReadOnly = true;
-            // 
-            // TipoEquipo
-            // 
-            this.TipoEquipo.HeaderText = "Tipo Equipo";
-            this.TipoEquipo.Name = "TipoEquipo";
-            this.TipoEquipo.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
             // 
             // textBoxCodigo
             // 
@@ -240,12 +198,48 @@
             this.labelBusqueda.TabIndex = 1;
             this.labelBusqueda.Text = "Busqueda";
             // 
+            // IdEquipo
+            // 
+            this.IdEquipo.HeaderText = "IdEquipo";
+            this.IdEquipo.Name = "IdEquipo";
+            this.IdEquipo.ReadOnly = true;
+            this.IdEquipo.Visible = false;
+            // 
+            // Codigo
+            // 
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.Width = 150;
+            // 
+            // TipoEquipo
+            // 
+            this.TipoEquipo.HeaderText = "Tipo Equipo";
+            this.TipoEquipo.Name = "TipoEquipo";
+            this.TipoEquipo.ReadOnly = true;
+            this.TipoEquipo.Width = 150;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 150;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            this.Descripcion.Width = 265;
+            // 
             // FrmEquipos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panelPrincipal);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmEquipos";
             this.Text = "Gestionar Equipos";
             this.Load += new System.EventHandler(this.FrmEquipos_Load);
@@ -270,14 +264,13 @@
         private System.Windows.Forms.Button buttonBuscar;
         private System.Windows.Forms.ComboBox comboBoxTipoEquipo;
         private System.Windows.Forms.TextBox textBoxNombre;
+        private System.Windows.Forms.Button buttonModificar;
+        private System.Windows.Forms.Button buttonEliminar;
+        private System.Windows.Forms.Button buttonNuevo;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdEquipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoEquipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.Button buttonModificar;
-        private System.Windows.Forms.Button buttonEliminar;
-        private System.Windows.Forms.Button buttonNuevo;
-        private System.Windows.Forms.Button buttonSalir;
     }
 }

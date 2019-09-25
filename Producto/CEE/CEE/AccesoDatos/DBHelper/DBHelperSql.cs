@@ -12,8 +12,8 @@ namespace CEE.AccesoDatos.DBHelper
 
         private DBHelperSql()
         {
-            // string_conexion = "Data Source=NicoPC\\SQLEXPRESS;Initial Catalog=64429Pav1;Integrated Security=True";
-            string_conexion = "Data Source=maquis;Initial Catalog=64429Pav1;User ID=avisuales1;Password=avisuales1";
+            string_conexion = "Data Source=NicoPC\\SQLEXPRESS;Initial Catalog=64429Pav1;Integrated Security=True";
+            //string_conexion = "Data Source=maquis;Initial Catalog=64429Pav1;User ID=avisuales1;Password=avisuales1";
         }
 
         public static DBHelperSql GetDBHelper()
