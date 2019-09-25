@@ -125,13 +125,6 @@ namespace CEE.Interfaz
             {
                 try
                 {
-                    if (string.IsNullOrEmpty(textBoxCodigo.Text) || string.IsNullOrWhiteSpace(textBoxCodigo.Text))
-                        throw new Exception("Codigo no puede ser vacio");
-                    if (string.IsNullOrEmpty(textBoxNombre.Text) || string.IsNullOrWhiteSpace(textBoxNombre.Text))
-                        throw new Exception("Nombre no puede ser vacio");
-                    if (comboBoxTipoEquipo.SelectedIndex == 0)
-                        throw new Exception("Debe seleccionar un Tipo de Equipo");
-
                     EquipoDTO oEquipo = new EquipoDTO();
 
                     oEquipo.IdEquipo = 0;

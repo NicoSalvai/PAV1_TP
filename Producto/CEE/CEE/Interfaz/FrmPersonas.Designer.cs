@@ -80,7 +80,7 @@
             this.buttonNuevo.Location = new System.Drawing.Point(674, 469);
             this.buttonNuevo.Name = "buttonNuevo";
             this.buttonNuevo.Size = new System.Drawing.Size(93, 23);
-            this.buttonNuevo.TabIndex = 12;
+            this.buttonNuevo.TabIndex = 4;
             this.buttonNuevo.Text = "Nueva Persona";
             this.buttonNuevo.UseVisualStyleBackColor = true;
             this.buttonNuevo.Click += new System.EventHandler(this.ButtonNuevo_Click);
@@ -90,7 +90,7 @@
             this.buttonEliminar.Location = new System.Drawing.Point(547, 469);
             this.buttonEliminar.Name = "buttonEliminar";
             this.buttonEliminar.Size = new System.Drawing.Size(121, 23);
-            this.buttonEliminar.TabIndex = 11;
+            this.buttonEliminar.TabIndex = 3;
             this.buttonEliminar.Text = "Eliminar Seleccionado";
             this.buttonEliminar.UseVisualStyleBackColor = true;
             this.buttonEliminar.Click += new System.EventHandler(this.ButtonEliminar_Click);
@@ -100,7 +100,7 @@
             this.buttonModificar.Location = new System.Drawing.Point(412, 469);
             this.buttonModificar.Name = "buttonModificar";
             this.buttonModificar.Size = new System.Drawing.Size(129, 23);
-            this.buttonModificar.TabIndex = 10;
+            this.buttonModificar.TabIndex = 2;
             this.buttonModificar.Text = "Modificar Seleccionado";
             this.buttonModificar.UseVisualStyleBackColor = true;
             this.buttonModificar.Click += new System.EventHandler(this.ButtonModificar_Click);
@@ -110,7 +110,7 @@
             this.buttonSalir.Location = new System.Drawing.Point(7, 469);
             this.buttonSalir.Name = "buttonSalir";
             this.buttonSalir.Size = new System.Drawing.Size(75, 23);
-            this.buttonSalir.TabIndex = 9;
+            this.buttonSalir.TabIndex = 1;
             this.buttonSalir.Text = "Salir";
             this.buttonSalir.UseVisualStyleBackColor = true;
             this.buttonSalir.Click += new System.EventHandler(this.ButtonSalir_Click);
@@ -141,14 +141,14 @@
             this.textBoxNombre.Location = new System.Drawing.Point(84, 76);
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(189, 20);
-            this.textBoxNombre.TabIndex = 12;
+            this.textBoxNombre.TabIndex = 2;
             // 
             // textBoxApellido
             // 
             this.textBoxApellido.Location = new System.Drawing.Point(84, 50);
             this.textBoxApellido.Name = "textBoxApellido";
             this.textBoxApellido.Size = new System.Drawing.Size(189, 20);
-            this.textBoxApellido.TabIndex = 11;
+            this.textBoxApellido.TabIndex = 1;
             // 
             // labelNombre
             // 
@@ -185,7 +185,7 @@
             this.dgvPersonas.Name = "dgvPersonas";
             this.dgvPersonas.ReadOnly = true;
             this.dgvPersonas.Size = new System.Drawing.Size(760, 296);
-            this.dgvPersonas.TabIndex = 8;
+            this.dgvPersonas.TabIndex = 6;
             // 
             // IdPersona
             // 
@@ -236,7 +236,7 @@
             this.buttonBuscar.Location = new System.Drawing.Point(688, 53);
             this.buttonBuscar.Name = "buttonBuscar";
             this.buttonBuscar.Size = new System.Drawing.Size(75, 23);
-            this.buttonBuscar.TabIndex = 7;
+            this.buttonBuscar.TabIndex = 5;
             this.buttonBuscar.Text = "Buscar";
             this.buttonBuscar.UseVisualStyleBackColor = true;
             this.buttonBuscar.Click += new System.EventHandler(this.ButtonBuscar_Click);
@@ -246,7 +246,7 @@
             this.textBoxNumeroDocumento.Location = new System.Drawing.Point(448, 50);
             this.textBoxNumeroDocumento.Name = "textBoxNumeroDocumento";
             this.textBoxNumeroDocumento.Size = new System.Drawing.Size(183, 20);
-            this.textBoxNumeroDocumento.TabIndex = 6;
+            this.textBoxNumeroDocumento.TabIndex = 4;
             this.textBoxNumeroDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxNumeroDocumento_KeyPress);
             this.textBoxNumeroDocumento.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxNumeroDocumento_Validating);
             // 
@@ -257,14 +257,14 @@
             this.comboBoxTipoDocumento.Location = new System.Drawing.Point(448, 23);
             this.comboBoxTipoDocumento.Name = "comboBoxTipoDocumento";
             this.comboBoxTipoDocumento.Size = new System.Drawing.Size(183, 21);
-            this.comboBoxTipoDocumento.TabIndex = 5;
+            this.comboBoxTipoDocumento.TabIndex = 3;
             // 
             // textBoxLegajo
             // 
             this.textBoxLegajo.Location = new System.Drawing.Point(84, 23);
             this.textBoxLegajo.Name = "textBoxLegajo";
             this.textBoxLegajo.Size = new System.Drawing.Size(189, 20);
-            this.textBoxLegajo.TabIndex = 4;
+            this.textBoxLegajo.TabIndex = 0;
             this.textBoxLegajo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxLegajo_KeyPress);
             this.textBoxLegajo.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxLegajo_Validating);
             // 
@@ -315,7 +315,7 @@
             this.ClientSize = new System.Drawing.Size(800, 521);
             this.Controls.Add(this.panelPrincipal);
             this.Name = "FrmPersonas";
-            this.Text = "Gestionar Personas";
+            this.Text = "s";
             this.Load += new System.EventHandler(this.FrmPersonas_Load);
             this.panelPrincipal.ResumeLayout(false);
             this.panelBusqueda.ResumeLayout(false);

@@ -23,12 +23,13 @@ namespace CEE.Interfaz
         {
             InitializeComponent();
 
-            oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
             oPersonaService = new PersonaService();
         }
 
         private void FrmPersonas_Load(object sender, EventArgs e)
         {
+            oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
+            errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             cargarCombos();
         }
 
