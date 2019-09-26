@@ -26,7 +26,9 @@ CREATE TABLE USUARIO (
 CREATE TABLE PERFIL (
 	perfil_id		INT NOT NULL IDENTITY(1,1),
 	nombre_perfil	VARCHAR(30) NOT NULL,
-	descripcion		VARCHAR(50)
+	descripcion		VARCHAR(50),
+	fecha_alta		DATETIME NOT NULL,
+	fecha_baja		DATETIME,
 	
 	CONSTRAINT PK_PERFIL PRIMARY KEY(perfil_id),
 	CONSTRAINT U_nombre_perfil UNIQUE(nombre_perfil)

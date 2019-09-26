@@ -134,6 +134,28 @@ WHERE tipo_equipo_id = 1;
 INSERT INTO TIPO_EQUIPO(tipo_equipo, descripcion, codigo_recomendado)
 VALUES('', '', '');
 
+
+-- ################################################################ Class : EstadoDao
+-- GetEstadoById()
+USE [64429Pav1]
+SELECT EST.estado_id,
+		EST.nombre_estado,
+		EST.ambito,
+		EST.deshabilita
+FROM ESTADO EST
+WHERE EST.estado_id = 1;
+
+-- GetTipoEquipoByFilters()
+SELECT EST.estado_id,
+		EST.nombre_estado,
+		EST.ambito,
+		EST.deshabilita
+FROM ESTADO EST
+WHERE 1 = 1
+
+AND EST.nombre_estado = ''		-- NombreEstado
+AND EST.ambito = '';		-- Ambito
+
 -- ################################################################ Class : EquipoDao
 -- GetEquipoById()
 SELECT E.equipo_id,
@@ -142,6 +164,7 @@ SELECT E.equipo_id,
 	TE.tipo_equipo,
 	E.tipo_equipo_id,
 	EST.nombre_estado,
+	E.estado_id,
 	E.descripcion,
 	E.fecha_alta,
 	E.fecha_baja
@@ -157,12 +180,15 @@ SELECT E.equipo_id,
 	E.nombre,
 	TE.tipo_equipo,
 	E.tipo_equipo_id,
+	EST.nombre_estado,
+	E.estado_id,
 	E.descripcion,
 	E.fecha_alta,
 	E.fecha_baja
 FROM EQUIPO E
 JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id
-WHERE E.equipo_id = 1
+JOIN ESTADO EST ON EST.estado_id = E.estado_id
+WHERE 1 = 1
 
 AND E.codigo LIKE ''			-- CodigoLike
 AND E.codigo = ''				-- Codigo

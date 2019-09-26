@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDatos\Dao\IEquipoDao.cs" />
+    <Compile Include="AccesoDatos\Dao\IEstadoDao.cs" />
     <Compile Include="AccesoDatos\Dao\IMenuDao.cs" />
     <Compile Include="AccesoDatos\Dao\IPersonaDao.cs" />
     <Compile Include="AccesoDatos\Dao\IPrestamoDao.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="AccesoDatos\Dao\IUsuarioDao.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\EquipoDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\IPerfilDao.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\EstadoDao.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\MenuDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\PerfilDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\PersonaDaoSql.cs" />
@@ -113,6 +115,7 @@
     </Compile>
     <Compile Include="Negocio\Auxiliares\ErrorProviderExtension.cs" />
     <Compile Include="Negocio\DTO\EquipoDTO.cs" />
+    <Compile Include="Negocio\DTO\EstadoDTO.cs" />
     <Compile Include="Negocio\DTO\MenuDTO.cs" />
     <Compile Include="Negocio\DTO\PerfilDTO.cs" />
     <Compile Include="Negocio\DTO\PersonaDTO.cs" />
@@ -121,6 +124,7 @@
     <Compile Include="Negocio\DTO\TipoEquipoDTO.cs" />
     <Compile Include="Negocio\DTO\UsuarioDTO.cs" />
     <Compile Include="Negocio\EquipoService.cs" />
+    <Compile Include="Negocio\EstadoService.cs" />
     <Compile Include="Negocio\MenuService.cs" />
     <Compile Include="Negocio\PerfilService.cs" />
     <Compile Include="Negocio\PersonaService.cs" />

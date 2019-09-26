@@ -13,6 +13,8 @@ namespace CEE.Negocio.DTO
         public string Nombre { get; set; }
         public string TipoEquipo { get; set; }
         public int IdTipoEquipo { get; set; }
+        public string Estado { get; set; }
+        public int IdEstado { get; set; }
         /// <summary>
         /// Nullable
         /// </summary>

@@ -51,6 +51,16 @@ namespace CEE.Interfaz
                 content.Add(tipoEquipo.NombreTipoEquipo);
 
             comboBoxTipoEquipo.DataSource = content;
+
+            // ######################################
+            IList<EstadoDTO> estados = new EstadoService().GetEstadoByFilters(new Dictionary<string, object>());
+            List<string> contentEstados = new List<string>();
+
+            contentEstados.Add("Seleccionar");
+            foreach (EstadoDTO estado in estados)
+                contentEstados.Add(estado.NombreEstado);
+
+            comboBoxEstado.DataSource = contentEstados;
         }
 
         /// <summary>
@@ -76,11 +86,13 @@ namespace CEE.Interfaz
                 parametros.Add("Nombre", textBoxNombre.Text);
             if (comboBoxTipoEquipo.SelectedIndex != 0)
                 parametros.Add("TipoEquipo", comboBoxTipoEquipo.SelectedValue.ToString());
+            if (comboBoxEstado.SelectedIndex != 0)
+                parametros.Add("Estado", comboBoxEstado.SelectedValue.ToString());
 
             IList<EquipoDTO> busqueda = oEquipoService.GetEquipoByFilters(parametros);
             foreach (EquipoDTO oEquipo in busqueda)
             {
-                dgvEquipos.Rows.Add(new object[] { oEquipo.IdEquipo.ToString(), oEquipo.Codigo, oEquipo.TipoEquipo, oEquipo.Nombre, oEquipo.Descripcion });
+                dgvEquipos.Rows.Add(new object[] { oEquipo.IdEquipo.ToString(), oEquipo.Codigo, oEquipo.TipoEquipo, oEquipo.Nombre, oEquipo.Descripcion, oEquipo.Estado });
             }
         }
 

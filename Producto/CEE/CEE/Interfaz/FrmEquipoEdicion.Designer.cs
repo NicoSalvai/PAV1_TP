@@ -42,6 +42,8 @@
             this.textBoxCodigo = new System.Windows.Forms.TextBox();
             this.comboBoxTipoEquipo = new System.Windows.Forms.ComboBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.labelEstado = new System.Windows.Forms.Label();
+            this.comboBoxEstado = new System.Windows.Forms.ComboBox();
             this.panelPrincipal.SuspendLayout();
             this.panelEquipo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -53,12 +55,14 @@
             this.panelPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPrincipal.Location = new System.Drawing.Point(0, 0);
             this.panelPrincipal.Name = "panelPrincipal";
-            this.panelPrincipal.Size = new System.Drawing.Size(329, 261);
+            this.panelPrincipal.Size = new System.Drawing.Size(329, 290);
             this.panelPrincipal.TabIndex = 0;
             // 
             // panelEquipo
             // 
             this.panelEquipo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelEquipo.Controls.Add(this.labelEstado);
+            this.panelEquipo.Controls.Add(this.comboBoxEstado);
             this.panelEquipo.Controls.Add(this.labelDescripcion);
             this.panelEquipo.Controls.Add(this.labelNombre);
             this.panelEquipo.Controls.Add(this.labelCodigo);
@@ -70,13 +74,13 @@
             this.panelEquipo.Controls.Add(this.comboBoxTipoEquipo);
             this.panelEquipo.Location = new System.Drawing.Point(12, 12);
             this.panelEquipo.Name = "panelEquipo";
-            this.panelEquipo.Size = new System.Drawing.Size(305, 237);
+            this.panelEquipo.Size = new System.Drawing.Size(305, 266);
             this.panelEquipo.TabIndex = 0;
             // 
             // labelDescripcion
             // 
             this.labelDescripcion.AutoSize = true;
-            this.labelDescripcion.Location = new System.Drawing.Point(16, 100);
+            this.labelDescripcion.Location = new System.Drawing.Point(16, 123);
             this.labelDescripcion.Name = "labelDescripcion";
             this.labelDescripcion.Size = new System.Drawing.Size(66, 13);
             this.labelDescripcion.TabIndex = 10;
@@ -85,7 +89,7 @@
             // labelNombre
             // 
             this.labelNombre.AutoSize = true;
-            this.labelNombre.Location = new System.Drawing.Point(35, 69);
+            this.labelNombre.Location = new System.Drawing.Point(35, 97);
             this.labelNombre.Name = "labelNombre";
             this.labelNombre.Size = new System.Drawing.Size(47, 13);
             this.labelNombre.TabIndex = 9;
@@ -94,7 +98,7 @@
             // labelCodigo
             // 
             this.labelCodigo.AutoSize = true;
-            this.labelCodigo.Location = new System.Drawing.Point(39, 44);
+            this.labelCodigo.Location = new System.Drawing.Point(39, 71);
             this.labelCodigo.Name = "labelCodigo";
             this.labelCodigo.Size = new System.Drawing.Size(43, 13);
             this.labelCodigo.TabIndex = 8;
@@ -111,7 +115,7 @@
             // 
             // buttonGuardar
             // 
-            this.buttonGuardar.Location = new System.Drawing.Point(225, 209);
+            this.buttonGuardar.Location = new System.Drawing.Point(225, 238);
             this.buttonGuardar.Name = "buttonGuardar";
             this.buttonGuardar.Size = new System.Drawing.Size(75, 23);
             this.buttonGuardar.TabIndex = 5;
@@ -121,7 +125,7 @@
             // 
             // textBoxNombre
             // 
-            this.textBoxNombre.Location = new System.Drawing.Point(88, 66);
+            this.textBoxNombre.Location = new System.Drawing.Point(88, 94);
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(197, 20);
             this.textBoxNombre.TabIndex = 2;
@@ -129,7 +133,7 @@
             // 
             // textBoxDescripcion
             // 
-            this.textBoxDescripcion.Location = new System.Drawing.Point(88, 97);
+            this.textBoxDescripcion.Location = new System.Drawing.Point(88, 120);
             this.textBoxDescripcion.Multiline = true;
             this.textBoxDescripcion.Name = "textBoxDescripcion";
             this.textBoxDescripcion.Size = new System.Drawing.Size(197, 95);
@@ -137,7 +141,7 @@
             // 
             // textBoxCodigo
             // 
-            this.textBoxCodigo.Location = new System.Drawing.Point(88, 41);
+            this.textBoxCodigo.Location = new System.Drawing.Point(88, 68);
             this.textBoxCodigo.Name = "textBoxCodigo";
             this.textBoxCodigo.Size = new System.Drawing.Size(197, 20);
             this.textBoxCodigo.TabIndex = 1;
@@ -157,11 +161,29 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // labelEstado
+            // 
+            this.labelEstado.AutoSize = true;
+            this.labelEstado.Location = new System.Drawing.Point(39, 44);
+            this.labelEstado.Name = "labelEstado";
+            this.labelEstado.Size = new System.Drawing.Size(43, 13);
+            this.labelEstado.TabIndex = 12;
+            this.labelEstado.Text = "Estado:";
+            // 
+            // comboBoxEstado
+            // 
+            this.comboBoxEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEstado.FormattingEnabled = true;
+            this.comboBoxEstado.Location = new System.Drawing.Point(88, 41);
+            this.comboBoxEstado.Name = "comboBoxEstado";
+            this.comboBoxEstado.Size = new System.Drawing.Size(197, 21);
+            this.comboBoxEstado.TabIndex = 11;
+            // 
             // FrmEquipoEdicion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 261);
+            this.ClientSize = new System.Drawing.Size(329, 290);
             this.Controls.Add(this.panelPrincipal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmEquipoEdicion";
@@ -189,5 +211,7 @@
         private System.Windows.Forms.TextBox textBoxCodigo;
         private System.Windows.Forms.ComboBox comboBoxTipoEquipo;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Label labelEstado;
+        private System.Windows.Forms.ComboBox comboBoxEstado;
     }
 }

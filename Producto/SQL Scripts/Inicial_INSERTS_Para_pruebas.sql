@@ -7,8 +7,8 @@ USE [64429Pav1];
 INSERT INTO USUARIO (nombre_usuario, pass, fecha_alta)
 	VALUES('administrador', '91f5167c34c400758115c2a6826ec2e3', GETDATE()); -- administrador
 
-INSERT INTO PERFIL (nombre_perfil, descripcion)
-	VALUES ('Administrador', '');
+INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
+	VALUES ('Administrador', '', GETDATE());
 
 INSERT INTO USUARIO_PERFIL (usuario_id, perfil_id)
 	VALUES(1,1);
@@ -19,8 +19,8 @@ VALUES(1, NULL, 'Personas', 0, ''),
 			(2, 1, 'Gestionar Personas', 1, 'Personas'),
 			(3, 1, 'Consultar Personas', 1, 'ConsultarPersonas');
 	
-INSERT INTO PERFIL (nombre_perfil, descripcion)
-	VALUES ('Encargado Personas', '');
+INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
+	VALUES ('Encargado Personas', '', GETDATE());
 
 INSERT INTO PERFIL_MENU (perfil_id, menu_id)
 	VALUES(2,2),(2,3),		-- Personas
@@ -36,8 +36,8 @@ VALUES(4, NULL, 'Equipos', 0, ''),
 			(5, 4, 'Gestionar Equipos', 1, 'Equipos'),
 			(6, 4, 'Gestionar Tipos de Equipos', 1, 'TiposEquipos');
 			
-INSERT INTO PERFIL (nombre_perfil, descripcion)
-	VALUES('Encargado Equipos', '');
+INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
+	VALUES('Encargado Equipos', '', GETDATE());
 
 INSERT INTO ESTADO(nombre_estado, ambito, deshabilita)
 	VALUES('DISPONIBLE','EQUIPO',0),
@@ -58,12 +58,29 @@ VALUES(7, NULL, 'Prestamos', 0, ''),
 			(9, 7, 'Finalizar Prestamos', 1, 'FinPrestamos'),
 			(10, 7, 'Consultar Prestamos', 1, 'ConsultarPrestamos');
 
-INSERT INTO PERFIL (nombre_perfil, descripcion)
-	VALUES ('Encargado Prestamos', '');
+INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
+	VALUES ('Encargado Prestamos', '', GETDATE());
 
 INSERT INTO PERFIL_MENU (perfil_id, menu_id)
 VALUES(4,8),(4,9),(4,10),	-- Equipos
 		(1,8),(1,9),(1,10); -- Administrador
+		
+-- ################################################################	MODULO Usuarios
+USE [64429Pav1];
+INSERT INTO MENU (menu_id, padre_menu_id, nombre_menu, es_final, aplicacion)
+VALUES(11, NULL, 'Usuarios', 0, ''),
+			(12, 11, 'Gestionar Usuarios', 1, 'Usuarios'),
+			(13, 11, 'Gestionar Perfiles', 1, 'Perfiles');
+			
+
+INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
+	VALUES ('Encargado Usuarios', '', GETDATE()),
+			('Encargado Perfiles', '', GETDATE());
+
+INSERT INTO PERFIL_MENU (perfil_id, menu_id)
+VALUES(5,12),			-- Usuarios
+		(6,13),			-- Perfiles
+		(1,12),(1,13);	-- Administrador
 
 -- ####################################################################################
 -- ############			INICIO CARGA EJEMPLOS									############

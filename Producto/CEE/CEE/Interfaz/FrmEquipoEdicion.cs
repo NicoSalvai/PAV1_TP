@@ -18,6 +18,7 @@ namespace CEE.Interfaz
     {
         EquipoService oEquipoService;
         TipoEquipoService oTipoEquipoService;
+        EstadoService oEstadoService;
         private ErrorProviderExtension oErrorProviderExtension;
 
         private ABMFormMode formMode = ABMFormMode.insert;
@@ -48,6 +49,7 @@ namespace CEE.Interfaz
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
             this.oTipoEquipoService = new TipoEquipoService();
+            this.oEstadoService = new EstadoService();
 
             cargarCombos();
             setTextBoxLimits();
@@ -69,6 +71,16 @@ namespace CEE.Interfaz
                 content.Add(tipoEquipo.NombreTipoEquipo);
 
             comboBoxTipoEquipo.DataSource = content;
+
+            // ######################################
+            IList<EstadoDTO> estados = oEstadoService.GetEstadoByFilters(new Dictionary<string, object>());
+            List<string> contentEstados = new List<string>();
+
+            foreach (EstadoDTO estado in estados)
+                contentEstados.Add(estado.NombreEstado);
+
+            comboBoxEstado.SelectedIndex = comboBoxEstado.FindStringExact("DISPONIBLE");
+            comboBoxEstado.DataSource = contentEstados;
         }
 
         /// <summary>
@@ -111,6 +123,7 @@ namespace CEE.Interfaz
                 textBoxCodigo.Enabled = false;
                 textBoxNombre.Enabled = false;
                 comboBoxTipoEquipo.Enabled = false;
+                comboBoxEstado.Enabled = false;
                 textBoxDescripcion.Enabled = false;
             }
         }
@@ -127,6 +140,7 @@ namespace CEE.Interfaz
                 textBoxCodigo.Text = oEquipo.Codigo;
                 textBoxNombre.Text = oEquipo.Nombre;
                 comboBoxTipoEquipo.SelectedIndex = comboBoxTipoEquipo.FindStringExact(oEquipo.TipoEquipo);
+                comboBoxEstado.SelectedIndex = comboBoxEstado.FindStringExact(oEquipo.Estado);
                 textBoxDescripcion.Text = oEquipo.Descripcion;
             }
         }
@@ -154,11 +168,16 @@ namespace CEE.Interfaz
                     oEquipo.Nombre = textBoxNombre.Text;
                     oEquipo.Descripcion = textBoxDescripcion.Text;
                     oEquipo.TipoEquipo = comboBoxTipoEquipo.SelectedItem.ToString();
+                    oEquipo.Estado = comboBoxEstado.SelectedItem.ToString();
 
                     //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
                     Dictionary<string, object> parametros = new Dictionary<string, object>();
                     parametros.Add("TipoEquipo", comboBoxTipoEquipo.SelectedItem.ToString());
                     oEquipo.IdTipoEquipo = oTipoEquipoService.GetTipoEquipoByFilters(parametros).First().IdTipoEquipo; // CORREGIR
+
+                    Dictionary<string, object> parametros2 = new Dictionary<string, object>();
+                    parametros2.Add("NombreEstado", comboBoxEstado.SelectedItem.ToString());
+                    oEquipo.IdEstado = oEstadoService.GetEstadoByFilters(parametros2).First().IdEstado; // CORREGIR
                     //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
 
                     switch (formMode)

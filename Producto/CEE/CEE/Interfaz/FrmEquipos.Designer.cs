@@ -34,6 +34,8 @@
             this.buttonEliminar = new System.Windows.Forms.Button();
             this.buttonNuevo = new System.Windows.Forms.Button();
             this.panelBusqueda = new System.Windows.Forms.Panel();
+            this.comboBoxEstado = new System.Windows.Forms.ComboBox();
+            this.labelEstado = new System.Windows.Forms.Label();
             this.buttonBuscar = new System.Windows.Forms.Button();
             this.comboBoxTipoEquipo = new System.Windows.Forms.ComboBox();
             this.textBoxNombre = new System.Windows.Forms.TextBox();
@@ -48,6 +50,7 @@
             this.TipoEquipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelPrincipal.SuspendLayout();
             this.panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEquipos)).BeginInit();
@@ -98,6 +101,8 @@
             // panelBusqueda
             // 
             this.panelBusqueda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelBusqueda.Controls.Add(this.comboBoxEstado);
+            this.panelBusqueda.Controls.Add(this.labelEstado);
             this.panelBusqueda.Controls.Add(this.buttonBuscar);
             this.panelBusqueda.Controls.Add(this.comboBoxTipoEquipo);
             this.panelBusqueda.Controls.Add(this.textBoxNombre);
@@ -111,6 +116,24 @@
             this.panelBusqueda.Name = "panelBusqueda";
             this.panelBusqueda.Size = new System.Drawing.Size(768, 389);
             this.panelBusqueda.TabIndex = 0;
+            // 
+            // comboBoxEstado
+            // 
+            this.comboBoxEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEstado.FormattingEnabled = true;
+            this.comboBoxEstado.Location = new System.Drawing.Point(377, 27);
+            this.comboBoxEstado.Name = "comboBoxEstado";
+            this.comboBoxEstado.Size = new System.Drawing.Size(155, 21);
+            this.comboBoxEstado.TabIndex = 11;
+            // 
+            // labelEstado
+            // 
+            this.labelEstado.AutoSize = true;
+            this.labelEstado.Location = new System.Drawing.Point(328, 31);
+            this.labelEstado.Name = "labelEstado";
+            this.labelEstado.Size = new System.Drawing.Size(43, 13);
+            this.labelEstado.TabIndex = 10;
+            this.labelEstado.Text = "Estado:";
             // 
             // buttonBuscar
             // 
@@ -166,7 +189,8 @@
             this.Codigo,
             this.TipoEquipo,
             this.Nombre,
-            this.Descripcion});
+            this.Descripcion,
+            this.Estado});
             this.dgvEquipos.Location = new System.Drawing.Point(3, 109);
             this.dgvEquipos.Name = "dgvEquipos";
             this.dgvEquipos.ReadOnly = true;
@@ -210,7 +234,7 @@
             this.Codigo.HeaderText = "Codigo";
             this.Codigo.Name = "Codigo";
             this.Codigo.ReadOnly = true;
-            this.Codigo.Width = 150;
+            this.Codigo.Width = 120;
             // 
             // TipoEquipo
             // 
@@ -224,14 +248,21 @@
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 150;
+            this.Nombre.Width = 120;
             // 
             // Descripcion
             // 
             this.Descripcion.HeaderText = "Descripcion";
             this.Descripcion.Name = "Descripcion";
             this.Descripcion.ReadOnly = true;
-            this.Descripcion.Width = 265;
+            this.Descripcion.Width = 205;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            this.Estado.Width = 120;
             // 
             // FrmEquipos
             // 
@@ -267,10 +298,13 @@
         private System.Windows.Forms.Button buttonModificar;
         private System.Windows.Forms.Button buttonEliminar;
         private System.Windows.Forms.Button buttonNuevo;
+        private System.Windows.Forms.ComboBox comboBoxEstado;
+        private System.Windows.Forms.Label labelEstado;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdEquipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoEquipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
     }
 }
