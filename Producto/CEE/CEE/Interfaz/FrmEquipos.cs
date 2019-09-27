@@ -53,7 +53,9 @@ namespace CEE.Interfaz
             comboBoxTipoEquipo.DataSource = content;
 
             // ######################################
-            IList<EstadoDTO> estados = new EstadoService().GetEstadoByFilters(new Dictionary<string, object>());
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("Ambito", "Equipo");
+            IList<EstadoDTO> estados = new EstadoService().GetEstadoByFilters(parametros);
             List<string> contentEstados = new List<string>();
 
             contentEstados.Add("Seleccionar");
@@ -134,12 +136,6 @@ namespace CEE.Interfaz
                 alta.ShowDialog();
                 dgvEquipos.Rows.Clear();
             }
-        }
-
-
-        private void ButtonSalir_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
         }
     }
 }

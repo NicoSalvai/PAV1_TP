@@ -4,12 +4,12 @@
 
 -- ################################################################ Basico
 USE [64429Pav1];
-INSERT INTO USUARIO (nombre_usuario, pass, fecha_alta)
-	VALUES('administrador', '91f5167c34c400758115c2a6826ec2e3', GETDATE()); -- administrador
+INSERT INTO USUARIO (nombre_usuario, pass, forzar_password, fecha_alta)
+	VALUES('admin', '21232f297a57a5a743894a0e4a801fc3', 0, GETDATE()); -- administrador
 
 INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
 	VALUES ('Administrador', '', GETDATE());
-
+SELECT * FROM USUARIO;
 INSERT INTO USUARIO_PERFIL (usuario_id, perfil_id)
 	VALUES(1,1);
 -- ################################################################	MODULO PERSONAS
@@ -98,8 +98,8 @@ INSERT INTO PRESTAMO(persona_id, fecha_desde)
 INSERT INTO DETALLE_PRESTAMO(detalle_prestamo_id, prestamo_id, equipo_id)
 	VALUES(1, 1, 1);
 
-INSERT INTO USUARIO (nombre_usuario, pass, fecha_alta)
-	VALUES('u01','91f5167c34c400758115c2a6826ec2e3', GETDATE());
+INSERT INTO USUARIO (nombre_usuario, pass, forzar_password, fecha_alta)
+	VALUES('nico','410ec15153a6dff0bed851467309bcbd', 0, GETDATE());
 	
 INSERT INTO USUARIO_PERFIL (usuario_id, perfil_id)
 	VALUES(2,2),(2,3);

@@ -51,11 +51,12 @@ SELECT 	P.perfil_id,
 		P.descripcion
 FROM PERFIL P
 
-JOIN USUARIO_PERFIL UP ON UP.perfil_id = P.perfil_id	-- IdUsuario
+RIGHT JOIN USUARIO_PERFIL UP ON UP.perfil_id = P.perfil_id	-- IdUsuario && IdUsuarioNot
 
 WHERE 1 = 1
 
 AND (UP.usuario_id = 1) ;								-- IdUsuario
+AND (UP.usuario_id != 1) ;								-- IdUsuarioNot
 
 -- ################################################################ Class: UsuarioDao
 -- GetUsuarioById()
@@ -63,6 +64,7 @@ USE [64429Pav1];
 SELECT 	U.usuario_id,
 		U.nombre_usuario,
 		U.pass,
+		U.forzar_password,
 		U.fecha_alta,
 		U.fecha_baja
 FROM USUARIO U
@@ -73,6 +75,7 @@ AND U.fecha_baja IS NULL;
 SELECT 	U.usuario_id,
 		U.nombre_usuario,
 		U.pass,
+		U.forzar_password,
 		U.fecha_alta,
 		U.fecha_baja
 FROM USUARIO U
@@ -93,12 +96,14 @@ WHERE usuario_id = 1;
 
 -- UpdateUSuarioById()
 UPDATE USUARIO
-SET pass = ''
+SET nombre_usuario = '',
+	pass = '',
+	forzar_password = 0
 WHERE usuario_id = 1;
 
 -- InsertUSuario()
-INSERT INTO USUARIO(nombre_usuario, pass, fecha_alta)
-VALUES('', '', GETDATE());
+INSERT INTO USUARIO(nombre_usuario, pass, forzar_password, fecha_alta)
+VALUES('', '', 0, GETDATE());
 
 -- ################################################################ Class : TipoEquipoDao
 -- GetTipoEquipoById()

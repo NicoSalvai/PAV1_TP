@@ -73,7 +73,9 @@ namespace CEE.Interfaz
             comboBoxTipoEquipo.DataSource = content;
 
             // ######################################
-            IList<EstadoDTO> estados = oEstadoService.GetEstadoByFilters(new Dictionary<string, object>());
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("Ambito", "Equipo");
+            IList<EstadoDTO> estados = oEstadoService.GetEstadoByFilters(parametros);
             List<string> contentEstados = new List<string>();
 
             foreach (EstadoDTO estado in estados)
@@ -202,12 +204,6 @@ namespace CEE.Interfaz
                     MessageBox.Show(ex.Message);
                 }
             }
-        }
-
-
-        private void ButtonCancelar_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
         }
 
         // ##################################################################

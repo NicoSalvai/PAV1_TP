@@ -30,7 +30,7 @@ namespace CEE.AccesoDatos.Dao.Sql
         /// <summary>
         /// Me devuelve una IList de objetos Perfil segun los parametros que yo le envie
         /// </summary>
-        /// <param name="parametros">NombrePerfil</param>
+        /// <param name="parametros">NombrePerfil - IdUsuario - IdUsuarioNot</param>
         /// <returns>Operacion no soportada</returns>
         public IList<PerfilDTO> GetPerfilByFilters(Dictionary<string, object> parametros)
         {
@@ -39,11 +39,24 @@ namespace CEE.AccesoDatos.Dao.Sql
             var strSql = "SELECT P.perfil_id, " +
                         "P.nombre_perfil, " +
                         "P.descripcion " +
-                        "FROM PERFIL P " +
-                        "WHERE 1 = 1 ";
+                        "FROM PERFIL P ";
+
+            /*if (parametros.ContainsKey("IdUsuario"))
+                strSql += "LEFT JOIN USUARIO_PERFIL UP ON UP.perfil_id = P.perfil_id ";*/
+
+            strSql += "WHERE 1 = 1 ";
 
             if (parametros.ContainsKey("NombrePerfil"))
                 strSql += " AND (U.nombre_perfil = @NombrePerfil) ";
+            if (parametros.ContainsKey("IdUsuario"))
+                strSql += " AND(P.perfil_id IN (SELECT UUPP.perfil_id FROM USUARIO_PERFIL UUPP WHERE UUPP.usuario_id = @IdUsuario)) ";
+            //strSql += " AND(UP.usuario_id = @IdUsuario) ";
+
+
+            /*if (parametros.ContainsKey("IdUsuarioNot"))
+                strSql += " AND(UP.usuario_id != @IdUsuarioNot OR UP.usuario_id IS NULL) ";*/
+            if (parametros.ContainsKey("IdUsuarioNot"))
+                strSql += " AND(P.perfil_id NOT IN (SELECT UUPP.perfil_id FROM USUARIO_PERFIL UUPP WHERE UUPP.usuario_id = @IdUsuarioNot)) ";
 
             DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
 

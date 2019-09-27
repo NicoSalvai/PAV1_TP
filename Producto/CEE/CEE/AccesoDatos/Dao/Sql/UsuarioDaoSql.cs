@@ -23,6 +23,7 @@ namespace CEE.AccesoDatos.Dao.Sql
             string strSql = "SELECT U.usuario_id, " +
                             "U.nombre_usuario, " +
                             "U.pass, " +
+                            "U.forzar_password, " +
                             "U.fecha_alta, " +
                             "U.fecha_baja " + 
                             "FROM USUARIO U " + 
@@ -44,6 +45,7 @@ namespace CEE.AccesoDatos.Dao.Sql
             string strSql = "SELECT U.usuario_id, " +
                             "U.nombre_usuario, " +
                             "U.pass, " +
+                            "U.forzar_password, " +
                             "U.fecha_alta, " +
                             "U.fecha_baja " +
                             "FROM USUARIO U " +
@@ -52,7 +54,7 @@ namespace CEE.AccesoDatos.Dao.Sql
             if (parametros.ContainsKey("NombreUsuario"))
                 strSql += " AND (U.nombre_usuario = @NombreUsuario) ";
             if (parametros.ContainsKey("NombreUsuarioLike"))
-                strSql += " AND (U.nombre_usuario = @NombreUsuarioLike) ";
+                strSql += " AND (U.nombre_usuario LIKE '%' + @NombreUsuarioLike + '%') ";
             if (parametros.ContainsKey("Pass"))
                 strSql += " AND (U.pass=@Pass) ";
             if (!parametros.ContainsKey("FechaBajaNotNull"))
@@ -80,6 +82,7 @@ namespace CEE.AccesoDatos.Dao.Sql
             oUsuario.IdUsuario = Int32.Parse(row["usuario_id"].ToString());
             oUsuario.NombreUsuario = row["nombre_usuario"].ToString();
             oUsuario.Pass = row["pass"].ToString();
+            oUsuario.ForzarPassword = Boolean.Parse(row["forzar_password"].ToString());
             oUsuario.FechaAlta = DateTime.Parse(row["fecha_alta"].ToString());
 
             if(!DBNull.Value.Equals(row["fecha_baja"]))
@@ -90,17 +93,89 @@ namespace CEE.AccesoDatos.Dao.Sql
 
         public bool DeleteUsuarioById(int idUsuario)
         {
-            throw new NotImplementedException();
+            string strSql = "UPDATE USUARIO " +
+                            "SET fecha_baja = GETDATE() " +
+                            "WHERE usuario_id = " + idUsuario.ToString();
+
+            DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
+            return true;
+        }
+
+        public bool UpdateUsuarioById(UsuarioDTO oUsuario, IList<int> perfiles)
+        {
+            string strSql = "UPDATE USUARIO SET nombre_usuario = '" + oUsuario.NombreUsuario.ToString() + "' ";
+
+            if (oUsuario.Pass != "")
+            {
+                strSql += ", pass = '" + oUsuario.Pass.ToString() + "'";
+                strSql += ", forzar_password = '" + oUsuario.ForzarPassword.ToString() + "' ";
+            }
+
+            strSql += "WHERE usuario_id = "   + oUsuario.IdUsuario.ToString();
+
+            DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
+            
+            strSql = "DELETE FROM USUARIO_PERFIL WHERE usuario_id = " + oUsuario.IdUsuario.ToString();
+            DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
+
+            if (perfiles.Count != 0)
+            {
+                strSql = "INSERT INTO USUARIO_PERFIL(usuario_id, perfil_id) " +
+                            "VALUES";
+                foreach (int IdPerfil in perfiles)
+                {
+                    strSql += "(" + oUsuario.IdUsuario + "," + IdPerfil + ")";
+                    if (perfiles.Count - 1 != perfiles.IndexOf(IdPerfil))
+                    {
+                        strSql += ",";
+                    }
+                }
+
+                DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
+            }
+            
+            return true;
         }
 
         public bool UpdateUsuarioById(UsuarioDTO oUsuario)
         {
-            throw new NotImplementedException();
+            string strSql = "UPDATE USUARIO SET nombre_usuario = '" + oUsuario.NombreUsuario.ToString() + "' ";
+
+            if (oUsuario.Pass != "")
+            {
+                strSql += ", pass = '" + oUsuario.Pass.ToString() + "'";
+                strSql += ", forzar_password = '" + oUsuario.ForzarPassword.ToString() + "' ";
+            }
+
+            strSql += "WHERE usuario_id = " + oUsuario.IdUsuario.ToString();
+
+            DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
+            return true;
         }
 
-        public bool InsertUsuario(UsuarioDTO oUsuario)
+        public bool InsertUsuario(UsuarioDTO oUsuario, IList<int> perfiles)
         {
-            throw new NotImplementedException();
+            string strSql = "INSERT INTO USUARIO(nombre_usuario, pass, forzar_password, fecha_alta) " +
+                            "VALUES(" +
+                            "'" + oUsuario.NombreUsuario.ToString()     + "'," +
+                            "'" + oUsuario.Pass.ToString()              + "'," +
+                            "True," +
+                            "GETDATE())";
+
+            DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
+
+            if (perfiles.Count != 0)
+            {
+                strSql = "INSERT INTO USUARIO_PERFIL(usuario_id, perfil_id) " +
+                            "VALUES";
+                foreach (int IdPerfil in perfiles)
+                {
+                    strSql += "(" + oUsuario.IdUsuario + "," + IdPerfil + "),";
+                }
+                strSql.Remove(strSql.Length, 1);
+                DBHelperSql.GetDBHelper().EjecutarSQL(strSql);
+            }
+            return true;
         }
     }
 }

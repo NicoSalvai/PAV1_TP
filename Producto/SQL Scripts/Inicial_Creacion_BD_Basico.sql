@@ -1,10 +1,13 @@
 -- ####################################################################################
 -- ############			INICIO CREACION DE LA BASE DE DATOS			############
 -- ####################################################################################
+
+USE master;
+IF (EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE ('[' + name + ']' = '[64429Pav1]')))
+	ALTER DATABASE [64429Pav1] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+	DROP DATABASE [64429Pav1];
+
 CREATE DATABASE [64429Pav1];
-
--- DROP DATABASE [64429Pav1];
-
 
 -- ####################################################################################
 -- ############			FIN CREACION DE LA BASE DE DATOS						############
@@ -16,6 +19,7 @@ CREATE TABLE USUARIO (
 	usuario_id		INT NOT NULL IDENTITY(1,1),
 	nombre_usuario	VARCHAR(30) NOT NULL,
 	pass			VARCHAR(50) NOT NULL,
+	forzar_password	BIT NOT NULL,
 	fecha_alta		DATETIME NOT NULL,
 	fecha_baja		DATETIME,
 	
@@ -73,8 +77,6 @@ CREATE TABLE PERFIL_MENU (
 -- ############			FIN CREACION TABLAS DE USUARIO_PERFIL_MENU			############
 -- ############			INICIO CREACION TABLAS DE PERSONA_PRESTAMO_EQUIPO ############
 -- ####################################################################################
-
-USE [64429Pav1];
 
 CREATE TABLE TIPO_DOCUMENTO (
 	tipo_documento_id		INT NOT NULL IDENTITY(1,1),

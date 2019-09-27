@@ -17,6 +17,7 @@ namespace CEE.Negocio
     {
         private IUsuarioDao oUsuarioDao;
         public int IdUsuarioLogeado { get; set; }
+        public int IdUsuarioSelected { get; set; }
 
         public UsuarioService()
         {
@@ -33,29 +34,25 @@ namespace CEE.Negocio
             return oUsuarioDao.GetUsuarioByFilters(parametros);
         }
 
-
-
-
-        public bool LoginUsuario(string nombreUsuario, string passwordUsuario)
+        public bool DeleteUsuarioById(int idUsuario)
         {
-            Dictionary<string, object> parametros = new Dictionary<string, object>();
-            parametros.Add("NombreUsuario", nombreUsuario);
-
-            IList<UsuarioDTO> lista = GetUsuarioByFilters(parametros);
-
-            if (lista.Count == 1)
-            {
-                if (lista.First().Pass.Equals(GetMd5Hash(passwordUsuario)))
-                {
-                    IdUsuarioLogeado = lista.First().IdUsuario;
-                    return true;
-                }
-                throw new Exception("Password Incorrecta");
-            }
-            throw new Exception("Usuario Inexistente");
+            return oUsuarioDao.DeleteUsuarioById(idUsuario);
         }
 
+        public bool UpdateUsuarioById(UsuarioDTO oUsuario, IList<int> perfiles)
+        {
+            return oUsuarioDao.UpdateUsuarioById(oUsuario, perfiles);
+        }
 
+        public bool UpdateUsuarioById(UsuarioDTO oUsuario)
+        {
+            return oUsuarioDao.UpdateUsuarioById(oUsuario);
+        }
+
+        public bool InsertUsuario(UsuarioDTO oUsuario, IList<int> perfiles)
+        {
+            return oUsuarioDao.InsertUsuario(oUsuario, perfiles);
+        }
 
 
 
