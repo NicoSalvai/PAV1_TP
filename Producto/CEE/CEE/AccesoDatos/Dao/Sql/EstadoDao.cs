@@ -22,7 +22,8 @@ namespace CEE.AccesoDatos.Dao.Sql
             string strSql = "SELECT EST.estado_id, " +
                             "EST.nombre_estado, " +
                             "EST.ambito, " +
-                            "EST.deshabilita " +
+                            "EST.deshabilita, " +
+                            "EST.editable " +
                             "FROM ESTADO EST " +
                             "WHERE EST.estado_id = " + idEstado;
 
@@ -41,7 +42,8 @@ namespace CEE.AccesoDatos.Dao.Sql
             string strSql = "SELECT EST.estado_id, " +
                             "EST.nombre_estado, " +
                             "EST.ambito, " +
-                            "EST.deshabilita " +
+                            "EST.deshabilita, " +
+                            "EST.editable " +
                             "FROM ESTADO EST " +
                             "WHERE 1 = 1";
 
@@ -49,6 +51,10 @@ namespace CEE.AccesoDatos.Dao.Sql
                 strSql += " AND (EST.nombre_estado = @NombreEstado) ";
             if (parametros.ContainsKey("Ambito"))
                 strSql += " AND (EST.ambito = @Ambito) ";
+            if (parametros.ContainsKey("Deshabilita"))
+                strSql += " AND (EST.deshabilita = @Deshabilita) ";
+            if (parametros.ContainsKey("Editable"))
+                strSql += " AND (EST.editable = @Editable) ";
 
 
             DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
@@ -75,6 +81,7 @@ namespace CEE.AccesoDatos.Dao.Sql
             oEstado.NombreEstado = row["nombre_estado"].ToString();
             oEstado.Ambito = row["ambito"].ToString();
             oEstado.Deshabilita = Boolean.Parse(row["deshabilita"].ToString());
+            oEstado.Editable = Boolean.Parse(row["editable"].ToString());
 
             return oEstado;
         }

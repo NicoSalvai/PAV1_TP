@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonCerrarSesion = new System.Windows.Forms.Button();
+            this.buttonCambioPassword = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.personasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Personas = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,8 +54,6 @@
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionarUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionarPerfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonCambioPassword = new System.Windows.Forms.Button();
-            this.buttonCerrarSesion = new System.Windows.Forms.Button();
             this.panelPrincipal.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -82,6 +82,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(776, 426);
             this.panel1.TabIndex = 1;
+            // 
+            // buttonCerrarSesion
+            // 
+            this.buttonCerrarSesion.Location = new System.Drawing.Point(3, 56);
+            this.buttonCerrarSesion.Name = "buttonCerrarSesion";
+            this.buttonCerrarSesion.Size = new System.Drawing.Size(124, 23);
+            this.buttonCerrarSesion.TabIndex = 3;
+            this.buttonCerrarSesion.Text = "Cerrar Sesion";
+            this.buttonCerrarSesion.UseVisualStyleBackColor = true;
+            this.buttonCerrarSesion.Click += new System.EventHandler(this.ButtonCerrarSesion_Click);
+            // 
+            // buttonCambioPassword
+            // 
+            this.buttonCambioPassword.Location = new System.Drawing.Point(3, 27);
+            this.buttonCambioPassword.Name = "buttonCambioPassword";
+            this.buttonCambioPassword.Size = new System.Drawing.Size(124, 23);
+            this.buttonCambioPassword.TabIndex = 2;
+            this.buttonCambioPassword.Text = "Cambiar Contraseña";
+            this.buttonCambioPassword.UseVisualStyleBackColor = true;
+            this.buttonCambioPassword.Click += new System.EventHandler(this.ButtonCambioPassword_Click);
             // 
             // menuStrip1
             // 
@@ -184,6 +204,7 @@
             this.InicioPrestamos.Size = new System.Drawing.Size(183, 22);
             this.InicioPrestamos.Text = "Iniciar Prestamos";
             this.InicioPrestamos.Visible = false;
+            this.InicioPrestamos.Click += new System.EventHandler(this.InicioPrestamos_Click);
             // 
             // FinPrestamos
             // 
@@ -241,7 +262,7 @@
             // 
             this.gestionarArticulosToolStripMenuItem.Enabled = false;
             this.gestionarArticulosToolStripMenuItem.Name = "gestionarArticulosToolStripMenuItem";
-            this.gestionarArticulosToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.gestionarArticulosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gestionarArticulosToolStripMenuItem.Text = "Gestionar Articulos";
             this.gestionarArticulosToolStripMenuItem.Visible = false;
             // 
@@ -268,7 +289,7 @@
             // 
             this.gestionarUsuariosToolStripMenuItem.Enabled = false;
             this.gestionarUsuariosToolStripMenuItem.Name = "gestionarUsuariosToolStripMenuItem";
-            this.gestionarUsuariosToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.gestionarUsuariosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gestionarUsuariosToolStripMenuItem.Text = "Gestionar Usuarios";
             this.gestionarUsuariosToolStripMenuItem.Visible = false;
             this.gestionarUsuariosToolStripMenuItem.Click += new System.EventHandler(this.GestionarUsuariosToolStripMenuItem_Click);
@@ -277,29 +298,9 @@
             // 
             this.gestionarPerfilesToolStripMenuItem.Enabled = false;
             this.gestionarPerfilesToolStripMenuItem.Name = "gestionarPerfilesToolStripMenuItem";
-            this.gestionarPerfilesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.gestionarPerfilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gestionarPerfilesToolStripMenuItem.Text = "Gestionar Perfiles";
             this.gestionarPerfilesToolStripMenuItem.Visible = false;
-            // 
-            // buttonCambioPassword
-            // 
-            this.buttonCambioPassword.Location = new System.Drawing.Point(3, 27);
-            this.buttonCambioPassword.Name = "buttonCambioPassword";
-            this.buttonCambioPassword.Size = new System.Drawing.Size(124, 23);
-            this.buttonCambioPassword.TabIndex = 2;
-            this.buttonCambioPassword.Text = "Cambiar Contraseña";
-            this.buttonCambioPassword.UseVisualStyleBackColor = true;
-            this.buttonCambioPassword.Click += new System.EventHandler(this.ButtonCambioPassword_Click);
-            // 
-            // buttonCerrarSesion
-            // 
-            this.buttonCerrarSesion.Location = new System.Drawing.Point(3, 56);
-            this.buttonCerrarSesion.Name = "buttonCerrarSesion";
-            this.buttonCerrarSesion.Size = new System.Drawing.Size(124, 23);
-            this.buttonCerrarSesion.TabIndex = 3;
-            this.buttonCerrarSesion.Text = "Cerrar Sesion";
-            this.buttonCerrarSesion.UseVisualStyleBackColor = true;
-            this.buttonCerrarSesion.Click += new System.EventHandler(this.ButtonCerrarSesion_Click);
             // 
             // FrmPrincipal
             // 

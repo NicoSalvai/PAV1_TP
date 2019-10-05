@@ -15,12 +15,16 @@ namespace CEE.AccesoDatos.Dao.Sql
         public PersonaDTO GetPersonaById(int idPersona)
         {
             string strSql = "SELECT P.persona_id, " +
-                            "P.legajo, " +
                             "P.numero_documento, " +
                             "P.tipo_documento_id, " +
                             "TD.nombre_tipo_documento, " +
                             "P.apellido, " +
                             "P.nombre, " +
+                            "P.legajo, " +
+                            "P.universidad_id, " +
+                            "U.nombre_universidad, " +
+                            "P.carrera_id, " +
+                            "C.nombre_carrera, " +
                             "P.telefono, " +
                             "P.mail, " +
                             "P.calle, " +
@@ -31,7 +35,9 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "P.fecha_alta, " +
                             "P.fecha_baja " +
                             "FROM PERSONA P " +
-                            "JOIN TIPO_DOCUMENTO TD ON TD.tipo_documento_id = P.tipo_documento_id " +
+                            "LEFT JOIN TIPO_DOCUMENTO TD ON TD.tipo_documento_id = P.tipo_documento_id " +
+                            "LEFT JOIN CARRERA C ON C.carrera_id = P.carrera_id " +
+                            "LEFT JOIN UNIVERSIDAD U ON U.universidad_id = P.universidad_id " +
                             "WHERE P.persona_id = " + idPersona.ToString() + " " +
                             "AND P.fecha_baja IS NULL; ";
 
@@ -43,12 +49,16 @@ namespace CEE.AccesoDatos.Dao.Sql
             List<PersonaDTO> resultado = new List<PersonaDTO>();
 
             string strSql = "SELECT P.persona_id, " +
-                            "P.legajo, " +
                             "P.numero_documento, " +
                             "P.tipo_documento_id, " +
                             "TD.nombre_tipo_documento, " +
                             "P.apellido, " +
                             "P.nombre, " +
+                            "P.legajo, " +
+                            "P.universidad_id, " +
+                            "U.nombre_universidad, " +
+                            "P.carrera_id, " +
+                            "C.nombre_carrera, " +
                             "P.telefono, " +
                             "P.mail, " +
                             "P.calle, " +
@@ -59,7 +69,9 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "P.fecha_alta, " +
                             "P.fecha_baja " +
                             "FROM PERSONA P " +
-                            "JOIN TIPO_DOCUMENTO TD ON TD.tipo_documento_id = P.tipo_documento_id " +
+                            "LEFT JOIN TIPO_DOCUMENTO TD ON TD.tipo_documento_id = P.tipo_documento_id " +
+                            "LEFT JOIN CARRERA C ON C.carrera_id = P.carrera_id " +
+                            "LEFT JOIN UNIVERSIDAD U ON U.universidad_id = P.universidad_id " +
                             "WHERE 1 = 1 ";
 
             if (parametros.ContainsKey("Legajo"))
@@ -92,12 +104,22 @@ namespace CEE.AccesoDatos.Dao.Sql
             PersonaDTO oPersona = new PersonaDTO();
 
             oPersona.IdPersona = Int32.Parse(row["persona_id"].ToString());
-            oPersona.Legajo = Int32.Parse(row["legajo"].ToString());
             oPersona.Apellido = row["apellido"].ToString();
             oPersona.Nombre = row["nombre"].ToString();
             oPersona.NombreTipoDocumento = row["nombre_tipo_documento"].ToString();
             oPersona.IdTipoDocumento = Int32.Parse(row["tipo_documento_id"].ToString());
             oPersona.NumeroDocumento = Int32.Parse(row["numero_documento"].ToString());
+
+            if (!DBNull.Value.Equals(row["legajo"]))
+                oPersona.Legajo = Int32.Parse(row["legajo"].ToString());
+            if (!DBNull.Value.Equals(row["universidad_id"]))
+                oPersona.IdUniversidad = Int32.Parse(row["universidad_id"].ToString());
+            if (!DBNull.Value.Equals(row["nombre_universidad"]))
+                oPersona.NombreUniversidad = row["nombre_universidad"].ToString();
+            if (!DBNull.Value.Equals(row["carrera_id"]))
+                oPersona.IdCarrera = Int32.Parse(row["carrera_id"].ToString());
+            if (!DBNull.Value.Equals(row["nombre_carrera"]))
+                oPersona.NombreCarrera = row["nombre_carrera"].ToString();
 
             if (!DBNull.Value.Equals(row["mail"]))
                 oPersona.Mail = row["mail"].ToString();
@@ -135,14 +157,33 @@ namespace CEE.AccesoDatos.Dao.Sql
 
         public bool InsertPersona(PersonaDTO oPersona)
         {
-            string strSql = "INSERT INTO PERSONA(legajo, numero_documento, tipo_documento_id, apellido, nombre, telefono, " +
-                            "mail, calle, numero_calle, piso, departamento, observaciones, fecha_alta) " +
+            string strSql = "INSERT INTO PERSONA(numero_documento, tipo_documento_id, apellido, nombre, ";
+            if (oPersona.Legajo > 0)
+                strSql += "legajo, ";
+            if (oPersona.IdUniversidad > 0)
+                strSql += "universidad_id, ";
+            if (oPersona.IdCarrera > 0)
+                strSql += "carrera_id, ";
+
+
+            strSql += "telefono, mail, calle, numero_calle, piso, departamento, observaciones, fecha_alta) " +
                             "VALUES(" +
-                            "'" + oPersona.Legajo.ToString()            + "', " +
                             "'" + oPersona.NumeroDocumento.ToString()   + "', " +
                             "'" + oPersona.IdTipoDocumento.ToString()   + "', " +
                             "'" + oPersona.Apellido.ToString()          + "', " +
-                            "'" + oPersona.Nombre.ToString()            + "', " +
+                            "'" + oPersona.Nombre.ToString()            + "', " ;
+
+
+            if (oPersona.Legajo > 0)
+                strSql += "'" + oPersona.Legajo.ToString() + "', ";
+            if (oPersona.IdUniversidad > 0)
+                strSql += "'" + oPersona.IdUniversidad.ToString() + "', ";
+            if (oPersona.IdCarrera > 0)
+                strSql += "'" + oPersona.IdCarrera.ToString() + "', ";
+
+
+            strSql +=       "'" + oPersona.IdUniversidad.ToString()     + "', " +
+                            "'" + oPersona.IdCarrera.ToString()         + "', " +
                             "'" + oPersona.Telefono.ToString()          + "', " +
                             "'" + oPersona.Mail.ToString()              + "', " +
                             "'" + oPersona.Calle.ToString()             + "', " +
@@ -158,12 +199,27 @@ namespace CEE.AccesoDatos.Dao.Sql
         public bool UpdatePersonaById(PersonaDTO oPersona)
         {
             string strSql = "UPDATE PERSONA " +
-                            "SET legajo = '" + oPersona.Legajo.ToString()                       + "', " +
-                            "    numero_documento = '" + oPersona.NumeroDocumento.ToString()    + "', " +
+                            "SET numero_documento = '" + oPersona.NumeroDocumento.ToString()    + "', " +
                             "    tipo_documento_id = '" + oPersona.IdTipoDocumento.ToString()   + "', " +
                             "    apellido = '" + oPersona.Apellido.ToString()                   + "', " +
-                            "    nombre = '" + oPersona.Nombre.ToString()                       + "', " +
-                            "    telefono = '" + oPersona.Telefono.ToString()                   + "', " +
+                            "    nombre = '" + oPersona.Nombre.ToString()                       + "', ";
+
+
+            if (oPersona.Legajo > 0)
+                strSql += "    legajo = '" + oPersona.Legajo.ToString()                       + "', " ;
+            else
+                strSql += "    legajo = NULL, ";
+            if (oPersona.IdUniversidad > 0)
+                strSql += "    universidad_id = '" + oPersona.IdUniversidad.ToString()        + "', ";
+            else
+                strSql += "    universidad_id = NULL, ";
+            if (oPersona.IdCarrera > 0)
+                strSql += "    carrera_id = '" + oPersona.IdCarrera.ToString() + "', ";
+            else
+                strSql += "    carrera_id = NULL, ";
+
+
+            strSql +=       "    telefono = '" + oPersona.Telefono.ToString()                   + "', " +
                             "    mail = '" + oPersona.Mail.ToString()                           + "', " +
                             "    calle = '" + oPersona.Calle.ToString()                         + "', " +
                             "    numero_calle = '" + oPersona.NumeroCalle.ToString()            + "', " +

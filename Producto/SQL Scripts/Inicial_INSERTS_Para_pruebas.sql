@@ -1,7 +1,6 @@
 -- ####################################################################################
 -- ############			INICIO CARGA INICIAL									############
 -- ####################################################################################
-
 -- ################################################################ Basico
 USE [64429Pav1];
 INSERT INTO USUARIO (nombre_usuario, pass, forzar_password, fecha_alta)
@@ -9,7 +8,7 @@ INSERT INTO USUARIO (nombre_usuario, pass, forzar_password, fecha_alta)
 
 INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
 	VALUES ('Administrador', '', GETDATE());
-SELECT * FROM USUARIO;
+
 INSERT INTO USUARIO_PERFIL (usuario_id, perfil_id)
 	VALUES(1,1);
 -- ################################################################	MODULO PERSONAS
@@ -29,6 +28,12 @@ INSERT INTO PERFIL_MENU (perfil_id, menu_id)
 INSERT INTO TIPO_DOCUMENTO(nombre_tipo_documento, descripcion)
 	VALUES('DNI', 'Documento Nacional de Identidad');
 
+INSERT INTO UNIVERSIDAD(nombre_universidad)
+	VALUES('UNIVERSIDAD TECNOLOGICA NACIONAL - FACULTAD REGIONAL DE CORDOBA');
+
+INSERT INTO CARRERA(nombre_carrera)
+	VALUES('Ingenieria en Sistemas de Informacion'),
+		('Ingenieria Electronica');
 -- ################################################################	MODULO EQUIPOS
 USE [64429Pav1];
 INSERT INTO MENU (menu_id, padre_menu_id, nombre_menu, es_final, aplicacion)
@@ -39,10 +44,10 @@ VALUES(4, NULL, 'Equipos', 0, ''),
 INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
 	VALUES('Encargado Equipos', '', GETDATE());
 
-INSERT INTO ESTADO(nombre_estado, ambito, deshabilita)
-	VALUES('DISPONIBLE','EQUIPO',0),
-		('PRESTADO','EQUIPO',1),
-		('FUERA DE SERVICIO','EQUIPO',0);
+INSERT INTO ESTADO(nombre_estado, ambito, deshabilita, editable)
+	VALUES('DISPONIBLE','EQUIPO',0, 1),
+		('PRESTADO','EQUIPO',1, 0),
+		('FUERA DE SERVICIO','EQUIPO',1, 1);
 	
 INSERT INTO PERFIL_MENU (perfil_id, menu_id)
 VALUES(3,5),(3,6),		-- Equipos
@@ -50,20 +55,6 @@ VALUES(3,5),(3,6),		-- Equipos
 		
 INSERT INTO TIPO_EQUIPO(tipo_equipo, descripcion, codigo_recomendado)
 	VALUES('Generico', '', 'Gen-XX');
--- ################################################################	MODULO Prestamos
-USE [64429Pav1];
-INSERT INTO MENU (menu_id, padre_menu_id, nombre_menu, es_final, aplicacion)
-VALUES(7, NULL, 'Prestamos', 0, ''),
-			(8, 7, 'Iniciar Prestamos', 1, 'InicioPrestamos'),
-			(9, 7, 'Finalizar Prestamos', 1, 'FinPrestamos'),
-			(10, 7, 'Consultar Prestamos', 1, 'ConsultarPrestamos');
-
-INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
-	VALUES ('Encargado Prestamos', '', GETDATE());
-
-INSERT INTO PERFIL_MENU (perfil_id, menu_id)
-VALUES(4,8),(4,9),(4,10),	-- Equipos
-		(1,8),(1,9),(1,10); -- Administrador
 		
 -- ################################################################	MODULO Usuarios
 USE [64429Pav1];
@@ -78,22 +69,44 @@ INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
 			('Encargado Perfiles', '', GETDATE());
 
 INSERT INTO PERFIL_MENU (perfil_id, menu_id)
-VALUES(5,12),			-- Usuarios
-		(6,13),			-- Perfiles
+VALUES(4,12),			-- Usuarios
+		(5,13),			-- Perfiles
 		(1,12),(1,13);	-- Administrador
 
+-- ################################################################	MODULO Prestamos
+USE [64429Pav1];
+INSERT INTO MENU (menu_id, padre_menu_id, nombre_menu, es_final, aplicacion)
+VALUES(7, NULL, 'Prestamos', 0, ''),
+			(8, 7, 'Iniciar Prestamos', 1, 'InicioPrestamos'),
+			(9, 7, 'Finalizar Prestamos', 1, 'FinPrestamos'),
+			(10, 7, 'Consultar Prestamos', 1, 'ConsultarPrestamos');
+
+INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
+	VALUES ('Encargado Prestamos', '', GETDATE());
+
+INSERT INTO PERFIL_MENU (perfil_id, menu_id)
+VALUES(6,8),(6,9),(6,10),	-- Prestamos
+		(1,8),(1,9),(1,10); -- Administrador
+		
+INSERT INTO ESTADO(nombre_estado, ambito, deshabilita, editable)	-- aca no me importa el editable por eso pongo siempre 0
+	VALUES('EN CURSO','PRESTAMO',0, 0),
+		('DEVUELTO PARCIAL','PRESTAMO',0, 0),
+		('DEVUELTO','PRESTAMO',1, 0),
+		('CANCELADO','PRESTAMO',1, 0);
+		
 -- ####################################################################################
 -- ############			INICIO CARGA EJEMPLOS									############
 -- ####################################################################################
 USE [64429Pav1];
-INSERT INTO PERSONA(legajo, numero_documento, tipo_documento_id, apellido, nombre, telefono, mail, calle, numero_calle, piso, departamento, observaciones, fecha_alta)
-	VALUES(64429,39072672,1,'Salvai','Nicolas',35130941,'example@example.com','Calle Falsa', 123, 1, 'F', 'Observaciones', GETDATE());
+INSERT INTO PERSONA(numero_documento, tipo_documento_id, apellido, nombre, legajo, universidad_id, carrera_id, telefono, mail, calle, numero_calle, piso, departamento, observaciones, fecha_alta)
+	VALUES(39072672,1,'Salvai','Nicolas',64429,1,1,35130941,'example@example.com','Calle Falsa', 123, 1, 'F', 'Observaciones', GETDATE());
 
 INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, estado_id, descripcion, fecha_alta)
-	VALUES('Ej-01', 'Ejemplo XXX', 1, 1, '...', GETDATE());
+	VALUES('Ej-01', 'Ejemplo XXX', 1, 1, '...', GETDATE()),
+	('Ej-02', 'Ejemplo XXY', 1, 1, '...', GETDATE());
 
-INSERT INTO PRESTAMO(persona_id, fecha_desde)
-	VALUES(1, GETDATE());
+INSERT INTO PRESTAMO(persona_id, estado_id, fecha_desde, fecha_hasta_estimada)
+	VALUES(1, 4, GETDATE(), GETDATE());
 
 INSERT INTO DETALLE_PRESTAMO(detalle_prestamo_id, prestamo_id, equipo_id)
 	VALUES(1, 1, 1);

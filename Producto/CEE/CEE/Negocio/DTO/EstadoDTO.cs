@@ -12,5 +12,6 @@ namespace CEE.Negocio.DTO
         public string NombreEstado { get; set; }
         public string Ambito { get; set; }
         public bool Deshabilita { get; set; }
+        public bool Editable { get; set; }
     }
 }

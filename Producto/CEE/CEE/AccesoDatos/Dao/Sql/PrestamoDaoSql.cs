@@ -32,7 +32,12 @@ namespace CEE.AccesoDatos.Dao.Sql
 
         public bool InsertPrestamo(PrestamoDTO oPrestamo)
         {
-            throw new NotImplementedException();
+            string strSql = "";
+
+
+
+
+            return true;
         }
 
         public bool UpdatePrestamoById(PrestamoDTO oPrestamo)

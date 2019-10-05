@@ -75,14 +75,16 @@ namespace CEE.Interfaz
             // ######################################
             Dictionary<string, object> parametros = new Dictionary<string, object>();
             parametros.Add("Ambito", "Equipo");
+            if (formMode == ABMFormMode.insert) parametros.Add("Editable", "True");
+
             IList<EstadoDTO> estados = oEstadoService.GetEstadoByFilters(parametros);
             List<string> contentEstados = new List<string>();
 
             foreach (EstadoDTO estado in estados)
-                contentEstados.Add(estado.NombreEstado);
-
+                comboBoxEstado.Items.Add(estado.NombreEstado);
+            
             comboBoxEstado.SelectedIndex = comboBoxEstado.FindStringExact("DISPONIBLE");
-            comboBoxEstado.DataSource = contentEstados;
+            
         }
 
         /// <summary>
@@ -143,6 +145,14 @@ namespace CEE.Interfaz
                 textBoxNombre.Text = oEquipo.Nombre;
                 comboBoxTipoEquipo.SelectedIndex = comboBoxTipoEquipo.FindStringExact(oEquipo.TipoEquipo);
                 comboBoxEstado.SelectedIndex = comboBoxEstado.FindStringExact(oEquipo.Estado);
+                if(oEquipo.Estado == "PRESTADO")
+                {
+                    comboBoxEstado.Enabled = false;
+                } else
+                {
+                    comboBoxEstado.Items.Remove("PRESTADO");
+                }
+
                 textBoxDescripcion.Text = oEquipo.Descripcion;
             }
         }

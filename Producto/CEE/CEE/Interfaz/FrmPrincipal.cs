@@ -122,6 +122,11 @@ namespace CEE.Interfaz
 
             checkLogin();
         }
+
+        private void InicioPrestamos_Click(object sender, EventArgs e)
+        {
+            new FrmInicioPrestamos().ShowDialog();
+        }
     }
 }
 

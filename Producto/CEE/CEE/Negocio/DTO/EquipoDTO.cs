@@ -14,6 +14,8 @@ namespace CEE.Negocio.DTO
         public string TipoEquipo { get; set; }
         public int IdTipoEquipo { get; set; }
         public string Estado { get; set; }
+        public bool EstadoDeshabilita { get; set; }
+        public bool EstadoEditable { get; set; }
         public int IdEstado { get; set; }
         /// <summary>
         /// Nullable

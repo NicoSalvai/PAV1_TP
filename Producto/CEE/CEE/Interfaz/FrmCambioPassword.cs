@@ -24,6 +24,7 @@ namespace CEE.Interfaz
             cambio,
             forzarCambio
         }
+
         public FrmCambioPassword(UsuarioService oUsuarioService, CambioPassFormMode formMode)
         {
             this.oUsuarioService = oUsuarioService;
@@ -38,7 +39,24 @@ namespace CEE.Interfaz
             this.MinimizeBox = false;
             finalizo = false;
         }
+        private void FrmCambioPassword_Load(object sender, EventArgs e)
+        {
+            setTextBoxLimits();
+        }
 
+        /// <summary>
+        /// Setea el largo maximo para los campos textBox iguales a los seteados en la BD
+        /// </summary>
+        private void setTextBoxLimits()
+        {
+            textBoxContraseña.MaxLength = 20;
+            textBoxContraseñaVieja.MaxLength = 20;
+            textBoxContraseñaRepetir.MaxLength = 20;
+        }
+        
+        // #########################################################
+        // Eventos de los botonoes
+        // #########################################################
         private void ButtonAceptar_Click(object sender, EventArgs e)
         {
             try
@@ -61,17 +79,11 @@ namespace CEE.Interfaz
                     else { throw new Exception("Contraseñas no coinciden"); }
                 }
                 else { throw new Exception("Contraseña Equivocada"); }
+
                 finalizo = true;
                 this.Dispose();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }
-
-        private void FrmCambioPassword_Load(object sender, EventArgs e)
-        {
-            textBoxContraseña.MaxLength = 20;
-            textBoxContraseñaVieja.MaxLength = 20;
-            textBoxContraseñaRepetir.MaxLength = 20;
         }
 
         private void FrmPrincipal_FormClosing(object sender, FormClosingEventArgs e)

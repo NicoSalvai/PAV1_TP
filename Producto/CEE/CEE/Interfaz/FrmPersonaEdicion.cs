@@ -18,6 +18,8 @@ namespace CEE.Interfaz
     {
         private PersonaService oPersonaService;
         private TipoDocumentoService oTipoDocumentoService;
+        private UniversidadService oUniversidadService;
+        private CarreraService oCarreraService;
         private ErrorProviderExtension oErrorProviderExtension;
 
         private ABMFormMode formMode = ABMFormMode.insert;
@@ -48,6 +50,8 @@ namespace CEE.Interfaz
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
             this.oTipoDocumentoService = new TipoDocumentoService();
+            this.oUniversidadService = new UniversidadService();
+            this.oCarreraService = new CarreraService();
 
             cargarCombos();
             setTextBoxLimits();
@@ -69,6 +73,28 @@ namespace CEE.Interfaz
                 content.Add(oTipoDocumento.NombreTipoDocumento);
 
             comboBoxTipoDocumento.DataSource = content;
+
+            // ###############################################################
+
+            IList<UniversidadDTO> universidades = oUniversidadService.GetUniversidadByFilters(new Dictionary<string, object>());
+            List<string> content2 = new List<string>();
+
+            content2.Add("Seleccionar");
+            foreach (UniversidadDTO oUniversidad in universidades)
+                content2.Add(oUniversidad.NombreUniversidad);
+
+            comboBoxUniversidad.DataSource = content2;
+
+            // ###############################################################
+
+            IList<CarreraDTO> carreras = oCarreraService.GetCarreraByFilters(new Dictionary<string, object>());
+            List<string> content3 = new List<string>();
+
+            content3.Add("Seleccionar");
+            foreach (CarreraDTO oCarrera in carreras)
+                content3.Add(oCarrera.NombreCarrera);
+
+            comboBoxCarrera.DataSource = content3;
         }
 
         /// <summary>
@@ -128,6 +154,8 @@ namespace CEE.Interfaz
                 textBoxPiso.Enabled = false;
                 textBoxDepartamento.Enabled = false;
                 textBoxObservaciones.Enabled = false;
+                comboBoxCarrera.Enabled = false;
+                comboBoxUniversidad.Enabled = false;
             }
         }
 
@@ -141,18 +169,28 @@ namespace CEE.Interfaz
             {
                 PersonaDTO oPersona = oPersonaService.GetPersonaById(oPersonaService.IdPersonaSeleccionada);
 
-                textBoxLegajo.Text = oPersona.Legajo.ToString();
+                
                 textBoxApellido.Text = oPersona.Apellido;
                 textBoxNombre.Text = oPersona.Nombre;
                 comboBoxTipoDocumento.SelectedIndex = comboBoxTipoDocumento.FindStringExact(oPersona.NombreTipoDocumento);
                 textBoxNumeroDocumento.Text = oPersona.NumeroDocumento.ToString();
 
+                if (oPersona.Legajo != 0)
+                    textBoxLegajo.Text = oPersona.Legajo.ToString();
+
+               if (!string.IsNullOrEmpty(oPersona.NombreUniversidad))
+                    comboBoxUniversidad.SelectedIndex = comboBoxUniversidad.FindStringExact(oPersona.NombreUniversidad);
+                if (!string.IsNullOrEmpty(oPersona.NombreCarrera))
+                    comboBoxCarrera.SelectedIndex = comboBoxCarrera.FindStringExact(oPersona.NombreCarrera);
+
                 textBoxEmail.Text = oPersona.Mail;
                 textBoxTelefono.Text = oPersona.Telefono.ToString();
 
                 textBoxCalle.Text = oPersona.Calle;
-                textBoxNumero.Text = oPersona.NumeroCalle.ToString();
-                textBoxPiso.Text = oPersona.Piso.ToString();
+                if (oPersona.NumeroCalle != 0)
+                    textBoxNumero.Text = oPersona.NumeroCalle.ToString();
+                if (oPersona.Piso != 0)
+                    textBoxPiso.Text = oPersona.Piso.ToString();
                 textBoxDepartamento.Text = oPersona.Departamento;
                 textBoxObservaciones.Text = oPersona.Observaciones;
             }
@@ -166,8 +204,7 @@ namespace CEE.Interfaz
         {
             validarCampoObligatorio(textBoxApellido);
             validarCampoObligatorio(textBoxNombre);
-            if (validarCampoObligatorio(textBoxLegajo))
-                validarCampoNumerico(textBoxLegajo);
+            validarCampoNumerico(textBoxLegajo);
             if(validarCampoObligatorio(textBoxNumeroDocumento))
                 validarCampoNumerico(textBoxNumeroDocumento);
             validarCampoObligatorio(comboBoxTipoDocumento);
@@ -181,11 +218,33 @@ namespace CEE.Interfaz
                     if (formMode != ABMFormMode.insert)
                         oPersona.IdPersona = oPersonaService.IdPersonaSeleccionada;
 
-                    oPersona.Legajo = Int32.Parse(textBoxLegajo.Text);
                     oPersona.Apellido = textBoxApellido.Text;
                     oPersona.Nombre = textBoxNombre.Text;
-                    oPersona.NombreTipoDocumento = comboBoxTipoDocumento.SelectedItem.ToString();
                     oPersona.NumeroDocumento = Int32.Parse(textBoxNumeroDocumento.Text);
+                    oPersona.NombreTipoDocumento = comboBoxTipoDocumento.SelectedItem.ToString();
+                    //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoDopcumento
+                    Dictionary<string, object> parametros = new Dictionary<string, object>();
+                    parametros.Add("TipoDocumento", comboBoxTipoDocumento.SelectedItem.ToString());
+                    oPersona.IdTipoDocumento = oTipoDocumentoService.GetTipoDocumentoByFilters(parametros).First().IdTipoDocumento; // CORREGIR
+                    //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoDopcumento
+
+                    if (textBoxLegajo.Text != "")
+                        oPersona.Legajo = Int32.Parse(textBoxLegajo.Text);
+                    if (comboBoxUniversidad.SelectedIndex != 0)
+                    {
+                        oPersona.NombreUniversidad = comboBoxUniversidad.SelectedItem.ToString();
+                        parametros.Clear();
+                        parametros.Add("NombreUniversidad", comboBoxUniversidad.SelectedItem.ToString());
+                        oPersona.IdUniversidad = oUniversidadService.GetUniversidadByFilters(parametros).First().IdUniversidad; // CORREGIR
+                    }
+                    if (comboBoxCarrera.SelectedIndex != 0)
+                    {
+
+                        oPersona.NombreCarrera = comboBoxCarrera.SelectedItem.ToString();
+                        parametros.Clear();
+                        parametros.Add("NombreCarrera", comboBoxCarrera.SelectedItem.ToString());
+                        oPersona.IdCarrera = oCarreraService.GetCarreraByFilters(parametros).First().IdCarrera; // CORREGIR
+                    }
 
                     oPersona.Mail = textBoxEmail.Text;
                     oPersona.Telefono = textBoxTelefono.Text;
@@ -198,11 +257,6 @@ namespace CEE.Interfaz
                     oPersona.Departamento = textBoxDepartamento.Text;
                     oPersona.Observaciones = textBoxObservaciones.Text;
 
-                    //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoDopcumento
-                    Dictionary<string, object> parametros = new Dictionary<string, object>();
-                    parametros.Add("TipoDocumento", comboBoxTipoDocumento.SelectedItem.ToString());
-                    oPersona.IdTipoDocumento = oTipoDocumentoService.GetTipoDocumentoByFilters(parametros).First().IdTipoDocumento; // CORREGIR
-                    //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoDopcumento
 
                     switch (formMode)
                     {
@@ -253,7 +307,7 @@ namespace CEE.Interfaz
             validarCampoObligatorio(oEventSender);
         }
 
-        private void TextBoxLegajoyNumeroDocumento_Validating(object sender, CancelEventArgs e)
+        private void TextBoxNumeroDocumento_Validating(object sender, CancelEventArgs e)
         {
             TextBox oEventSender = (TextBox)sender;
             if(validarCampoObligatorio(oEventSender))
@@ -261,6 +315,12 @@ namespace CEE.Interfaz
         }
 
         private void TextBoxPisoYNumero_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox oEventSender = (TextBox)sender;
+            validarCampoNumerico(oEventSender);
+        }
+
+        private void TextBoxLegajo_Validating(object sender, CancelEventArgs e)
         {
             TextBox oEventSender = (TextBox)sender;
             validarCampoNumerico(oEventSender);
@@ -300,5 +360,6 @@ namespace CEE.Interfaz
             oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
             return errorString == "";
         }
+
     }
 }

@@ -29,19 +29,19 @@ namespace CEE.Interfaz
             this.MinimizeBox = false;
         }
 
-        public FrmLogin()
+        private void FrmLogin_Load(object sender, EventArgs e)
         {
-            this.oUsuarioService = new UsuarioService();
-            InitializeComponent();
-
-            this.MinimumSize = this.Size;
-            this.MaximumSize = this.Size;
-            this.CenterToScreen();
-            this.ShowInTaskbar = false;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            setTextBoxLimits();
         }
 
+        private void setTextBoxLimits()
+        {
+            textBoxUsuario.MaxLength = 20;
+            textBoxPassword.MaxLength = 20;
+        }
+        // #########################################################
+        // Eventos de los botonoes
+        // #########################################################
         private void ButtonAceptar_Click(object sender, EventArgs e)
         {
             try
@@ -83,10 +83,6 @@ namespace CEE.Interfaz
             this.Dispose();
         }
 
-        private void FrmLogin_Load(object sender, EventArgs e)
-        {
-            textBoxUsuario.MaxLength = 20;
-            textBoxPassword.MaxLength = 20;
-        }
+
     }
 }

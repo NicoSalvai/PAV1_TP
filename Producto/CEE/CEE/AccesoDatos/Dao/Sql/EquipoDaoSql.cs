@@ -25,6 +25,8 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "TE.tipo_equipo, " +
                             "E.tipo_equipo_id, " +
                             "EST.nombre_estado, " +
+                            "EST.deshabilita, " +
+                            "EST.editable, " +
                             "E.estado_id, " +
                             "E.descripcion, " +
 	                        "E.fecha_alta, " +
@@ -53,6 +55,8 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "TE.tipo_equipo, " +
                             "E.tipo_equipo_id, " +
                             "EST.nombre_estado, " +
+                            "EST.deshabilita, " +
+                            "EST.editable, " +
                             "E.estado_id, " +
                             "E.descripcion, " +
                             "E.fecha_alta, " +
@@ -64,6 +68,8 @@ namespace CEE.AccesoDatos.Dao.Sql
 
             if (parametros.ContainsKey("Codigo"))
                 strSql += " AND (E.codigo LIKE '%' + @Codigo + '%') ";
+            if (parametros.ContainsKey("CodigoEquals"))
+                strSql += " AND (E.codigo = @CodigoEquals ) ";
             if (parametros.ContainsKey("Nombre"))
                 strSql += " AND (E.nombre LIKE '%' + @Nombre + '%') ";
             if (parametros.ContainsKey("TipoEquipo"))
@@ -100,6 +106,8 @@ namespace CEE.AccesoDatos.Dao.Sql
             oEquipo.TipoEquipo = row["tipo_equipo"].ToString();
             oEquipo.IdTipoEquipo = Int32.Parse(row["tipo_equipo_id"].ToString());
             oEquipo.Estado = row["nombre_estado"].ToString();
+            oEquipo.EstadoDeshabilita = Boolean.Parse(row["deshabilita"].ToString());
+            oEquipo.EstadoEditable = Boolean.Parse(row["editable"].ToString());
             oEquipo.IdEstado = Int32.Parse(row["estado_id"].ToString());
             oEquipo.FechaAlta = DateTime.Parse(row["fecha_alta"].ToString());
 
