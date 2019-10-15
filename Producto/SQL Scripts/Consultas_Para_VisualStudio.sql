@@ -466,7 +466,28 @@ WHERE prestamo_id = 1;
 -- DeleteDetallePrestamoById()
 
 -- UpdateDetallePrestamoById()
+BEGIN TRANSACTION 
+USE[64429Pav1] 
 
+UPDATE DETALLE_PRESTAMO 
+SET fecha_devuelto = GETDATE() 
+WHERE detalle_prestamo_id = 27 
+
+UPDATE EQUIPO 
+SET estado_id = (SELECT estado_id FROM ESTADO WHERE nombre_estado = 'DISPONIBLE') 
+WHERE equipo_id = 1 
+
+IF((SELECT COUNT(*) FROM DETALLE_PRESTAMO WHERE prestamo_id = @IdPrestamo AND fecha_devuelto IS NULL GROUP BY prestamo_id ) IS NULL) 
+	UPDATE PRESTAMO SET fecha_hasta = GETDATE(), estado_id = (SELECT estado_id FROM ESTADO WHERE nombre_estado = 'DEVUELTO') WHERE prestamo_id = @IdPrestamo; 
+ELSE 
+	UPDATE PRESTAMO SET estado_id = (SELECT estado_id FROM ESTADO WHERE nombre_estado = 'DEVUELTO PARCIAL') WHERE prestamo_id = @IdPrestamo;  
+	
+IF(1 = 1) 
+	COMMIT; 
+ELSE 
+	ROLLBACK; 
+	
+	
 -- InsertDetallePrestamo()
 BEGIN TRANSACTION
 USE [64429Pav1]

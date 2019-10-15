@@ -127,6 +127,11 @@ namespace CEE.Interfaz
         {
             new FrmInicioPrestamos().ShowDialog();
         }
+
+        private void FinPrestamos_Click(object sender, EventArgs e)
+        {
+            new FrmFinalizarPrestamo().ShowDialog();
+        }
     }
 }
 

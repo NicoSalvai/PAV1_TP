@@ -19,5 +19,6 @@ namespace CEE.Negocio.DTO
         /// Nullable
         /// </summary>
         public DateTime FechaDevuelto { get; set; }
+        public bool Devuelto { get; set; }
     }
 }

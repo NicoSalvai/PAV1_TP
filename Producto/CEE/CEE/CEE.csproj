@@ -99,6 +99,12 @@
     <Compile Include="Interfaz\FrmEquipos.Designer.cs">
       <DependentUpon>FrmEquipos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaz\FrmFinalizarPrestamo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\FrmFinalizarPrestamo.Designer.cs">
+      <DependentUpon>FrmFinalizarPrestamo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaz\FrmInicioPrestamos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\FrmEquipos.resx">
       <DependentUpon>FrmEquipos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz\FrmFinalizarPrestamo.resx">
+      <DependentUpon>FrmFinalizarPrestamo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\FrmInicioPrestamos.resx">
       <DependentUpon>FrmInicioPrestamos.cs</DependentUpon>

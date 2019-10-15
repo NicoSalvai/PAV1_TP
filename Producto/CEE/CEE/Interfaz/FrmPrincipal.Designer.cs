@@ -213,6 +213,7 @@
             this.FinPrestamos.Size = new System.Drawing.Size(183, 22);
             this.FinPrestamos.Text = "Finalizar Prestamos";
             this.FinPrestamos.Visible = false;
+            this.FinPrestamos.Click += new System.EventHandler(this.FinPrestamos_Click);
             // 
             // ConsultarPrestamos
             // 
@@ -262,7 +263,7 @@
             // 
             this.gestionarArticulosToolStripMenuItem.Enabled = false;
             this.gestionarArticulosToolStripMenuItem.Name = "gestionarArticulosToolStripMenuItem";
-            this.gestionarArticulosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gestionarArticulosToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.gestionarArticulosToolStripMenuItem.Text = "Gestionar Articulos";
             this.gestionarArticulosToolStripMenuItem.Visible = false;
             // 
@@ -289,7 +290,7 @@
             // 
             this.gestionarUsuariosToolStripMenuItem.Enabled = false;
             this.gestionarUsuariosToolStripMenuItem.Name = "gestionarUsuariosToolStripMenuItem";
-            this.gestionarUsuariosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gestionarUsuariosToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.gestionarUsuariosToolStripMenuItem.Text = "Gestionar Usuarios";
             this.gestionarUsuariosToolStripMenuItem.Visible = false;
             this.gestionarUsuariosToolStripMenuItem.Click += new System.EventHandler(this.GestionarUsuariosToolStripMenuItem_Click);
@@ -298,7 +299,7 @@
             // 
             this.gestionarPerfilesToolStripMenuItem.Enabled = false;
             this.gestionarPerfilesToolStripMenuItem.Name = "gestionarPerfilesToolStripMenuItem";
-            this.gestionarPerfilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gestionarPerfilesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.gestionarPerfilesToolStripMenuItem.Text = "Gestionar Perfiles";
             this.gestionarPerfilesToolStripMenuItem.Visible = false;
             // 

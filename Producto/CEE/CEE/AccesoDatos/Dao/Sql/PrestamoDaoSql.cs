@@ -221,7 +221,38 @@ namespace CEE.AccesoDatos.Dao.Sql
 
         public bool UpdatePrestamoById(PrestamoDTO oPrestamo)
         {
-            throw new NotImplementedException();
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("IdPrestamo", oPrestamo.IdPrestamo.ToString());
+
+            string strSql = "BEGIN TRANSACTION " +
+                            "USE[64429Pav1] ";
+
+            int i = 0;
+            foreach (DetallePrestamoDTO oDetallePrestamo in oPrestamo.Detalles)
+            {
+                if (oDetallePrestamo.Devuelto)
+                {
+                    i++;
+                    strSql += "UPDATE DETALLE_PRESTAMO " +
+                                "SET fecha_devuelto = GETDATE() " +
+                                "WHERE detalle_prestamo_id = " + oDetallePrestamo.IdDetallePrestamo.ToString();
+
+                    strSql += " UPDATE EQUIPO SET estado_id = (SELECT estado_id FROM ESTADO WHERE nombre_estado = 'DISPONIBLE') " +
+                        "WHERE equipo_id = " + oDetallePrestamo.IdEquipo.ToString() + "";
+                }
+            }
+
+            strSql += " IF((SELECT COUNT(*) FROM DETALLE_PRESTAMO WHERE prestamo_id = @IdPrestamo AND fecha_devuelto IS NULL GROUP BY prestamo_id ) IS NULL) " +
+                        "UPDATE PRESTAMO SET fecha_hasta = GETDATE(), estado_id = (SELECT estado_id FROM ESTADO WHERE nombre_estado = 'DEVUELTO') WHERE prestamo_id = @IdPrestamo; " +
+                        "ELSE " +
+                        "UPDATE PRESTAMO SET estado_id = (SELECT estado_id FROM ESTADO WHERE nombre_estado = 'DEVUELTO PARCIAL') WHERE prestamo_id = @IdPrestamo; ";
+            strSql += " IF(1 = 1) " +
+                        "COMMIT; " +
+                        "ELSE " +
+                        "ROLLBACK; ";
+
+            DBHelperSql.GetDBHelper().EjecutarSQL(strSql, parametros);
+            return true;
         }
     }
 }
