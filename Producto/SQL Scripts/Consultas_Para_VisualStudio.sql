@@ -359,6 +359,7 @@ VALUES(1, 1, 1, '', '', 1, '', '', 1, 1, '', '', GETDATE());
 
 -- ################################################################ Class : PrestamoDao
 -- GetPrestamoById()
+USE [64429Pav1];
 SELECT P.prestamo_id,
 		P.persona_id,
 		PER.numero_documento,
@@ -378,6 +379,19 @@ JOIN PERSONA PER ON PER.persona_id = P.persona_id
 JOIN TIPO_DOCUMENTO TD ON TD.tipo_documento_id = PER.tipo_documento_id
 JOIN ESTADO EST ON EST.estado_id = P.estado_id
 WHERE P.prestamo_id = 1;
+
+SELECT DP.detalle_prestamo_id,
+		DP.prestamo_id,
+		E.equipo_id,
+		E.codigo,
+		E.nombre,
+		TE.tipo_equipo_id,
+		TE.tipo_equipo,
+		DP.fecha_devuelto
+FROM DETALLE_PRESTAMO DP
+JOIN EQUIPO E ON E.equipo_id = DP.equipo_id
+JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id
+
 
 -- GetPrestamoByFilters()
 SELECT P.prestamo_id,
@@ -454,3 +468,19 @@ WHERE prestamo_id = 1;
 -- UpdateDetallePrestamoById()
 
 -- InsertDetallePrestamo()
+BEGIN TRANSACTION
+USE [64429Pav1]
+
+INSERT INTO PRESTAMO(persona_id, estado_id, fecha_desde, fecha_hasta_estimada)
+	VALUES(@IdPersona, @IdEstado, GETDATE(), GETDATE());
+
+DECLARE @IdPrestamo INT;  
+SELECT @IdPrestamo = @@IDENTITY;
+
+INSERT INTO DETALLE_PRESTAMO(prestamo_id, equipo_id)
+	VALUES(@IdPrestamo, @IdEquipo);
+	
+IF ((SELECT COUNT(*) FROM DETALLE_PRESTAMO WHERE prestamo_id = @IdPrestamo) = 1)
+	COMMIT;
+ELSE
+	ROLLBACK;

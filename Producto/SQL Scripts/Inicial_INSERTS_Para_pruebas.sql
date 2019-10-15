@@ -108,8 +108,8 @@ INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, estado_id, descripcion, fecha
 INSERT INTO PRESTAMO(persona_id, estado_id, fecha_desde, fecha_hasta_estimada)
 	VALUES(1, 4, GETDATE(), GETDATE());
 
-INSERT INTO DETALLE_PRESTAMO(detalle_prestamo_id, prestamo_id, equipo_id)
-	VALUES(1, 1, 1);
+INSERT INTO DETALLE_PRESTAMO(prestamo_id, equipo_id)
+	VALUES(1, 1);
 
 INSERT INTO USUARIO (nombre_usuario, pass, forzar_password, fecha_alta)
 	VALUES('nico','410ec15153a6dff0bed851467309bcbd', 0, GETDATE());

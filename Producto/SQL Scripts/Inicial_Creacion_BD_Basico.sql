@@ -190,7 +190,7 @@ CREATE TABLE EQUIPO (
 );
 
 CREATE TABLE DETALLE_PRESTAMO (
-	detalle_prestamo_id		INT NOT NULL,
+	detalle_prestamo_id		INT NOT NULL IDENTITY(1,1),
 	prestamo_id				INT NOT NULL,
 	equipo_id				INT NOT NULL,
 	fecha_devuelto			DATETIME,

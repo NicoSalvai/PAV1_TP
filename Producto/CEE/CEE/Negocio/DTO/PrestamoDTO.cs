@@ -20,7 +20,7 @@ namespace CEE.Negocio.DTO
         /// </summary>
         public int LegajoPersona { get; set; }
         public int IdEstado { get; set; }
-        public int NombreEstado { get; set; }
+        public string NombreEstado { get; set; }
         public DateTime FechaDesde { get; set; }
         public DateTime FechaHastaEstimada { get; set; }
         /// <summary>
@@ -34,6 +34,6 @@ namespace CEE.Negocio.DTO
         /// <summary>
         /// Nullable. Solo para Busqueda por filtros
         /// </summary>
-        public DetallePrestamoDTO DetallePrestamo { get; set; }
+        public IList<DetallePrestamoDTO> Detalles { get; set; }
     }
 }

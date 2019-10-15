@@ -18,6 +18,8 @@ namespace CEE.Interfaz
     {
         private PersonaService oPersonaService;
         private EquipoService oEquipoService;
+        private PrestamoService oPrestamoService;
+
         private ErrorProviderExtension oErrorProviderExtension;
         private FormMode formMode = FormMode.noSeleccionado;
 
@@ -43,8 +45,10 @@ namespace CEE.Interfaz
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
             formMode = FormMode.noSeleccionado;
+
             oPersonaService = new PersonaService();
             oEquipoService = new EquipoService();
+            oPrestamoService = new PrestamoService();
 
             cargarCombos();
             setTextBoxLimits();
@@ -217,8 +221,11 @@ namespace CEE.Interfaz
 
                 if (busqueda.Count == 0)
                     throw new Exception("El codigo buscado no existe");
-
-                if (!cargarEquipoGrilla(busqueda.First()))
+                if (busqueda.First().EstadoDeshabilita)
+                {
+                    throw new Exception("El equipo no se encuentra DISPONIBLE");
+                }
+                else if (!cargarEquipoGrilla(busqueda.First()))
                 {
                     throw new Exception("El Equipo ya fue ingresado a la lista anteriormente");
                 }
@@ -248,7 +255,24 @@ namespace CEE.Interfaz
                 if (dgvPrestamo.Rows.Count < 1)
                     throw new Exception("Debe cargar al menos un equipo para prestar");
 
+                PrestamoDTO oPrestamo = new PrestamoDTO();
+
+                oPrestamo.IdPersona = oPersonaService.IdPersonaSeleccionada;
+                oPrestamo.IdEstado = 4;
+                oPrestamo.Detalles = new List<DetallePrestamoDTO>();
+
+                foreach (DataGridViewRow dgvRow in dgvPrestamo.Rows)
+                {
+                    DetallePrestamoDTO oDetallePrestamo = new DetallePrestamoDTO();
+                    oDetallePrestamo.IdEquipo = Int32.Parse(dgvRow.Cells["IdEquipo"].Value.ToString());
+                    oPrestamo.Detalles.Add(oDetallePrestamo);
+                }
                 
+
+                oPrestamoService.InsertPrestamo(oPrestamo);
+
+                MessageBox.Show("Prestamo ingresado con exito   ");
+                this.Close();
             }
             catch (Exception ex)
             {
