@@ -24,11 +24,16 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "E.nombre, " +
                             "TE.tipo_equipo, " +
                             "E.tipo_equipo_id, " +
+                            "EST.nombre_estado, " +
+                            "EST.deshabilita, " +
+                            "EST.editable, " +
+                            "E.estado_id, " +
                             "E.descripcion, " +
 	                        "E.fecha_alta, " +
 	                        "E.fecha_baja " +
                             "FROM EQUIPO E " +
                             "JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id " +
+                            "JOIN ESTADO EST ON EST.estado_id = E.estado_id " +
                             "WHERE E.equipo_id = " + idEquipo.ToString() + " " +
                             "AND E.fecha_baja IS NULL ";
 
@@ -49,21 +54,31 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "E.nombre, " +
                             "TE.tipo_equipo, " +
                             "E.tipo_equipo_id, " +
+                            "EST.nombre_estado, " +
+                            "EST.deshabilita, " +
+                            "EST.editable, " +
+                            "E.estado_id, " +
                             "E.descripcion, " +
                             "E.fecha_alta, " +
                             "E.fecha_baja " +
                             "FROM EQUIPO E " +
                             "JOIN TIPO_EQUIPO TE ON TE.tipo_equipo_id = E.tipo_equipo_id " +
+                            "JOIN ESTADO EST ON EST.estado_id = E.estado_id " +
                             "WHERE 1 = 1 ";
 
             if (parametros.ContainsKey("Codigo"))
                 strSql += " AND (E.codigo LIKE '%' + @Codigo + '%') ";
+            if (parametros.ContainsKey("CodigoEquals"))
+                strSql += " AND (E.codigo = @CodigoEquals ) ";
             if (parametros.ContainsKey("Nombre"))
                 strSql += " AND (E.nombre LIKE '%' + @Nombre + '%') ";
             if (parametros.ContainsKey("TipoEquipo"))
                 strSql += " AND (TE.tipo_equipo = @TipoEquipo) ";
+            if (parametros.ContainsKey("Estado"))
+                strSql += " AND (EST.nombre_estado = @Estado) ";
             if (!parametros.ContainsKey("FechaBajaNotNull"))
                 strSql += " AND (E.fecha_baja IS NULL) ";
+
 
             DataTable dt = DBHelperSql.GetDBHelper().ConsultaSQLConParametros(strSql, parametros);
 
@@ -90,6 +105,10 @@ namespace CEE.AccesoDatos.Dao.Sql
             oEquipo.Codigo = row["codigo"].ToString();
             oEquipo.TipoEquipo = row["tipo_equipo"].ToString();
             oEquipo.IdTipoEquipo = Int32.Parse(row["tipo_equipo_id"].ToString());
+            oEquipo.Estado = row["nombre_estado"].ToString();
+            oEquipo.EstadoDeshabilita = Boolean.Parse(row["deshabilita"].ToString());
+            oEquipo.EstadoEditable = Boolean.Parse(row["editable"].ToString());
+            oEquipo.IdEstado = Int32.Parse(row["estado_id"].ToString());
             oEquipo.FechaAlta = DateTime.Parse(row["fecha_alta"].ToString());
 
             if(!DBNull.Value.Equals(row["fecha_baja"]))
@@ -117,6 +136,7 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "SET codigo = '" + oEquipo.Codigo               + "', " +
                             "nombre = '" + oEquipo.Nombre                   + "', " +
                             "tipo_equipo_id = '" + oEquipo.IdTipoEquipo     + "', " +
+                            "estado_id = '" + oEquipo.IdEstado              + "', " +
                             "descripcion = '" + oEquipo.Descripcion         + "' " +
                             "WHERE equipo_id = " + oEquipo.IdEquipo.ToString();
 
@@ -126,11 +146,12 @@ namespace CEE.AccesoDatos.Dao.Sql
 
         public bool InsertEquipo(EquipoDTO oEquipo)
         {
-            string strSql = "INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, descripcion, fecha_alta) " +
+            string strSql = "INSERT INTO EQUIPO(codigo, nombre, tipo_equipo_id, estado_id, descripcion, fecha_alta) " +
                             "VALUES(" + 
                             "'" + oEquipo.Codigo                            + "'," +
                             "'" + oEquipo.Nombre                            + "'," +
                             "'" + oEquipo.IdTipoEquipo.ToString()           + "'," +
+                            "'" + oEquipo.IdEstado.ToString()               + "'," +
                             "'" + oEquipo.Descripcion                       + "'," +
                              "GETDATE()" + "); ";
 

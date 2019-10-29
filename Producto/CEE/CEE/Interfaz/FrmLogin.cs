@@ -16,18 +16,32 @@ namespace CEE.Interfaz
     public partial class FrmLogin : Form
     {
         UsuarioService oUsuarioService;
-        public FrmLogin(UsuarioService ioUsuarioService)
+        public FrmLogin(UsuarioService oUsuarioService)
         {
-            this.oUsuarioService = ioUsuarioService;
+            this.oUsuarioService = oUsuarioService;
             InitializeComponent();
+
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            this.CenterToScreen();
+            this.ShowInTaskbar = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
-        public FrmLogin()
+        private void FrmLogin_Load(object sender, EventArgs e)
         {
-            this.oUsuarioService = new UsuarioService();
-            InitializeComponent();
+            setTextBoxLimits();
         }
 
+        private void setTextBoxLimits()
+        {
+            textBoxUsuario.MaxLength = 20;
+            textBoxPassword.MaxLength = 20;
+        }
+        // #########################################################
+        // Eventos de los botonoes
+        // #########################################################
         private void ButtonAceptar_Click(object sender, EventArgs e)
         {
             try
@@ -37,10 +51,29 @@ namespace CEE.Interfaz
                 if (textBoxPassword.Text == "" || textBoxPassword.Text == null)
                     throw new Exception("Campo Password vacio o null");
 
-                if (oUsuarioService.LoginUsuario(textBoxUsuario.Text, textBoxPassword.Text))
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("NombreUsuario", textBoxUsuario.Text);
+
+                IList<UsuarioDTO> lista = oUsuarioService.GetUsuarioByFilters(parametros);
+                UsuarioDTO oUsuario;
+
+                if (lista.Count == 1)
                 {
-                    this.Close();
+                    oUsuario = lista.First();
+                    if (lista.First().Pass.Equals(oUsuarioService.GetMd5Hash(textBoxPassword.Text)))
+                    {
+                        oUsuarioService.IdUsuarioLogeado = lista.First().IdUsuario;
+                    }
+                    else { throw new Exception("Password Incorrecta"); }
                 }
+                else { throw new Exception("Usuario Inexistente"); }
+
+                if (oUsuario.ForzarPassword)
+                {
+                    new FrmCambioPassword(oUsuarioService, FrmCambioPassword.CambioPassFormMode.forzarCambio).ShowDialog();
+                }
+                
+                this.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -49,5 +82,7 @@ namespace CEE.Interfaz
         {
             this.Dispose();
         }
+
+
     }
 }

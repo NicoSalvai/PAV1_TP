@@ -13,6 +13,7 @@ namespace CEE.AccesoDatos.DBHelper
         private DBHelperSql()
         {
             string_conexion = "Data Source=NicoPC\\SQLEXPRESS;Initial Catalog=64429Pav1;Integrated Security=True";
+            //string_conexion = "Data Source=maquis;Initial Catalog=64429Pav1;User ID=avisuales1;Password=avisuales1";
         }
 
         public static DBHelperSql GetDBHelper()
@@ -47,6 +48,58 @@ namespace CEE.AccesoDatos.DBHelper
                 cmd.Connection = cnn;
                 cmd.CommandText = strSql;
                 cmd.Transaction = t;
+                afectadas = cmd.ExecuteNonQuery();
+                //Commit de transacción...
+                t.Commit();
+            }
+            catch (Exception ex)
+            {
+                if (t != null)
+                {
+                    t.Rollback();
+                    afectadas = 0;
+                }
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection(cnn);
+            }
+
+            return afectadas;
+        }
+
+
+        /// Resumen:
+        ///     Se utiliza para sentencias SQL del tipo “Insert/Update/Delete”. Recibe por valor una sentencia sql como string
+        /// Devuelve:
+        ///      un valor entero con el número de filas afectadas por la sentencia ejecutada
+        /// Excepciones:
+        ///      System.Data.SqlClient.SqlException:
+        ///          El error de conexión se produce:
+        ///              a) durante la apertura de la conexión
+        ///              b) durante la ejecución del comando.
+        public int EjecutarSQL(string strSql, Dictionary<string, object> parametros = null)
+        {
+            int afectadas = 0;
+            SqlConnection cnn = new SqlConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction t = null;
+
+            try
+            {
+                cnn.ConnectionString = string_conexion;
+                cnn.Open();
+                //comienzo de transaccion...
+                t = cnn.BeginTransaction();
+                cmd.Connection = cnn;
+                cmd.Transaction = t;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = strSql;
+                foreach (var item in parametros)
+                {
+                    cmd.Parameters.AddWithValue(item.Key, item.Value);
+                }
                 afectadas = cmd.ExecuteNonQuery();
                 //Commit de transacción...
                 t.Commit();

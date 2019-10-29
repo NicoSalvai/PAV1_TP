@@ -47,9 +47,9 @@ namespace CEE.Interfaz
         /// </summary>
         private void checkLogin()
         {
-            //FrmLogin login = new FrmLogin(oUsuarioService);
-            //login.ShowDialog();
-            oUsuarioService.IdUsuarioLogeado = 1;
+            FrmLogin login = new FrmLogin(oUsuarioService);
+            login.ShowDialog();
+            //oUsuarioService.IdUsuarioLogeado = 1;
             if (oUsuarioService.IdUsuarioLogeado == 0)
                Application.Exit(); 
             
@@ -68,6 +68,7 @@ namespace CEE.Interfaz
 
             foreach (ToolStripMenuItem submenu in menuStrip1.Items)
             {
+                bool flag = false;
                 foreach (ToolStripMenuItem opcion in submenu.DropDownItems)
                 {
                     foreach (MenuDTO menu in usuarioMenus)
@@ -75,9 +76,13 @@ namespace CEE.Interfaz
                         if (menu.NombreMenu == opcion.Text)
                         {
                             opcion.Enabled = true;
+                            opcion.Visible = true;
+                            flag = true;
                         }
                     }
                 }
+                submenu.Enabled = flag;
+                submenu.Visible = flag;
             }
         }
 
@@ -89,6 +94,43 @@ namespace CEE.Interfaz
         private void Personas_Click(object sender, EventArgs e)
         {
             new FrmPersonas().ShowDialog();
+        }
+
+        private void GestionarUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmUsuarios().ShowDialog();
+        }
+
+        private void ButtonCambioPassword_Click(object sender, EventArgs e)
+        {
+            new FrmCambioPassword(oUsuarioService, FrmCambioPassword.CambioPassFormMode.cambio).ShowDialog();
+        }
+
+        private void ButtonCerrarSesion_Click(object sender, EventArgs e)
+        {
+            oUsuarioService.IdUsuarioLogeado = 0;
+            foreach (ToolStripMenuItem submenu in menuStrip1.Items)
+            {
+                foreach (ToolStripMenuItem opcion in submenu.DropDownItems)
+                {
+                    opcion.Enabled = false;
+                    opcion.Visible = false;
+                }
+                submenu.Enabled = false;
+                submenu.Visible = false;
+            }
+
+            checkLogin();
+        }
+
+        private void InicioPrestamos_Click(object sender, EventArgs e)
+        {
+            new FrmInicioPrestamos().ShowDialog();
+        }
+
+        private void FinPrestamos_Click(object sender, EventArgs e)
+        {
+            new FrmFinalizarPrestamo().ShowDialog();
         }
     }
 }

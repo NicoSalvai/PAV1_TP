@@ -10,17 +10,32 @@ using System.Windows.Forms;
 
 using CEE.Negocio;
 using CEE.Negocio.DTO;
+using CEE.Negocio.Auxiliares;
 
 namespace CEE.Interfaz
 {
     public partial class FrmEquipos : Form
     {
         EquipoService oEquipoService;
+
         public FrmEquipos()
         {
             InitializeComponent();
+
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            this.CenterToScreen();
+            this.ShowInTaskbar = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+        }
+
+        private void FrmEquipos_Load(object sender, EventArgs e)
+        {
             oEquipoService = new EquipoService();
+
             cargarCombos();
+            setTextBoxLimits();
         }
 
         /// <summary>
@@ -36,6 +51,27 @@ namespace CEE.Interfaz
                 content.Add(tipoEquipo.NombreTipoEquipo);
 
             comboBoxTipoEquipo.DataSource = content;
+
+            // ######################################
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("Ambito", "Equipo");
+            IList<EstadoDTO> estados = new EstadoService().GetEstadoByFilters(parametros);
+            List<string> contentEstados = new List<string>();
+
+            contentEstados.Add("Seleccionar");
+            foreach (EstadoDTO estado in estados)
+                contentEstados.Add(estado.NombreEstado);
+
+            comboBoxEstado.DataSource = contentEstados;
+        }
+
+        /// <summary>
+        /// Setea el largo maximo para los campos textBox iguales a los seteados en la BD
+        /// </summary>
+        private void setTextBoxLimits()
+        {
+            textBoxNombre.MaxLength = 20;
+            textBoxCodigo.MaxLength = 20;
         }
 
         // ########################################################################
@@ -52,20 +88,22 @@ namespace CEE.Interfaz
                 parametros.Add("Nombre", textBoxNombre.Text);
             if (comboBoxTipoEquipo.SelectedIndex != 0)
                 parametros.Add("TipoEquipo", comboBoxTipoEquipo.SelectedValue.ToString());
+            if (comboBoxEstado.SelectedIndex != 0)
+                parametros.Add("Estado", comboBoxEstado.SelectedValue.ToString());
 
             IList<EquipoDTO> busqueda = oEquipoService.GetEquipoByFilters(parametros);
             foreach (EquipoDTO oEquipo in busqueda)
             {
-                dgvEquipos.Rows.Add(new object[] { oEquipo.IdEquipo.ToString(), oEquipo.Codigo, oEquipo.TipoEquipo, oEquipo.Nombre, oEquipo.Descripcion });
+                dgvEquipos.Rows.Add(new object[] { oEquipo.IdEquipo.ToString(), oEquipo.Codigo, oEquipo.TipoEquipo, oEquipo.Nombre, oEquipo.Descripcion, oEquipo.Estado });
             }
         }
 
 
         private void ButtonNuevo_Click(object sender, EventArgs e)
         {
-            FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService);
-            alta.formMode = FrmEquipoEdicion.ABMFormMode.insert;
+            FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService, FrmEquipoEdicion.ABMFormMode.insert);
             alta.ShowDialog();
+            dgvEquipos.Rows.Clear();
         }
 
 
@@ -77,12 +115,10 @@ namespace CEE.Interfaz
             }
             else
             {
-                int idEquipoSeleccionado = Int32.Parse(dgvEquipos.CurrentRow.Cells["IdEquipo"].Value.ToString());
-                oEquipoService.IdEquipoSelected = idEquipoSeleccionado;
-
-                FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService);
-                alta.formMode = FrmEquipoEdicion.ABMFormMode.delete;
+                oEquipoService.IdEquipoSelected = Int32.Parse(dgvEquipos.CurrentRow.Cells["IdEquipo"].Value.ToString());
+                FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService, FrmEquipoEdicion.ABMFormMode.delete);
                 alta.ShowDialog();
+                dgvEquipos.Rows.Clear();
             }
         }
 
@@ -95,19 +131,11 @@ namespace CEE.Interfaz
             }
             else
             {
-                int idEquipoSeleccionado = Int32.Parse(dgvEquipos.CurrentRow.Cells["IdEquipo"].Value.ToString());
-                oEquipoService.IdEquipoSelected = idEquipoSeleccionado;
-
-                FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService);
-                alta.formMode = FrmEquipoEdicion.ABMFormMode.update;
+                oEquipoService.IdEquipoSelected = Int32.Parse(dgvEquipos.CurrentRow.Cells["IdEquipo"].Value.ToString());
+                FrmEquipoEdicion alta = new FrmEquipoEdicion(oEquipoService, FrmEquipoEdicion.ABMFormMode.update);
                 alta.ShowDialog();
+                dgvEquipos.Rows.Clear();
             }
-        }
-
-
-        private void ButtonSalir_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using CEE.Negocio;
 using CEE.Negocio.DTO;
+using CEE.Negocio.Auxiliares;
 
 namespace CEE.Interfaz
 {
@@ -17,8 +18,10 @@ namespace CEE.Interfaz
     {
         EquipoService oEquipoService;
         TipoEquipoService oTipoEquipoService;
+        EstadoService oEstadoService;
+        private ErrorProviderExtension oErrorProviderExtension;
 
-        public ABMFormMode formMode = ABMFormMode.insert;
+        private ABMFormMode formMode = ABMFormMode.insert;
         public enum ABMFormMode
         {
             insert,
@@ -26,22 +29,73 @@ namespace CEE.Interfaz
             delete
         }
 
-        public FrmEquipoEdicion(EquipoService oEquipoService)
+        public FrmEquipoEdicion(EquipoService oEquipoService, ABMFormMode formMode)
         {
             InitializeComponent();
 
-            this.oTipoEquipoService = new TipoEquipoService();
+            this.formMode = formMode;
             this.oEquipoService = oEquipoService;
+
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            this.CenterToScreen();
+            this.ShowInTaskbar = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
         private void FrmEquipoEdicion_Load(object sender, EventArgs e)
         {
-            setLabels();
+            errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
+            this.oTipoEquipoService = new TipoEquipoService();
+            this.oEstadoService = new EstadoService();
+
             cargarCombos();
+            setTextBoxLimits();
+            setLabels();
             habilitarCampos();
             cargarDatos();
         }
 
+        /// <summary>
+        /// Levanta los datos necesarios atraves de servicios para cargar los combos de la interfaz
+        /// </summary>
+        private void cargarCombos()
+        {
+            IList<TipoEquipoDTO> tiposEquipos = oTipoEquipoService.GetTipoEquipoByFilters(new Dictionary<string, object>());
+            List<string> content = new List<string>();
+
+            content.Add("Seleccionar");
+            foreach (TipoEquipoDTO tipoEquipo in tiposEquipos)
+                content.Add(tipoEquipo.NombreTipoEquipo);
+
+            comboBoxTipoEquipo.DataSource = content;
+
+            // ######################################
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("Ambito", "Equipo");
+            if (formMode == ABMFormMode.insert) parametros.Add("Editable", "True");
+
+            IList<EstadoDTO> estados = oEstadoService.GetEstadoByFilters(parametros);
+            List<string> contentEstados = new List<string>();
+
+            foreach (EstadoDTO estado in estados)
+                comboBoxEstado.Items.Add(estado.NombreEstado);
+            
+            comboBoxEstado.SelectedIndex = comboBoxEstado.FindStringExact("DISPONIBLE");
+            
+        }
+
+        /// <summary>
+        /// Setea el largo maximo para los campos textBox iguales a los seteados en la BD
+        /// </summary>
+        private void setTextBoxLimits()
+        {
+            textBoxNombre.MaxLength = 30;
+            textBoxCodigo.MaxLength = 20;
+            textBoxDescripcion.MaxLength = 50;
+        }
         /// <summary>
         /// Ajusta los labels de la pantalla para que coincidan con el modo de formulario
         /// </summary>
@@ -62,20 +116,20 @@ namespace CEE.Interfaz
 
             }
         }
-
+        
         /// <summary>
-        /// Levanta los datos necesarios atraves de servicios para cargar los combos de la interfaz
+        /// habilita o deshabilita los campos segun el modo de formulario
         /// </summary>
-        private void cargarCombos()
+        private void habilitarCampos()
         {
-            IList<TipoEquipoDTO> tiposEquipos = oTipoEquipoService.GetTipoEquipoByFilters(new Dictionary<string, object>());
-            List<string> content = new List<string>();
-
-            content.Add("Seleccionar");
-            foreach (TipoEquipoDTO tipoEquipo in tiposEquipos)
-                content.Add(tipoEquipo.NombreTipoEquipo);
-
-            comboBoxTipoEquipo.DataSource = content;
+            if (formMode == ABMFormMode.delete)
+            {
+                textBoxCodigo.Enabled = false;
+                textBoxNombre.Enabled = false;
+                comboBoxTipoEquipo.Enabled = false;
+                comboBoxEstado.Enabled = false;
+                textBoxDescripcion.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -90,79 +144,112 @@ namespace CEE.Interfaz
                 textBoxCodigo.Text = oEquipo.Codigo;
                 textBoxNombre.Text = oEquipo.Nombre;
                 comboBoxTipoEquipo.SelectedIndex = comboBoxTipoEquipo.FindStringExact(oEquipo.TipoEquipo);
+                comboBoxEstado.SelectedIndex = comboBoxEstado.FindStringExact(oEquipo.Estado);
+                if(oEquipo.Estado == "PRESTADO")
+                {
+                    comboBoxEstado.Enabled = false;
+                } else
+                {
+                    comboBoxEstado.Items.Remove("PRESTADO");
+                }
+
                 textBoxDescripcion.Text = oEquipo.Descripcion;
             }
         }
-        
-        /// <summary>
-        /// habilita o deshabilita los campos segun el modo de formulario
-        /// </summary>
-        private void habilitarCampos()
-        {
-            if (formMode == ABMFormMode.delete)
-            {
-                textBoxCodigo.Enabled = false;
-                textBoxNombre.Enabled = false;
-                comboBoxTipoEquipo.Enabled = false;
-                textBoxDescripcion.Enabled = false;
-            }
-        }
+
+        // #########################################################
+        // Eventos de los botonoes
+        // #########################################################
 
         private void ButtonGuardar_Click(object sender, EventArgs e)
         {
-            try
+            validarCampoObligatorios(this.textBoxNombre);
+            validarCampoObligatorios(this.textBoxCodigo);
+            validarCampoObligatorios(this.comboBoxTipoEquipo);
+            if (!oErrorProviderExtension.HasErrors())
             {
-                if (string.IsNullOrEmpty(textBoxCodigo.Text) || string.IsNullOrWhiteSpace(textBoxCodigo.Text))
-                    throw new Exception("Codigo no puede ser vacio");
-                if (string.IsNullOrEmpty(textBoxNombre.Text) || string.IsNullOrWhiteSpace(textBoxNombre.Text))
-                    throw new Exception("Nombre no puede ser vacio");
-                if (comboBoxTipoEquipo.SelectedIndex == 0)
-                    throw new Exception("Debe seleccionar un Tipo de Equipo");
-
-                EquipoDTO oEquipo = new EquipoDTO();
-
-                oEquipo.IdEquipo = 0;
-                if (formMode != ABMFormMode.insert)
-                    oEquipo.IdEquipo = oEquipoService.IdEquipoSelected;
-
-                oEquipo.Codigo = textBoxCodigo.Text;
-                oEquipo.Nombre = textBoxNombre.Text;
-                oEquipo.Descripcion = textBoxDescripcion.Text;
-                oEquipo.TipoEquipo = comboBoxTipoEquipo.SelectedItem.ToString();
-
-                //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
-                Dictionary<string, object> parametros = new Dictionary<string, object>();
-                parametros.Add("TipoEquipo", comboBoxTipoEquipo.SelectedItem.ToString());
-                oEquipo.IdTipoEquipo = oTipoEquipoService.GetTipoEquipoByFilters(parametros).First().IdTipoEquipo; // CORREGIR
-                //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
-
-                if (formMode == ABMFormMode.update)
+                try
                 {
-                    oEquipoService.UpdateEquipoById(oEquipo);
-                    this.Dispose();
+                    EquipoDTO oEquipo = new EquipoDTO();
+
+                    oEquipo.IdEquipo = 0;
+                    if (formMode != ABMFormMode.insert)
+                        oEquipo.IdEquipo = oEquipoService.IdEquipoSelected;
+
+                    oEquipo.Codigo = textBoxCodigo.Text;
+                    oEquipo.Nombre = textBoxNombre.Text;
+                    oEquipo.Descripcion = textBoxDescripcion.Text;
+                    oEquipo.TipoEquipo = comboBoxTipoEquipo.SelectedItem.ToString();
+                    oEquipo.Estado = comboBoxEstado.SelectedItem.ToString();
+
+                    //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
+                    Dictionary<string, object> parametros = new Dictionary<string, object>();
+                    parametros.Add("TipoEquipo", comboBoxTipoEquipo.SelectedItem.ToString());
+                    oEquipo.IdTipoEquipo = oTipoEquipoService.GetTipoEquipoByFilters(parametros).First().IdTipoEquipo; // CORREGIR
+
+                    Dictionary<string, object> parametros2 = new Dictionary<string, object>();
+                    parametros2.Add("NombreEstado", comboBoxEstado.SelectedItem.ToString());
+                    oEquipo.IdEstado = oEstadoService.GetEstadoByFilters(parametros2).First().IdEstado; // CORREGIR
+                    //       ######################################################################     SOULICION MOMENTANEA PARA TRAER IdTipoEquipo
+
+                    switch (formMode)
+                    {
+                        case ABMFormMode.insert:
+                            oEquipoService.InsertEquipo(oEquipo);
+                            this.Close();
+                            break;
+                        case ABMFormMode.update:
+                            oEquipoService.UpdateEquipoById(oEquipo);
+                            this.Close();
+                            break;
+                        case ABMFormMode.delete:
+                            if (MessageBox.Show("¿Seguro que quiere eliminar" + oEquipo.Codigo + "?", "Confirmar Eliminacion", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                                oEquipoService.DeleteEquipoById(oEquipo.IdEquipo);
+                            this.Close();
+                            break;
+                    }
                 }
-                else if (formMode == ABMFormMode.insert)
+                catch (Exception ex)
                 {
-                    oEquipoService.InsertEquipo(oEquipo);
-                    this.Dispose();
+                    MessageBox.Show(ex.Message);
                 }
-                else if (formMode == ABMFormMode.delete)
-                {
-                    if (MessageBox.Show("¿Seguro que quiere eliminar" + oEquipo.Codigo + "?", "Confirmar Eliminacion", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                        oEquipoService.DeleteEquipoById(oEquipo.IdEquipo);
-                    this.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
+        // ##################################################################
+        // Eventos Validating y KeyPress(No hay aca)
+        // ##################################################################
 
-        private void ButtonCancelar_Click(object sender, EventArgs e)
+        private void TextBoxObligatorios_Validating(object sender, CancelEventArgs e)
         {
-            this.Dispose();
+            TextBox oEventSender = (TextBox)sender;
+            validarCampoObligatorios(oEventSender);
         }
+
+        private void ComboBoxObligatorios_Validating(object sender, CancelEventArgs e)
+        {
+            ComboBox oEventSender = (ComboBox)sender;
+            validarCampoObligatorios(oEventSender);
+        }
+
+        private void validarCampoObligatorios(TextBox oEventSender)
+        {
+            string errorString = "";
+            if (string.IsNullOrEmpty(oEventSender.Text))
+                errorString += "El " + oEventSender.Name + " es un campo obligatorio";
+
+            oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
+        }
+
+        private void validarCampoObligatorios(ComboBox oEventSender)
+        {
+            string errorString = "";
+            if (oEventSender.SelectedIndex == 0)
+                errorString += "El " + oEventSender.Name + " es un campo obligatorio";
+
+            oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
+        }
+
+
     }
 }

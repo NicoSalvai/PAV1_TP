@@ -19,7 +19,7 @@ namespace CEE.Negocio
             oPrestamoDao = new PrestamoDaoSql();
         }
 
-        public PrestamoDTO GetPrestamoyId(int idPrestamo)
+        public PrestamoDTO GetPrestamoById(int idPrestamo)
         {
             return oPrestamoDao.GetPrestamoyId(idPrestamo);
         }
@@ -27,6 +27,21 @@ namespace CEE.Negocio
         public IList<PrestamoDTO> GetPrestamoByFilters(Dictionary<string, object> parametros)
         {
             return oPrestamoDao.GetPrestamoByFilters(parametros);
+        }
+
+        public bool UpdatePrestamoById(PrestamoDTO oPrestamo)
+        {
+            return oPrestamoDao.UpdatePrestamoById(oPrestamo);
+        }
+
+        public bool InsertPrestamo(PrestamoDTO oPrestamo)
+        {
+            return oPrestamoDao.InsertPrestamo(oPrestamo);
+        }
+
+        public bool DeletePrestamoById(int idPrestamo)
+        {
+            return oPrestamoDao.DeletePrestamoById(idPrestamo);
         }
     }
 }

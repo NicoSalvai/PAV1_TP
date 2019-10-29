@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\utnfrc_logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,20 +49,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDatos\Dao\IEquipoDao.cs" />
+    <Compile Include="AccesoDatos\Dao\IEstadoDao.cs" />
     <Compile Include="AccesoDatos\Dao\IMenuDao.cs" />
     <Compile Include="AccesoDatos\Dao\IPersonaDao.cs" />
     <Compile Include="AccesoDatos\Dao\IPrestamoDao.cs" />
     <Compile Include="AccesoDatos\Dao\ITipoDocumentoDao.cs" />
     <Compile Include="AccesoDatos\Dao\ITipoEquipoDao.cs" />
     <Compile Include="AccesoDatos\Dao\IUsuarioDao.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\CarreraDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\EquipoDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\IPerfilDao.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\EstadoDao.cs" />
+    <Compile Include="AccesoDatos\Dao\ICarreraDao.cs" />
+    <Compile Include="AccesoDatos\Dao\IUniversidadDao.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\MenuDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\PerfilDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\PersonaDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\PrestamoDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\TipoDocumentoDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\TipoEquipoDaoSql.cs" />
+    <Compile Include="AccesoDatos\Dao\Sql\UniversidadDaoSql.cs" />
     <Compile Include="AccesoDatos\Dao\Sql\UsuarioDaoSql.cs" />
     <Compile Include="AccesoDatos\DBHelper\DBHelperSql.cs" />
     <Compile Include="AccesoDatos\DBHelper\DBHelperMio.cs" />
@@ -72,6 +81,12 @@
     <Compile Include="Entidad\TipoDocumento.cs" />
     <Compile Include="Entidad\TipoEquipo.cs" />
     <Compile Include="Entidad\Usuario.cs" />
+    <Compile Include="Interfaz\FrmCambioPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\FrmCambioPassword.Designer.cs">
+      <DependentUpon>FrmCambioPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaz\FrmEquipoEdicion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +98,18 @@
     </Compile>
     <Compile Include="Interfaz\FrmEquipos.Designer.cs">
       <DependentUpon>FrmEquipos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz\FrmFinalizarPrestamo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\FrmFinalizarPrestamo.Designer.cs">
+      <DependentUpon>FrmFinalizarPrestamo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz\FrmInicioPrestamos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\FrmInicioPrestamos.Designer.cs">
+      <DependentUpon>FrmInicioPrestamos.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaz\FrmLogin.cs">
       <SubType>Form</SubType>
@@ -108,30 +135,58 @@
     <Compile Include="Interfaz\FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaz\FrmUsuarioEdicion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\FrmUsuarioEdicion.Designer.cs">
+      <DependentUpon>FrmUsuarioEdicion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz\FrmUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\FrmUsuarios.Designer.cs">
+      <DependentUpon>FrmUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Negocio\Auxiliares\ErrorProviderExtension.cs" />
+    <Compile Include="Negocio\CarreraService.cs" />
+    <Compile Include="Negocio\DTO\CarreraDTO.cs" />
+    <Compile Include="Negocio\DTO\DetallePrestamoDTO.cs" />
     <Compile Include="Negocio\DTO\EquipoDTO.cs" />
+    <Compile Include="Negocio\DTO\EstadoDTO.cs" />
     <Compile Include="Negocio\DTO\MenuDTO.cs" />
     <Compile Include="Negocio\DTO\PerfilDTO.cs" />
     <Compile Include="Negocio\DTO\PersonaDTO.cs" />
     <Compile Include="Negocio\DTO\PrestamoDTO.cs" />
     <Compile Include="Negocio\DTO\TipoDocumentoDTO.cs" />
     <Compile Include="Negocio\DTO\TipoEquipoDTO.cs" />
+    <Compile Include="Negocio\DTO\UniversidadDTO.cs" />
     <Compile Include="Negocio\DTO\UsuarioDTO.cs" />
     <Compile Include="Negocio\EquipoService.cs" />
+    <Compile Include="Negocio\EstadoService.cs" />
     <Compile Include="Negocio\MenuService.cs" />
     <Compile Include="Negocio\PerfilService.cs" />
     <Compile Include="Negocio\PersonaService.cs" />
     <Compile Include="Negocio\PrestamoService.cs" />
     <Compile Include="Negocio\TipoDocumentoService.cs" />
     <Compile Include="Negocio\TipoEquipoService.cs" />
+    <Compile Include="Negocio\UniversidadService.cs" />
     <Compile Include="Negocio\UsuarioService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Interfaz\FrmCambioPassword.resx">
+      <DependentUpon>FrmCambioPassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\FrmEquipoEdicion.resx">
       <DependentUpon>FrmEquipoEdicion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\FrmEquipos.resx">
       <DependentUpon>FrmEquipos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz\FrmFinalizarPrestamo.resx">
+      <DependentUpon>FrmFinalizarPrestamo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz\FrmInicioPrestamos.resx">
+      <DependentUpon>FrmInicioPrestamos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
@@ -145,6 +200,12 @@
     <EmbeddedResource Include="Interfaz\FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz\FrmUsuarioEdicion.resx">
+      <DependentUpon>FrmUsuarioEdicion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz\FrmUsuarios.resx">
+      <DependentUpon>FrmUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -153,6 +214,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -168,7 +230,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Interfaz\Personas\" />
     <Folder Include="Recursos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\TextFile1.txt" />
+    <Content Include="Resources\utnfrc_logo.ico" />
+    <Content Include="utnfrc_logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
