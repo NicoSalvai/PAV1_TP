@@ -205,7 +205,24 @@ namespace CEE.Interfaz
 
         private void ButtonBusqueda_Click(object sender, EventArgs e)
         {
+            FrmPersonas frmPersonas = new FrmPersonas(FrmPersonas.ABMFormMode.auxiliar, oPersonaService);
+            frmPersonas.ShowDialog();
+            if (oPersonaService.IdPersonaSeleccionada > 0)
+            {
+                try
+                {
+                    PersonaDTO oPersona = oPersonaService.GetPersonaById(oPersonaService.IdPersonaSeleccionada);
+                    
+                    cargarDatos(oPersona);
+                    formMode = FormMode.seleccionado;
+                    habilitarCampos();
 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
         }
 
         private void ButtonAgregar_Click(object sender, EventArgs e)

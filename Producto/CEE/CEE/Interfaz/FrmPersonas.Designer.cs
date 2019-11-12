@@ -40,6 +40,13 @@
             this.labelNombre = new System.Windows.Forms.Label();
             this.labelApellido = new System.Windows.Forms.Label();
             this.dgvPersonas = new System.Windows.Forms.DataGridView();
+            this.IdPersona = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumeroDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonBuscar = new System.Windows.Forms.Button();
             this.textBoxNumeroDocumento = new System.Windows.Forms.TextBox();
             this.comboBoxTipoDocumento = new System.Windows.Forms.ComboBox();
@@ -49,13 +56,7 @@
             this.labelLegajo = new System.Windows.Forms.Label();
             this.labelBusqueda = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.IdPersona = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumeroDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonSeleccionarBuscado = new System.Windows.Forms.Button();
             this.panelPrincipal.SuspendLayout();
             this.panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonas)).BeginInit();
@@ -65,6 +66,7 @@
             // panelPrincipal
             // 
             this.panelPrincipal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelPrincipal.Controls.Add(this.buttonSeleccionarBuscado);
             this.panelPrincipal.Controls.Add(this.buttonNuevo);
             this.panelPrincipal.Controls.Add(this.buttonEliminar);
             this.panelPrincipal.Controls.Add(this.buttonModificar);
@@ -176,6 +178,53 @@
             this.dgvPersonas.Size = new System.Drawing.Size(760, 353);
             this.dgvPersonas.TabIndex = 6;
             // 
+            // IdPersona
+            // 
+            this.IdPersona.HeaderText = "IdPersona";
+            this.IdPersona.Name = "IdPersona";
+            this.IdPersona.ReadOnly = true;
+            this.IdPersona.Visible = false;
+            // 
+            // Legajo
+            // 
+            this.Legajo.HeaderText = "Legajo";
+            this.Legajo.Name = "Legajo";
+            this.Legajo.ReadOnly = true;
+            // 
+            // NumeroDocumento
+            // 
+            this.NumeroDocumento.HeaderText = "Numero Documento";
+            this.NumeroDocumento.Name = "NumeroDocumento";
+            this.NumeroDocumento.ReadOnly = true;
+            this.NumeroDocumento.Width = 115;
+            // 
+            // NombreTipoDocumento
+            // 
+            this.NombreTipoDocumento.HeaderText = "Tipo Documento";
+            this.NombreTipoDocumento.Name = "NombreTipoDocumento";
+            this.NombreTipoDocumento.ReadOnly = true;
+            // 
+            // IdTipoDocumento
+            // 
+            this.IdTipoDocumento.HeaderText = "IdTipoDocumento";
+            this.IdTipoDocumento.Name = "IdTipoDocumento";
+            this.IdTipoDocumento.ReadOnly = true;
+            this.IdTipoDocumento.Visible = false;
+            // 
+            // Apellido
+            // 
+            this.Apellido.HeaderText = "Apellido";
+            this.Apellido.Name = "Apellido";
+            this.Apellido.ReadOnly = true;
+            this.Apellido.Width = 200;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 200;
+            // 
             // buttonBuscar
             // 
             this.buttonBuscar.Location = new System.Drawing.Point(688, 53);
@@ -253,52 +302,17 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // IdPersona
+            // buttonSeleccionarBuscado
             // 
-            this.IdPersona.HeaderText = "IdPersona";
-            this.IdPersona.Name = "IdPersona";
-            this.IdPersona.ReadOnly = true;
-            this.IdPersona.Visible = false;
-            // 
-            // Legajo
-            // 
-            this.Legajo.HeaderText = "Legajo";
-            this.Legajo.Name = "Legajo";
-            this.Legajo.ReadOnly = true;
-            // 
-            // NumeroDocumento
-            // 
-            this.NumeroDocumento.HeaderText = "Numero Documento";
-            this.NumeroDocumento.Name = "NumeroDocumento";
-            this.NumeroDocumento.ReadOnly = true;
-            this.NumeroDocumento.Width = 115;
-            // 
-            // NombreTipoDocumento
-            // 
-            this.NombreTipoDocumento.HeaderText = "Tipo Documento";
-            this.NombreTipoDocumento.Name = "NombreTipoDocumento";
-            this.NombreTipoDocumento.ReadOnly = true;
-            // 
-            // IdTipoDocumento
-            // 
-            this.IdTipoDocumento.HeaderText = "IdTipoDocumento";
-            this.IdTipoDocumento.Name = "IdTipoDocumento";
-            this.IdTipoDocumento.ReadOnly = true;
-            this.IdTipoDocumento.Visible = false;
-            // 
-            // Apellido
-            // 
-            this.Apellido.HeaderText = "Apellido";
-            this.Apellido.Name = "Apellido";
-            this.Apellido.ReadOnly = true;
-            this.Apellido.Width = 200;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 200;
+            this.buttonSeleccionarBuscado.Enabled = false;
+            this.buttonSeleccionarBuscado.Location = new System.Drawing.Point(3, 469);
+            this.buttonSeleccionarBuscado.Name = "buttonSeleccionarBuscado";
+            this.buttonSeleccionarBuscado.Size = new System.Drawing.Size(113, 23);
+            this.buttonSeleccionarBuscado.TabIndex = 5;
+            this.buttonSeleccionarBuscado.Text = "Seleciconar";
+            this.buttonSeleccionarBuscado.UseVisualStyleBackColor = true;
+            this.buttonSeleccionarBuscado.Visible = false;
+            this.buttonSeleccionarBuscado.Click += new System.EventHandler(this.ButtonSeleccionarBuscado_Click);
             // 
             // FrmPersonas
             // 
@@ -347,5 +361,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IdTipoDocumento;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.Button buttonSeleccionarBuscado;
     }
 }

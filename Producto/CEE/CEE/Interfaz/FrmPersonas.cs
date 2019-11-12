@@ -18,11 +18,33 @@ namespace CEE.Interfaz
     {
         PersonaService oPersonaService;
         private ErrorProviderExtension oErrorProviderExtension;
+        private ABMFormMode formMode = ABMFormMode.normal;
+
+        public enum ABMFormMode
+        {
+            normal,
+            auxiliar
+        }
 
         public FrmPersonas()
         {
             InitializeComponent();
-            
+
+            formMode = ABMFormMode.normal;
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            this.CenterToScreen();
+            this.ShowInTaskbar = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+        }
+
+        public FrmPersonas(ABMFormMode formMode, PersonaService oPersonaService)
+        {
+            InitializeComponent();
+            this.formMode = formMode;
+            this.oPersonaService = oPersonaService;
+
             this.MinimumSize = this.Size;
             this.MaximumSize = this.Size;
             this.CenterToScreen();
@@ -35,10 +57,12 @@ namespace CEE.Interfaz
         {
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             oErrorProviderExtension = new ErrorProviderExtension(errorProvider);
-            oPersonaService = new PersonaService();
+            if(formMode == ABMFormMode.normal)
+                oPersonaService = new PersonaService();
             
             cargarCombos();
             setTextBoxLimits();
+            habilitarBotones();
         }
 
         /// <summary>
@@ -67,6 +91,22 @@ namespace CEE.Interfaz
             textBoxNumeroDocumento.MaxLength = 9;
             textBoxApellido.MaxLength = 30;
             textBoxNombre.MaxLength = 30;
+        }
+
+        private void habilitarBotones()
+        {
+            if(formMode == ABMFormMode.auxiliar)
+            {
+                buttonEliminar.Enabled = false;
+                buttonEliminar.Visible = false;
+                buttonModificar.Enabled = false;
+                buttonModificar.Visible = false;
+                buttonNuevo.Enabled = false;
+                buttonNuevo.Visible = false;
+
+                buttonSeleccionarBuscado.Enabled = true;
+                buttonSeleccionarBuscado.Visible = true;
+            }
         }
         // ##############################################################################################################################
         // ACA van los eventos de los botones
@@ -178,6 +218,19 @@ namespace CEE.Interfaz
                 }
             }
             oErrorProviderExtension.SetErrorWithCount(oEventSender, errorString);
+        }
+
+        private void ButtonSeleccionarBuscado_Click(object sender, EventArgs e)
+        {
+            if (dgvPersonas.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un registro");
+            }
+            else
+            {
+                oPersonaService.IdPersonaSeleccionada = Int32.Parse(dgvPersonas.CurrentRow.Cells["IdPersona"].Value.ToString());
+                this.Close();
+            }
         }
     }
 }
