@@ -54,6 +54,10 @@
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionarUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionarPerfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generarReportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoPrestamosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reporteDemorasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelPrincipal.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -113,7 +117,8 @@
             this.inscripcionesToolStripMenuItem,
             this.articulosToolStripMenuItem,
             this.ventasToolStripMenuItem,
-            this.usuariosToolStripMenuItem});
+            this.usuariosToolStripMenuItem,
+            this.reportesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(774, 24);
@@ -303,6 +308,41 @@
             this.gestionarPerfilesToolStripMenuItem.Text = "Gestionar Perfiles";
             this.gestionarPerfilesToolStripMenuItem.Visible = false;
             // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generarReportesToolStripMenuItem,
+            this.listadoPrestamosToolStripMenuItem,
+            this.reporteDemorasToolStripMenuItem});
+            this.reportesToolStripMenuItem.Enabled = false;
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.reportesToolStripMenuItem.Text = "Reportes";
+            this.reportesToolStripMenuItem.Visible = false;
+            // 
+            // generarReportesToolStripMenuItem
+            // 
+            this.generarReportesToolStripMenuItem.Enabled = false;
+            this.generarReportesToolStripMenuItem.Name = "generarReportesToolStripMenuItem";
+            this.generarReportesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generarReportesToolStripMenuItem.Text = "Generar Reportes";
+            this.generarReportesToolStripMenuItem.Visible = false;
+            this.generarReportesToolStripMenuItem.Click += new System.EventHandler(this.GenerarReportesToolStripMenuItem_Click);
+            // 
+            // listadoPrestamosToolStripMenuItem
+            // 
+            this.listadoPrestamosToolStripMenuItem.Name = "listadoPrestamosToolStripMenuItem";
+            this.listadoPrestamosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listadoPrestamosToolStripMenuItem.Text = "Listado Prestamos";
+            this.listadoPrestamosToolStripMenuItem.Click += new System.EventHandler(this.ListadoPrestamosToolStripMenuItem_Click);
+            // 
+            // reporteDemorasToolStripMenuItem
+            // 
+            this.reporteDemorasToolStripMenuItem.Name = "reporteDemorasToolStripMenuItem";
+            this.reporteDemorasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reporteDemorasToolStripMenuItem.Text = "Reporte Demoras";
+            this.reporteDemorasToolStripMenuItem.Click += new System.EventHandler(this.ReporteDemorasToolStripMenuItem_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -352,6 +392,10 @@
         private System.Windows.Forms.ToolStripMenuItem gestionarPerfilesToolStripMenuItem;
         private System.Windows.Forms.Button buttonCambioPassword;
         private System.Windows.Forms.Button buttonCerrarSesion;
+        private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generarReportesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listadoPrestamosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reporteDemorasToolStripMenuItem;
     }
 }
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using CEE.Interfaz.Reportes;
 using CEE.Negocio;
 using CEE.Negocio.DTO;
 
@@ -131,6 +131,21 @@ namespace CEE.Interfaz
         private void FinPrestamos_Click(object sender, EventArgs e)
         {
             new FrmFinalizarPrestamo().ShowDialog();
+        }
+
+        private void GenerarReportesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ListadoPrestamosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmListadoPrestamos().ShowDialog();
+        }
+
+        private void ReporteDemorasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmReporteDemoras().ShowDialog();
         }
     }
 }

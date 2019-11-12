@@ -35,6 +35,9 @@
     <ApplicationIcon>Resources\utnfrc_logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -105,6 +108,12 @@
     <Compile Include="Interfaz\FrmFinalizarPrestamo.Designer.cs">
       <DependentUpon>FrmFinalizarPrestamo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaz\FrmGenerarReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\FrmGenerarReportes.Designer.cs">
+      <DependentUpon>FrmGenerarReportes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaz\FrmInicioPrestamos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +156,23 @@
     <Compile Include="Interfaz\FrmUsuarios.Designer.cs">
       <DependentUpon>FrmUsuarios.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaz\Reportes\DataSets\DataSetListadoPrestamos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetListadoPrestamos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz\Reportes\FrmListadoPrestamos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\Reportes\FrmListadoPrestamos.Designer.cs">
+      <DependentUpon>FrmListadoPrestamos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz\Reportes\FrmReporteDemoras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz\Reportes\FrmReporteDemoras.Designer.cs">
+      <DependentUpon>FrmReporteDemoras.cs</DependentUpon>
+    </Compile>
     <Compile Include="Negocio\Auxiliares\ErrorProviderExtension.cs" />
     <Compile Include="Negocio\CarreraService.cs" />
     <Compile Include="Negocio\DTO\CarreraDTO.cs" />
@@ -173,6 +199,7 @@
     <Compile Include="Negocio\UsuarioService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Interfaz\FrmCambioPassword.resx">
       <DependentUpon>FrmCambioPassword.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\FrmFinalizarPrestamo.resx">
       <DependentUpon>FrmFinalizarPrestamo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz\FrmGenerarReportes.resx">
+      <DependentUpon>FrmGenerarReportes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\FrmInicioPrestamos.resx">
       <DependentUpon>FrmInicioPrestamos.cs</DependentUpon>
@@ -206,6 +236,13 @@
     <EmbeddedResource Include="Interfaz\FrmUsuarios.resx">
       <DependentUpon>FrmUsuarios.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz\Reportes\Diseños\Report2.rdlc" />
+    <EmbeddedResource Include="Interfaz\Reportes\FrmListadoPrestamos.resx">
+      <DependentUpon>FrmListadoPrestamos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz\Reportes\FrmReporteDemoras.resx">
+      <DependentUpon>FrmReporteDemoras.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -216,6 +253,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Interfaz\Reportes\DataSets\DataSetListadoPrestamos.xsc">
+      <DependentUpon>DataSetListadoPrestamos.xsd</DependentUpon>
+    </None>
+    <None Include="Interfaz\Reportes\DataSets\DataSetListadoPrestamos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetListadoPrestamos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Interfaz\Reportes\DataSets\DataSetListadoPrestamos.xss">
+      <DependentUpon>DataSetListadoPrestamos.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -236,6 +285,19 @@
   <ItemGroup>
     <Content Include="Resources\TextFile1.txt" />
     <Content Include="Resources\utnfrc_logo.ico" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="utnfrc_logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

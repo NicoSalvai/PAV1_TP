@@ -94,6 +94,22 @@ INSERT INTO ESTADO(nombre_estado, ambito, deshabilita, editable)	-- aca no me im
 		('DEVUELTO','PRESTAMO',1, 0),
 		('CANCELADO','PRESTAMO',1, 0);
 		
+-- ############
+USE [64429Pav1];
+INSERT INTO MENU (menu_id, padre_menu_id, nombre_menu, es_final, aplicacion)
+VALUES(14, NULL, 'Reportes', 0, ''),
+			(15, 14, 'Generar Reportes', 1, 'GenerarReportes');
+			
+
+INSERT INTO PERFIL (nombre_perfil, descripcion, fecha_alta)
+	VALUES ('Reportes', '', GETDATE());
+
+INSERT INTO PERFIL_MENU (perfil_id, menu_id)
+VALUES(7,15),			-- Reportes
+		(1,15);	-- Administrador
+		
+		
+		
 -- ####################################################################################
 -- ############			INICIO CARGA EJEMPLOS									############
 -- ####################################################################################

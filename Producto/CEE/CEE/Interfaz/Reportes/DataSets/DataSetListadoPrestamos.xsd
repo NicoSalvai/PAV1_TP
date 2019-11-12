@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetListadoPrestamos" targetNamespace="http://tempuri.org/DataSetListadoPrestamos.xsd" xmlns:mstns="http://tempuri.org/DataSetListadoPrestamos.xsd" xmlns="http://tempuri.org/DataSetListadoPrestamos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="_64429Pav1ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="_64429Pav1ConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.CEE.Properties.Settings.GlobalReference.Default._64429Pav1ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="_64429Pav1ConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        PRESTAMO.prestamo_id, PRESTAMO.fecha_desde, PRESTAMO.fecha_hasta, PRESTAMO.fecha_hasta_estimada, ESTADO.nombre_estado, PERSONA.apellido, PERSONA.nombre, PERSONA.numero_documento, 
+                         TIPO_DOCUMENTO.nombre_tipo_documento
+FROM            PRESTAMO INNER JOIN
+                         ESTADO ON PRESTAMO.estado_id = ESTADO.estado_id INNER JOIN
+                         PERSONA ON PRESTAMO.persona_id = PERSONA.persona_id INNER JOIN
+                         TIPO_DOCUMENTO ON PERSONA.tipo_documento_id = TIPO_DOCUMENTO.tipo_documento_id</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="prestamo_id" DataSetColumn="prestamo_id" />
+              <Mapping SourceColumn="fecha_desde" DataSetColumn="fecha_desde" />
+              <Mapping SourceColumn="fecha_hasta" DataSetColumn="fecha_hasta" />
+              <Mapping SourceColumn="fecha_hasta_estimada" DataSetColumn="fecha_hasta_estimada" />
+              <Mapping SourceColumn="nombre_estado" DataSetColumn="nombre_estado" />
+              <Mapping SourceColumn="apellido" DataSetColumn="apellido" />
+              <Mapping SourceColumn="nombre" DataSetColumn="nombre" />
+              <Mapping SourceColumn="numero_documento" DataSetColumn="numero_documento" />
+              <Mapping SourceColumn="nombre_tipo_documento" DataSetColumn="nombre_tipo_documento" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetListadoPrestamos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetListadoPrestamos" msprop:Generator_UserDSName="DataSetListadoPrestamos">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="prestamo_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnprestamo_id" msprop:Generator_ColumnPropNameInRow="prestamo_id" msprop:Generator_ColumnPropNameInTable="prestamo_idColumn" msprop:Generator_UserColumnName="prestamo_id" type="xs:int" />
+              <xs:element name="fecha_desde" msprop:Generator_ColumnVarNameInTable="columnfecha_desde" msprop:Generator_ColumnPropNameInRow="fecha_desde" msprop:Generator_ColumnPropNameInTable="fecha_desdeColumn" msprop:Generator_UserColumnName="fecha_desde" type="xs:dateTime" />
+              <xs:element name="fecha_hasta" msprop:Generator_ColumnVarNameInTable="columnfecha_hasta" msprop:Generator_ColumnPropNameInRow="fecha_hasta" msprop:Generator_ColumnPropNameInTable="fecha_hastaColumn" msprop:Generator_UserColumnName="fecha_hasta" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="fecha_hasta_estimada" msprop:Generator_ColumnVarNameInTable="columnfecha_hasta_estimada" msprop:Generator_ColumnPropNameInRow="fecha_hasta_estimada" msprop:Generator_ColumnPropNameInTable="fecha_hasta_estimadaColumn" msprop:Generator_UserColumnName="fecha_hasta_estimada" type="xs:dateTime" />
+              <xs:element name="nombre_estado" msprop:Generator_ColumnVarNameInTable="columnnombre_estado" msprop:Generator_ColumnPropNameInRow="nombre_estado" msprop:Generator_ColumnPropNameInTable="nombre_estadoColumn" msprop:Generator_UserColumnName="nombre_estado">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="apellido" msprop:Generator_ColumnVarNameInTable="columnapellido" msprop:Generator_ColumnPropNameInRow="apellido" msprop:Generator_ColumnPropNameInTable="apellidoColumn" msprop:Generator_UserColumnName="apellido">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nombre" msprop:Generator_ColumnVarNameInTable="columnnombre" msprop:Generator_ColumnPropNameInRow="nombre" msprop:Generator_ColumnPropNameInTable="nombreColumn" msprop:Generator_UserColumnName="nombre">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="numero_documento" msprop:Generator_ColumnVarNameInTable="columnnumero_documento" msprop:Generator_ColumnPropNameInRow="numero_documento" msprop:Generator_ColumnPropNameInTable="numero_documentoColumn" msprop:Generator_UserColumnName="numero_documento" type="xs:int" />
+              <xs:element name="nombre_tipo_documento" msprop:Generator_ColumnVarNameInTable="columnnombre_tipo_documento" msprop:Generator_ColumnPropNameInRow="nombre_tipo_documento" msprop:Generator_ColumnPropNameInTable="nombre_tipo_documentoColumn" msprop:Generator_UserColumnName="nombre_tipo_documento">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DataTable1" />
+      <xs:field xpath="mstns:prestamo_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
