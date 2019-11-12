@@ -99,7 +99,7 @@ namespace CEE.Interfaz
             if (formMode == FormMode.noSeleccionado)
             {
                 textBoxCodigo.Enabled = false;
-                textBoxFechaHasta.Enabled = false;
+                dateTimePickerFechaHasta.Enabled = false;
                 checkBoxToday.Enabled = false;
                 buttonAgregar.Enabled = false;
                 buttonCancelarSeleccionados.Enabled = false;
@@ -110,7 +110,7 @@ namespace CEE.Interfaz
             {
                 textBoxCodigo.Enabled = true;
                 if(!checkBoxToday.Checked)
-                    textBoxFechaHasta.Enabled = true;
+                    dateTimePickerFechaHasta.Enabled = true;
                 checkBoxToday.Enabled = true;
                 buttonAgregar.Enabled = true;
                 buttonCancelarSeleccionados.Enabled = true;
@@ -266,6 +266,14 @@ namespace CEE.Interfaz
                     DetallePrestamoDTO oDetallePrestamo = new DetallePrestamoDTO();
                     oDetallePrestamo.IdEquipo = Int32.Parse(dgvRow.Cells["IdEquipo"].Value.ToString());
                     oPrestamo.Detalles.Add(oDetallePrestamo);
+                    if (!checkBoxToday.Checked)
+                    {
+                        oPrestamo.FechaHastaEstimada = dateTimePickerFechaHasta.Value.Date;
+                    }
+                    else
+                    {
+                        oPrestamo.FechaHastaEstimada = DateTime.Now;
+                    }
                 }
                 
 
@@ -327,11 +335,11 @@ namespace CEE.Interfaz
         {
             if (!checkBoxToday.Checked)
             {
-                textBoxFechaHasta.Enabled = true;
+                dateTimePickerFechaHasta.Enabled = true;
             }
             else
             {
-                textBoxFechaHasta.Enabled = false;
+                dateTimePickerFechaHasta.Enabled = false;
             }
         }
     }

@@ -171,8 +171,12 @@ namespace CEE.AccesoDatos.Dao.Sql
             oDetallePrestamo.IdTipoEquipo = Int32.Parse(row["tipo_equipo_id"].ToString());
             oDetallePrestamo.NombreTipoEquipo = row["tipo_equipo"].ToString();
 
-            if(!DBNull.Value.Equals(row["fecha_devuelto"]))
+            oDetallePrestamo.Devuelto = false;
+            if (!DBNull.Value.Equals(row["fecha_devuelto"]))
+            {
                 oDetallePrestamo.FechaDevuelto = DateTime.Parse(row["fecha_devuelto"].ToString());
+                oDetallePrestamo.Devuelto = true;
+            }
 
             return oDetallePrestamo;
         }
@@ -193,7 +197,7 @@ namespace CEE.AccesoDatos.Dao.Sql
                             "USE[64429Pav1] " +
 
                             "INSERT INTO PRESTAMO(persona_id, estado_id, fecha_desde, fecha_hasta_estimada) " +
-                            "VALUES(@IdPersona, @IdEstado, GETDATE(), GETDATE()); " +
+                            "VALUES(@IdPersona, @IdEstado, GETDATE(), '"+ oPrestamo.FechaHastaEstimada +"'); " +
 
                             "DECLARE @IdPrestamo INT; " +
                             "SELECT @IdPrestamo = @@IDENTITY; ";

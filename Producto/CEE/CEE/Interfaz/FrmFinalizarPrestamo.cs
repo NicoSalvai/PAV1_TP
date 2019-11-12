@@ -45,8 +45,6 @@ namespace CEE.Interfaz
             oPrestamoService = new PrestamoService();
 
             cargarCombos();
-            setTextBoxLimits();
-            habilitarCampos();
         }
 
 
@@ -141,14 +139,10 @@ namespace CEE.Interfaz
 
             foreach (DetallePrestamoDTO oDetalle in oPrestamo.Detalles)
             {
-                bool devuelto = false;
-                MessageBox.Show(oDetalle.FechaDevuelto.ToString());
-                if (oDetalle.FechaDevuelto.ToString() != "1/1/0001 00:00:00") devuelto = true;
-
-                if (!devuelto)
+                if (!oDetalle.Devuelto)
                 {
                     dgvDetalles.Rows.Add(new object[] { oDetalle.IdDetallePrestamo, oDetalle.IdEquipo, oDetalle.CodigoEquipo, oDetalle.NombreEquipo,
-                    oDetalle.IdTipoEquipo, oDetalle.NombreTipoEquipo, devuelto});
+                    oDetalle.IdTipoEquipo, oDetalle.NombreTipoEquipo, oDetalle.Devuelto});
                 }
                 
             }

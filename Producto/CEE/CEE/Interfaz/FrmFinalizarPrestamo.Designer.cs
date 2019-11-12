@@ -31,10 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFinalizarPrestamo));
             this.panelPrincipal = new System.Windows.Forms.Panel();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.groupBoxPrestamo = new System.Windows.Forms.GroupBox();
             this.groupBoxDetallePrestamo = new System.Windows.Forms.GroupBox();
-            this.dgvPrestamos = new System.Windows.Forms.DataGridView();
+            this.buttonDevolverParcial = new System.Windows.Forms.Button();
+            this.buttonDevolverTodo = new System.Windows.Forms.Button();
             this.dgvDetalles = new System.Windows.Forms.DataGridView();
             this.IdDetallePrestamo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdEquipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,8 +42,9 @@
             this.IdTipoEquipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoEquipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Devolver = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.buttonDevolverTodo = new System.Windows.Forms.Button();
-            this.buttonDevolverParcial = new System.Windows.Forms.Button();
+            this.groupBoxPrestamo = new System.Windows.Forms.GroupBox();
+            this.dgvPrestamos = new System.Windows.Forms.DataGridView();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.IdPrestamo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdPersona = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumeroDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,13 +53,13 @@
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaHasta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEstimada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelPrincipal.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            this.groupBoxPrestamo.SuspendLayout();
             this.groupBoxDetallePrestamo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPrestamos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalles)).BeginInit();
+            this.groupBoxPrestamo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPrestamos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panelPrincipal
@@ -71,20 +71,6 @@
             this.panelPrincipal.Name = "panelPrincipal";
             this.panelPrincipal.Size = new System.Drawing.Size(776, 485);
             this.panelPrincipal.TabIndex = 0;
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
-            // groupBoxPrestamo
-            // 
-            this.groupBoxPrestamo.Controls.Add(this.dgvPrestamos);
-            this.groupBoxPrestamo.Location = new System.Drawing.Point(3, 3);
-            this.groupBoxPrestamo.Name = "groupBoxPrestamo";
-            this.groupBoxPrestamo.Size = new System.Drawing.Size(768, 248);
-            this.groupBoxPrestamo.TabIndex = 0;
-            this.groupBoxPrestamo.TabStop = false;
-            this.groupBoxPrestamo.Text = "Prestamo";
             // 
             // groupBoxDetallePrestamo
             // 
@@ -98,27 +84,25 @@
             this.groupBoxDetallePrestamo.TabStop = false;
             this.groupBoxDetallePrestamo.Text = "Detalle del Prestamo";
             // 
-            // dgvPrestamos
+            // buttonDevolverParcial
             // 
-            this.dgvPrestamos.AllowUserToAddRows = false;
-            this.dgvPrestamos.AllowUserToDeleteRows = false;
-            this.dgvPrestamos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPrestamos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdPrestamo,
-            this.IdPersona,
-            this.NumeroDocumento,
-            this.IdTipoDocumento,
-            this.TipoDocumento,
-            this.Apellido,
-            this.Nombre,
-            this.Legajo,
-            this.FechaHasta});
-            this.dgvPrestamos.Location = new System.Drawing.Point(6, 19);
-            this.dgvPrestamos.Name = "dgvPrestamos";
-            this.dgvPrestamos.ReadOnly = true;
-            this.dgvPrestamos.Size = new System.Drawing.Size(756, 223);
-            this.dgvPrestamos.TabIndex = 0;
-            this.dgvPrestamos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPrestamos_CellClick);
+            this.buttonDevolverParcial.Location = new System.Drawing.Point(441, 198);
+            this.buttonDevolverParcial.Name = "buttonDevolverParcial";
+            this.buttonDevolverParcial.Size = new System.Drawing.Size(166, 23);
+            this.buttonDevolverParcial.TabIndex = 17;
+            this.buttonDevolverParcial.Text = "Devolucion de Seleccionados";
+            this.buttonDevolverParcial.UseVisualStyleBackColor = true;
+            this.buttonDevolverParcial.Click += new System.EventHandler(this.ButtonDevolverParcial_Click);
+            // 
+            // buttonDevolverTodo
+            // 
+            this.buttonDevolverTodo.Location = new System.Drawing.Point(638, 198);
+            this.buttonDevolverTodo.Name = "buttonDevolverTodo";
+            this.buttonDevolverTodo.Size = new System.Drawing.Size(130, 23);
+            this.buttonDevolverTodo.TabIndex = 16;
+            this.buttonDevolverTodo.Text = "Devolucion Completa";
+            this.buttonDevolverTodo.UseVisualStyleBackColor = true;
+            this.buttonDevolverTodo.Click += new System.EventHandler(this.ButtonDevolverTodo_Click);
             // 
             // dgvDetalles
             // 
@@ -187,31 +171,48 @@
             this.Devolver.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Devolver.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // buttonDevolverTodo
+            // groupBoxPrestamo
             // 
-            this.buttonDevolverTodo.Location = new System.Drawing.Point(638, 198);
-            this.buttonDevolverTodo.Name = "buttonDevolverTodo";
-            this.buttonDevolverTodo.Size = new System.Drawing.Size(130, 23);
-            this.buttonDevolverTodo.TabIndex = 16;
-            this.buttonDevolverTodo.Text = "Devolucion Completa";
-            this.buttonDevolverTodo.UseVisualStyleBackColor = true;
-            this.buttonDevolverTodo.Click += new System.EventHandler(this.ButtonDevolverTodo_Click);
+            this.groupBoxPrestamo.Controls.Add(this.dgvPrestamos);
+            this.groupBoxPrestamo.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxPrestamo.Name = "groupBoxPrestamo";
+            this.groupBoxPrestamo.Size = new System.Drawing.Size(768, 248);
+            this.groupBoxPrestamo.TabIndex = 0;
+            this.groupBoxPrestamo.TabStop = false;
+            this.groupBoxPrestamo.Text = "Prestamo";
             // 
-            // buttonDevolverParcial
+            // dgvPrestamos
             // 
-            this.buttonDevolverParcial.Location = new System.Drawing.Point(441, 198);
-            this.buttonDevolverParcial.Name = "buttonDevolverParcial";
-            this.buttonDevolverParcial.Size = new System.Drawing.Size(166, 23);
-            this.buttonDevolverParcial.TabIndex = 17;
-            this.buttonDevolverParcial.Text = "Devolucion de Seleccionados";
-            this.buttonDevolverParcial.UseVisualStyleBackColor = true;
-            this.buttonDevolverParcial.Click += new System.EventHandler(this.ButtonDevolverParcial_Click);
+            this.dgvPrestamos.AllowUserToAddRows = false;
+            this.dgvPrestamos.AllowUserToDeleteRows = false;
+            this.dgvPrestamos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPrestamos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdPrestamo,
+            this.IdPersona,
+            this.NumeroDocumento,
+            this.IdTipoDocumento,
+            this.TipoDocumento,
+            this.Apellido,
+            this.Nombre,
+            this.Legajo,
+            this.FechaEstimada});
+            this.dgvPrestamos.Location = new System.Drawing.Point(6, 19);
+            this.dgvPrestamos.Name = "dgvPrestamos";
+            this.dgvPrestamos.ReadOnly = true;
+            this.dgvPrestamos.Size = new System.Drawing.Size(756, 223);
+            this.dgvPrestamos.TabIndex = 0;
+            this.dgvPrestamos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPrestamos_CellClick);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // IdPrestamo
             // 
             this.IdPrestamo.HeaderText = "IdPrestamo";
             this.IdPrestamo.Name = "IdPrestamo";
             this.IdPrestamo.ReadOnly = true;
+            this.IdPrestamo.Visible = false;
             // 
             // IdPersona
             // 
@@ -261,12 +262,12 @@
             this.Legajo.Name = "Legajo";
             this.Legajo.ReadOnly = true;
             // 
-            // FechaHasta
+            // FechaEstimada
             // 
-            this.FechaHasta.HeaderText = "Fecha Hasta";
-            this.FechaHasta.Name = "FechaHasta";
-            this.FechaHasta.ReadOnly = true;
-            this.FechaHasta.Width = 130;
+            this.FechaEstimada.HeaderText = "Fecha Estimada";
+            this.FechaEstimada.Name = "FechaEstimada";
+            this.FechaEstimada.ReadOnly = true;
+            this.FechaEstimada.Width = 130;
             // 
             // FrmFinalizarPrestamo
             // 
@@ -279,11 +280,11 @@
             this.Text = "Finalizar Prestamo";
             this.Load += new System.EventHandler(this.FrmFinalizarPrestamo_Load);
             this.panelPrincipal.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            this.groupBoxPrestamo.ResumeLayout(false);
             this.groupBoxDetallePrestamo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPrestamos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalles)).EndInit();
+            this.groupBoxPrestamo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPrestamos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -313,6 +314,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaHasta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEstimada;
     }
 }
