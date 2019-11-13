@@ -17,6 +17,8 @@ namespace CEE.Interfaz.Reportes
         {
             InitializeComponent();
 
+            ///this.WindowState = FormWindowState.Maximized;
+
             this.MinimumSize = this.Size;
             this.MaximumSize = this.Size;
             this.CenterToScreen();
@@ -32,7 +34,7 @@ namespace CEE.Interfaz.Reportes
             cargarCombos();
             setTextBoxLimits();
 
-            
+            this.reportViewer1.RefreshReport();
         }
 
         /// <summary>

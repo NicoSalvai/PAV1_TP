@@ -4,18 +4,18 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="_64429Pav1ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="_64429Pav1ConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.CEE.Properties.Settings.GlobalReference.Default._64429Pav1ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="_64429Pav1ConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="_64429Pav1ConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.CEE.Properties.Settings.GlobalReference.Default._64429Pav1ConnectionString1" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTableListadoPrestamosTableAdapter" GeneratorDataComponentClassName="DataTableListadoPrestamosTableAdapter" Name="DataTableListadoPrestamos" UserDataComponentName="DataTableListadoPrestamosTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="_64429Pav1ConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="_64429Pav1ConnectionString1 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        PRESTAMO.prestamo_id, PRESTAMO.fecha_desde, PRESTAMO.fecha_hasta, PRESTAMO.fecha_hasta_estimada, ESTADO.nombre_estado, PERSONA.apellido, PERSONA.nombre, PERSONA.numero_documento, 
-                         TIPO_DOCUMENTO.nombre_tipo_documento
-FROM            PRESTAMO INNER JOIN
-                         ESTADO ON PRESTAMO.estado_id = ESTADO.estado_id INNER JOIN
+                    <CommandText>SELECT        PRESTAMO.prestamo_id, PRESTAMO.fecha_desde, PRESTAMO.fecha_hasta, PRESTAMO.fecha_hasta_estimada, ESTADO.nombre_estado, PERSONA.apellido, 
+                         PERSONA.nombre, PERSONA.numero_documento, TIPO_DOCUMENTO.nombre_tipo_documento
+FROM            ESTADO INNER JOIN
+                         PRESTAMO ON ESTADO.estado_id = PRESTAMO.estado_id INNER JOIN
                          PERSONA ON PRESTAMO.persona_id = PERSONA.persona_id INNER JOIN
                          TIPO_DOCUMENTO ON PERSONA.tipo_documento_id = TIPO_DOCUMENTO.tipo_documento_id</CommandText>
                     <Parameters />
@@ -44,7 +44,7 @@ FROM            PRESTAMO INNER JOIN
   <xs:element name="DataSetListadoPrestamos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetListadoPrestamos" msprop:Generator_UserDSName="DataSetListadoPrestamos">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+        <xs:element name="DataTableListadoPrestamos" msprop:Generator_TableClassName="DataTableListadoPrestamosDataTable" msprop:Generator_TableVarName="tableDataTableListadoPrestamos" msprop:Generator_TablePropName="DataTableListadoPrestamos" msprop:Generator_RowDeletingName="DataTableListadoPrestamosRowDeleting" msprop:Generator_RowChangingName="DataTableListadoPrestamosRowChanging" msprop:Generator_RowEvHandlerName="DataTableListadoPrestamosRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTableListadoPrestamosRowDeleted" msprop:Generator_UserTableName="DataTableListadoPrestamos" msprop:Generator_RowChangedName="DataTableListadoPrestamosRowChanged" msprop:Generator_RowEvArgName="DataTableListadoPrestamosRowChangeEvent" msprop:Generator_RowClassName="DataTableListadoPrestamosRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="prestamo_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnprestamo_id" msprop:Generator_ColumnPropNameInRow="prestamo_id" msprop:Generator_ColumnPropNameInTable="prestamo_idColumn" msprop:Generator_UserColumnName="prestamo_id" type="xs:int" />
@@ -86,7 +86,7 @@ FROM            PRESTAMO INNER JOIN
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:DataTable1" />
+      <xs:selector xpath=".//mstns:DataTableListadoPrestamos" />
       <xs:field xpath="mstns:prestamo_id" />
     </xs:unique>
   </xs:element>
