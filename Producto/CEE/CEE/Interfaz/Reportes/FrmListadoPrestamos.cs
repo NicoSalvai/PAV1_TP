@@ -29,10 +29,11 @@ namespace CEE.Interfaz.Reportes
 
         private void FrmListadoPrestamos_Load(object sender, EventArgs e)
         {
-            //oEquipoService = new EquipoService();
-
+            // TODO: This line of code loads data into the 'dataSetListado.DataTable1' table. You can move, or remove it, as needed.
+            this.dataTable1TableAdapter.Fill(this.dataSetListado.DataTable1);
             cargarCombos();
             setTextBoxLimits();
+
 
             this.reportViewer1.RefreshReport();
         }

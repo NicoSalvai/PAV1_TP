@@ -32,37 +32,38 @@
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmListadoPrestamos));
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.dataSetListadoPrestamos1 = new CEE.Interfaz.Reportes.DataSets.DataSetListadoPrestamos();
-            this.dataTableListadoPrestamosTableAdapter1 = new CEE.Interfaz.Reportes.DataSets.DataSetListadoPrestamosTableAdapters.DataTableListadoPrestamosTableAdapter();
-            this.dataTableListadoPrestamosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dataSetListadoPrestamos1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTableListadoPrestamosBindingSource)).BeginInit();
+            this.dataSetListado = new CEE.Interfaz.Reportes.DataSets.DataSetListado();
+            this.dataTable1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataTable1TableAdapter = new CEE.Interfaz.Reportes.DataSets.DataSetListadoTableAdapters.DataTable1TableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetListado)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // reportViewer1
             // 
-            reportDataSource1.Name = "DataSetListadoPrestamos";
-            reportDataSource1.Value = this.dataTableListadoPrestamosBindingSource;
+            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            reportDataSource1.Name = "DataSetListado";
+            reportDataSource1.Value = this.dataTable1BindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "CEE.Interfaz.Reportes.Diseños.Report2.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(12, 12);
+            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(1044, 571);
+            this.reportViewer1.Size = new System.Drawing.Size(1068, 595);
             this.reportViewer1.TabIndex = 0;
             // 
-            // dataSetListadoPrestamos1
+            // dataSetListado
             // 
-            this.dataSetListadoPrestamos1.DataSetName = "DataSetListadoPrestamos";
-            this.dataSetListadoPrestamos1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dataSetListado.DataSetName = "DataSetListado";
+            this.dataSetListado.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // dataTableListadoPrestamosTableAdapter1
+            // dataTable1BindingSource
             // 
-            this.dataTableListadoPrestamosTableAdapter1.ClearBeforeFill = true;
+            this.dataTable1BindingSource.DataMember = "DataTable1";
+            this.dataTable1BindingSource.DataSource = this.dataSetListado;
             // 
-            // dataTableListadoPrestamosBindingSource
+            // dataTable1TableAdapter
             // 
-            this.dataTableListadoPrestamosBindingSource.DataMember = "DataTableListadoPrestamos";
-            this.dataTableListadoPrestamosBindingSource.DataSource = this.dataSetListadoPrestamos1;
+            this.dataTable1TableAdapter.ClearBeforeFill = true;
             // 
             // FrmListadoPrestamos
             // 
@@ -74,8 +75,8 @@
             this.Name = "FrmListadoPrestamos";
             this.Text = "FrmListadoPrestamos";
             this.Load += new System.EventHandler(this.FrmListadoPrestamos_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataSetListadoPrestamos1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTableListadoPrestamosBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetListado)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -83,9 +84,11 @@
         #endregion
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        private DataSets.DataSetListadoPrestamos dataSetListadoPrestamos1;
-        private DataSets.DataSetListadoPrestamosTableAdapters.DataTableListadoPrestamosTableAdapter dataTableListadoPrestamosTableAdapter1;
-        private System.Windows.Forms.BindingSource dataTableListadoPrestamosBindingSource;
+        private DataSets.DataSetListado dataSetListado;
+        private System.Windows.Forms.BindingSource dataTable1BindingSource;
+        private DataSets.DataSetListadoTableAdapters.DataTable1TableAdapter dataTable1TableAdapter;
+
+
 
 
     }

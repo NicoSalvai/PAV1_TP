@@ -27,10 +27,19 @@ namespace CEE.Interfaz.Reportes
 
         private void FrmReporteDemoras_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'dataSet1.DataTablePrestamosDemoradosPorUniversidad' table. You can move, or remove it, as needed.
+            this.dataTablePrestamosDemoradosPorUniversidadTableAdapter.Fill(this.dataSet1.DataTablePrestamosDemoradosPorUniversidad);
+            // TODO: This line of code loads data into the 'dataSet1.DataTable1' table. You can move, or remove it, as needed.
+            this.dataTable1TableAdapter.Fill(this.dataSet1.DataTable1);
+            // TODO: This line of code loads data into the 'dataSet1.DataTablePrestamosDemoradosPorCarrera' table. You can move, or remove it, as needed.
+            this.dataTablePrestamosDemoradosPorCarreraTableAdapter.Fill(this.dataSet1.DataTablePrestamosDemoradosPorCarrera);
+            // TODO: This line of code loads data into the 'dataSet1.DataTableCantPrestamoPorCarrera' table. You can move, or remove it, as needed.
+            this.dataTableCantPrestamoPorCarreraTableAdapter.Fill(this.dataSet1.DataTableCantPrestamoPorCarrera);
             //oEquipoService = new EquipoService();
 
             cargarCombos();
             setTextBoxLimits();
+            this.reportViewer1.RefreshReport();
         }
 
         /// <summary>

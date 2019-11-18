@@ -159,10 +159,15 @@
     <Compile Include="Interfaz\FrmUsuarios.Designer.cs">
       <DependentUpon>FrmUsuarios.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaz\Reportes\DataSets\DataSetListadoPrestamos.Designer.cs">
+    <Compile Include="Interfaz\Reportes\DataSets\DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataSetListadoPrestamos.xsd</DependentUpon>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz\Reportes\DataSets\DataSetListado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetListado.xsd</DependentUpon>
     </Compile>
     <Compile Include="Interfaz\Reportes\FrmListadoPrestamos.cs">
       <SubType>Form</SubType>
@@ -239,6 +244,7 @@
       <DependentUpon>FrmUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\Reportes\Diseños\Report2.rdlc" />
+    <EmbeddedResource Include="Interfaz\Reportes\Diseños\Report3.rdlc" />
     <EmbeddedResource Include="Interfaz\Reportes\FrmListadoPrestamos.resx">
       <DependentUpon>FrmListadoPrestamos.cs</DependentUpon>
     </EmbeddedResource>
@@ -255,16 +261,27 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Interfaz\Reportes\DataSets\DataSetListadoPrestamos.xsc">
-      <DependentUpon>DataSetListadoPrestamos.xsd</DependentUpon>
+    <None Include="Interfaz\Reportes\DataSets\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
-    <None Include="Interfaz\Reportes\DataSets\DataSetListadoPrestamos.xsd">
+    <None Include="Interfaz\Reportes\DataSets\DataSet1.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSetListadoPrestamos.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Interfaz\Reportes\DataSets\DataSetListadoPrestamos.xss">
-      <DependentUpon>DataSetListadoPrestamos.xsd</DependentUpon>
+    <None Include="Interfaz\Reportes\DataSets\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Interfaz\Reportes\DataSets\DataSetListado.xsc">
+      <DependentUpon>DataSetListado.xsd</DependentUpon>
+    </None>
+    <None Include="Interfaz\Reportes\DataSets\DataSetListado.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetListado.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Interfaz\Reportes\DataSets\DataSetListado.xss">
+      <DependentUpon>DataSetListado.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -278,7 +295,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaz\Personas\" />

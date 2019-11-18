@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="_64429Pav1ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="_64429Pav1ConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.CEE.Properties.Settings.GlobalReference.Default._64429Pav1ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTableCantPrestamoPorCarreraTableAdapter" GeneratorDataComponentClassName="DataTableCantPrestamoPorCarreraTableAdapter" Name="DataTableCantPrestamoPorCarrera" UserDataComponentName="DataTableCantPrestamoPorCarreraTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="_64429Pav1ConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        CARRERA.nombre_carrera, ESTADO.nombre_estado, COUNT(*) AS cantidad_prestamos
+FROM            PRESTAMO INNER JOIN
+                         PERSONA ON PRESTAMO.persona_id = PERSONA.persona_id INNER JOIN
+                         CARRERA ON PERSONA.carrera_id = CARRERA.carrera_id INNER JOIN
+                         ESTADO ON PRESTAMO.estado_id = ESTADO.estado_id INNER JOIN
+                         TIPO_DOCUMENTO ON PERSONA.tipo_documento_id = TIPO_DOCUMENTO.tipo_documento_id
+GROUP BY CARRERA.nombre_carrera, ESTADO.nombre_estado
+ORDER BY CARRERA.nombre_carrera, ESTADO.nombre_estado</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="nombre_carrera" DataSetColumn="nombre_carrera" />
+              <Mapping SourceColumn="nombre_estado" DataSetColumn="nombre_estado" />
+              <Mapping SourceColumn="cantidad_prestamos" DataSetColumn="cantidad_prestamos" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTablePrestamosDemoradosPorCarreraTableAdapter" GeneratorDataComponentClassName="DataTablePrestamosDemoradosPorCarreraTableAdapter" Name="DataTablePrestamosDemoradosPorCarrera" UserDataComponentName="DataTablePrestamosDemoradosPorCarreraTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="_64429Pav1ConnectionString (Settings)" DbObjectName="[64429Pav1].dbo.CARRERA" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        CARRERA.nombre_carrera, COUNT(*) AS prestamos_demorados
+FROM            CARRERA INNER JOIN
+                         PERSONA ON CARRERA.carrera_id = PERSONA.carrera_id INNER JOIN
+                         PRESTAMO ON PERSONA.persona_id = PRESTAMO.persona_id INNER JOIN
+                         ESTADO ON PRESTAMO.estado_id = ESTADO.estado_id
+WHERE        (PRESTAMO.fecha_hasta IS NOT NULL) AND (DATEDIFF(day, PRESTAMO.fecha_hasta, PRESTAMO.fecha_hasta_estimada) &lt; 0)
+GROUP BY CARRERA.nombre_carrera
+ORDER BY CARRERA.nombre_carrera; </CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="nombre_carrera" DataSetColumn="nombre_carrera" />
+              <Mapping SourceColumn="prestamos_demorados" DataSetColumn="prestamos_demorados" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTablePrestamosDemoradosPorUniversidadTableAdapter" GeneratorDataComponentClassName="DataTablePrestamosDemoradosPorUniversidadTableAdapter" Name="DataTablePrestamosDemoradosPorUniversidad" UserDataComponentName="DataTablePrestamosDemoradosPorUniversidadTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="_64429Pav1ConnectionString (Settings)" DbObjectName="[64429Pav1].dbo.UNIVERSIDAD" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        UNIVERSIDAD.nombre_universidad, COUNT(*) AS prestamos_demorados
+FROM            UNIVERSIDAD INNER JOIN
+                         PERSONA ON UNIVERSIDAD.universidad_id = PERSONA.universidad_id JOIN
+                         PRESTAMO ON PERSONA.persona_id = PRESTAMO.persona_id INNER JOIN
+                         ESTADO ON PRESTAMO.estado_id = ESTADO.estado_id
+WHERE        (PRESTAMO.fecha_hasta IS NOT NULL) AND (DATEDIFF(day, PRESTAMO.fecha_hasta, PRESTAMO.fecha_hasta_estimada) &lt; 0)
+
+GROUP BY UNIVERSIDAD.nombre_universidad
+ORDER BY UNIVERSIDAD.nombre_universidad;</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="nombre_universidad" DataSetColumn="nombre_universidad" />
+              <Mapping SourceColumn="prestamos_demorados" DataSetColumn="prestamos_demorados" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="_64429Pav1ConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        UNIVERSIDAD.nombre_universidad, ESTADO.nombre_estado, COUNT(*) AS cantidad_prestamos
+FROM            PRESTAMO INNER JOIN 
+                         PERSONA ON PRESTAMO.persona_id = PERSONA.persona_id INNER JOIN
+                         UNIVERSIDAD ON PERSONA.universidad_id = UNIVERSIDAD.universidad_id INNER JOIN
+                         ESTADO ON PRESTAMO.estado_id = ESTADO.estado_id INNER JOIN
+                         TIPO_DOCUMENTO ON PERSONA.tipo_documento_id = TIPO_DOCUMENTO.tipo_documento_id
+GROUP BY UNIVERSIDAD.nombre_universidad, ESTADO.nombre_estado
+ORDER BY UNIVERSIDAD.nombre_universidad, ESTADO.nombre_estado;</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="nombre_universidad" DataSetColumn="nombre_universidad" />
+              <Mapping SourceColumn="nombre_estado" DataSetColumn="nombre_estado" />
+              <Mapping SourceColumn="cantidad_prestamos" DataSetColumn="cantidad_prestamos" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTableCantPrestamoPorCarrera" msprop:Generator_TableClassName="DataTableCantPrestamoPorCarreraDataTable" msprop:Generator_TableVarName="tableDataTableCantPrestamoPorCarrera" msprop:Generator_RowChangedName="DataTableCantPrestamoPorCarreraRowChanged" msprop:Generator_TablePropName="DataTableCantPrestamoPorCarrera" msprop:Generator_RowDeletingName="DataTableCantPrestamoPorCarreraRowDeleting" msprop:Generator_RowChangingName="DataTableCantPrestamoPorCarreraRowChanging" msprop:Generator_RowEvHandlerName="DataTableCantPrestamoPorCarreraRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTableCantPrestamoPorCarreraRowDeleted" msprop:Generator_RowClassName="DataTableCantPrestamoPorCarreraRow" msprop:Generator_UserTableName="DataTableCantPrestamoPorCarrera" msprop:Generator_RowEvArgName="DataTableCantPrestamoPorCarreraRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nombre_carrera" msprop:Generator_ColumnVarNameInTable="columnnombre_carrera" msprop:Generator_ColumnPropNameInRow="nombre_carrera" msprop:Generator_ColumnPropNameInTable="nombre_carreraColumn" msprop:Generator_UserColumnName="nombre_carrera">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nombre_estado" msprop:Generator_ColumnVarNameInTable="columnnombre_estado" msprop:Generator_ColumnPropNameInRow="nombre_estado" msprop:Generator_ColumnPropNameInTable="nombre_estadoColumn" msprop:Generator_UserColumnName="nombre_estado">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="cantidad_prestamos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columncantidad_prestamos" msprop:Generator_ColumnPropNameInRow="cantidad_prestamos" msprop:Generator_ColumnPropNameInTable="cantidad_prestamosColumn" msprop:Generator_UserColumnName="cantidad_prestamos" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataTablePrestamosDemoradosPorCarrera" msprop:Generator_TableClassName="DataTablePrestamosDemoradosPorCarreraDataTable" msprop:Generator_TableVarName="tableDataTablePrestamosDemoradosPorCarrera" msprop:Generator_RowChangedName="DataTablePrestamosDemoradosPorCarreraRowChanged" msprop:Generator_TablePropName="DataTablePrestamosDemoradosPorCarrera" msprop:Generator_RowDeletingName="DataTablePrestamosDemoradosPorCarreraRowDeleting" msprop:Generator_RowChangingName="DataTablePrestamosDemoradosPorCarreraRowChanging" msprop:Generator_RowEvHandlerName="DataTablePrestamosDemoradosPorCarreraRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTablePrestamosDemoradosPorCarreraRowDeleted" msprop:Generator_RowClassName="DataTablePrestamosDemoradosPorCarreraRow" msprop:Generator_UserTableName="DataTablePrestamosDemoradosPorCarrera" msprop:Generator_RowEvArgName="DataTablePrestamosDemoradosPorCarreraRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nombre_carrera" msprop:Generator_ColumnVarNameInTable="columnnombre_carrera" msprop:Generator_ColumnPropNameInRow="nombre_carrera" msprop:Generator_ColumnPropNameInTable="nombre_carreraColumn" msprop:Generator_UserColumnName="nombre_carrera">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="prestamos_demorados" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnprestamos_demorados" msprop:Generator_ColumnPropNameInRow="prestamos_demorados" msprop:Generator_ColumnPropNameInTable="prestamos_demoradosColumn" msprop:Generator_UserColumnName="prestamos_demorados" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataTablePrestamosDemoradosPorUniversidad" msprop:Generator_TableClassName="DataTablePrestamosDemoradosPorUniversidadDataTable" msprop:Generator_TableVarName="tableDataTablePrestamosDemoradosPorUniversidad" msprop:Generator_RowChangedName="DataTablePrestamosDemoradosPorUniversidadRowChanged" msprop:Generator_TablePropName="DataTablePrestamosDemoradosPorUniversidad" msprop:Generator_RowDeletingName="DataTablePrestamosDemoradosPorUniversidadRowDeleting" msprop:Generator_RowChangingName="DataTablePrestamosDemoradosPorUniversidadRowChanging" msprop:Generator_RowEvHandlerName="DataTablePrestamosDemoradosPorUniversidadRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTablePrestamosDemoradosPorUniversidadRowDeleted" msprop:Generator_RowClassName="DataTablePrestamosDemoradosPorUniversidadRow" msprop:Generator_UserTableName="DataTablePrestamosDemoradosPorUniversidad" msprop:Generator_RowEvArgName="DataTablePrestamosDemoradosPorUniversidadRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nombre_universidad" msprop:Generator_ColumnVarNameInTable="columnnombre_universidad" msprop:Generator_ColumnPropNameInRow="nombre_universidad" msprop:Generator_ColumnPropNameInTable="nombre_universidadColumn" msprop:Generator_UserColumnName="nombre_universidad">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="prestamos_demorados" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnprestamos_demorados" msprop:Generator_ColumnPropNameInRow="prestamos_demorados" msprop:Generator_ColumnPropNameInTable="prestamos_demoradosColumn" msprop:Generator_UserColumnName="prestamos_demorados" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nombre_universidad" msprop:Generator_ColumnVarNameInTable="columnnombre_universidad" msprop:Generator_ColumnPropNameInRow="nombre_universidad" msprop:Generator_ColumnPropNameInTable="nombre_universidadColumn" msprop:Generator_UserColumnName="nombre_universidad">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="nombre_estado" msprop:Generator_ColumnVarNameInTable="columnnombre_estado" msprop:Generator_ColumnPropNameInRow="nombre_estado" msprop:Generator_ColumnPropNameInTable="nombre_estadoColumn" msprop:Generator_UserColumnName="nombre_estado">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="cantidad_prestamos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columncantidad_prestamos" msprop:Generator_ColumnPropNameInRow="cantidad_prestamos" msprop:Generator_ColumnPropNameInTable="cantidad_prestamosColumn" msprop:Generator_UserColumnName="cantidad_prestamos" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
